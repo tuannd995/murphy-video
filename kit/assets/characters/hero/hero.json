@@ -1,0 +1,78 @@
+{
+  "id": "hero",
+  "name": "Phẳng",
+  "description": "a simple hand-drawn doodle young man with a big round white head, short spiky black hair, dot eyes, thick expressive eyebrows, tiny nose and mouth, slim stick-like limbs, wearing a light blue long-sleeve shirt, dark navy trousers and white sneakers, thick black ink outlines",
+  "reference": "docs/style/hero-model-sheet.png",
+  "heightPx": 620,
+  "poses": [
+    {
+      "id": "stand",
+      "prompt": "standing relaxed facing the viewer, arms down, neutral calm face, mouth closed"
+    },
+    {
+      "id": "think",
+      "prompt": "thinking, one hand on chin, other arm across belly, eyes looking up to the side, slightly puzzled"
+    },
+    {
+      "id": "point",
+      "prompt": "pointing with his right arm stretched out to the side (viewer's right), confident explaining face"
+    },
+    {
+      "id": "shock",
+      "prompt": "shocked, both hands grabbing the sides of his head, huge round eyes, mouth wide open, sweat drops",
+      "height": 1.03
+    },
+    {
+      "id": "happy",
+      "prompt": "very happy, both arms raised high in the air, eyes closed in joy, big open smile",
+      "height": 1.18
+    },
+    {
+      "id": "sad",
+      "prompt": "sad and disappointed, shoulders slumped, head down, arms hanging, a small tear"
+    },
+    {
+      "id": "angry",
+      "prompt": "angry, arms crossed on chest, frowning heavily with angled eyebrows, small anger marks"
+    },
+    {
+      "id": "facepalm",
+      "prompt": "facepalm, one hand covering his face, head tilted down, other arm hanging"
+    },
+    {
+      "id": "shrug",
+      "prompt": "shrugging, both palms up at shoulder height, eyebrows raised, awkward smile"
+    },
+    {
+      "id": "thumbsup",
+      "prompt": "giving a thumbs up with one hand, cheeky wink and grin"
+    },
+    {
+      "id": "walk-a",
+      "prompt": "walking to the viewer's right, side view, left leg forward right leg back, arms swinging",
+      "height": 1.0
+    },
+    {
+      "id": "walk-b",
+      "prompt": "walking to the viewer's right, side view, legs passing each other under the body, arms close to the body",
+      "height": 1.0
+    },
+    {
+      "id": "run",
+      "prompt": "running fast to the viewer's right, side view, leaning forward, legs wide apart, motion lines, panicked face",
+      "height": 0.86
+    }
+  ],
+  "variants": [
+    {
+      "id": "stand-talk",
+      "base": "stand",
+      "edit": "keep the image exactly identical (same pose, same lines, same background), only change the mouth so it is open as if speaking"
+    },
+    {
+      "id": "stand-blink",
+      "base": "stand",
+      "edit": "keep the image exactly identical (same pose, same lines, same background), only change the eyes so they are closed (two short curved lines)"
+    }
+  ]
+}

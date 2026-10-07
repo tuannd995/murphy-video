@@ -1,5 +1,7 @@
 # Nghịch lý Murphy — video giáo dục 5 phút (AI image + JavaScript animation)
 
+> **Muốn dựng xưởng video mới trên máy local?** Dùng bộ [`kit/`](kit/) (bắt đầu từ [`kit/00-START-HERE.md`](kit/00-START-HERE.md)). Repo này là bản thử nghiệm đầu tiên.
+
 Pipeline tạo video storytelling tiếng Việt (~4:50) với subtitle song ngữ Việt/Anh, **không dùng AI video**:
 
 ```
