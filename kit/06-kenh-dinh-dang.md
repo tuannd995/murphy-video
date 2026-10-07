@@ -15,11 +15,12 @@
   "intro": { "lines": ["Xin chào các bạn, chào mừng các bạn quay trở lại với Não Phẳng."] },
   "outro": { "lines": [] },
   "cta": { "tiktok": "Follow để xem thêm", "shorts": "Xem bản đầy đủ trên YouTube Não Phẳng", "reels": "Theo dõi Não Phẳng để xem thêm" },
+  "budget": { "monthlyUsd": 8, "monthlyVoiceCredits": 60000 },   // chặn ở mức kênh (ghi đè studio.json)
   "targetMinutes": [8, 10],
   "audience": "not_made_for_kids"
 }
 ```
-Lời intro và outro cũng phải tuân theo `NARRATION.md`. Ví dụ hướng intro người dùng thích: *"nơi tìm hiểu những điều không phải ai cũng biết, để nghe lúc làm việc, ăn uống, dọn nhà hay trước khi ngủ, và có thêm chuyện để kể với bạn bè."* Viết lại cho tự nhiên, không chèn câu đùa.
+Mỗi kênh còn có thư mục `brand/` (logo, banner, watermark, avatar, thumbnail mẫu) và `templates/` (`intro.ts`, `outro.ts`, khung kịch bản theo dạng video) như mô tả ở `10-cau-truc-du-an.md`. Lời intro và outro cũng phải tuân theo `NARRATION.md`. Ví dụ hướng intro người dùng thích: *"nơi tìm hiểu những điều không phải ai cũng biết, để nghe lúc làm việc, ăn uống, dọn nhà hay trước khi ngủ, và có thêm chuyện để kể với bạn bè."* Viết lại cho tự nhiên, không chèn câu đùa.
 
 ## 2. Ba kênh và thứ tự triển khai
 | Kênh | Chủ đề | Thời lượng | Ghi chú |

@@ -69,4 +69,4 @@ Skill là "công thức": từng bước, có điểm dừng ở cổng duyệt.
 
 ## 6. Bộ nhớ dự án
 - `.current-video` (một dòng `kenh/slug`) là video đang làm. Script đọc file này khi không truyền `--video`.
-- `docs/plans/` lưu kế hoạch đã duyệt. `data/activity.log` lưu nhật ký agent. `videos/.../data/review.md` lưu kết quả soát.
+- `docs/plans/` lưu kế hoạch đã duyệt. `data/activity.log` lưu nhật ký agent. `videos/.../data/review.md` lưu kết quả soát. `ledger/cost.jsonl` là sổ chi phí duy nhất. `npm run status` cho bảng trạng thái cả xưởng.

@@ -21,46 +21,28 @@ kịch bản (TS) → ảnh nền AI (OpenRouter, mỗi cảnh 1 ảnh) + bộ t
 - Không dùng Remotion, Puppeteer, React. Mỗi frame vẽ trực tiếp lên canvas rồi pipe raw RGBA vào ffmpeg.
 
 ## Cấu trúc thư mục (đích cuối)
+Chi tiết đầy đủ, quy tắc tầng và cache nằm ở **`10-cau-truc-du-an.md`** (đọc ngay sau file này). Tóm tắt:
 ```
 .
-├── CLAUDE.md                      luật chung cho mọi agent (07-claude-setup.md)
-├── .claude/
-│   ├── settings.json              hooks
-│   ├── agents/*.md                8 agent chuyên môn
-│   ├── skills/<tên>/SKILL.md      công thức cho từng việc
-│   └── hooks/*.sh
-├── docs/
-│   ├── style/STYLE.md             phong cách hình ảnh + ảnh mẫu (copy từ kit/assets/style)
-│   ├── style/NARRATION.md         phong cách lời thoại (= kit/05-loi-thoai.md)
-│   ├── style/private/             ảnh tham khảo của bên thứ ba (GITIGNORE, không commit)
-│   ├── plans/                     kế hoạch đã duyệt (hook lưu tự động)
-│   └── HUONG-DAN.md
-├── channels/<kenh>/channel.json   tên, tagline, giọng văn, palette, intro/outro, voice, nhạc, CTA
-├── characters/<id>/
-│   ├── <id>.json                  mô tả, ảnh model sheet, danh sách tư thế
-│   ├── raw/<pose>.png             ảnh gốc nền trơn (AI hoặc tự vẽ)
-│   ├── poses/<pose>.png           đã tách nền (PNG trong suốt)
-│   └── sheet.png                  tờ xem trước
-├── library/
-│   ├── backgrounds/<id>.png + index.json   nền dùng lại, có tag (bếp, phố, văn phòng…)
-│   └── props/
-├── videos/<kenh>/<slug>/
-│   ├── script.ts                  kịch bản (nguồn chính, có type)
-│   ├── scenes/sceneXX.ts          animation từng scene
-│   ├── data/                      script.json, storyboard*.json, cost.json, alignment/, review.md, feedback.json
-│   ├── assets/images/             ảnh nền riêng của video (ít nhất có thể, ưu tiên library)
-│   ├── assets/voice/              <hash-câu>.mp3 (+ .json timestamp)
-│   └── output/                    (gitignore) scenes/*.mp4, audio-mix.wav, <slug>[-<định dạng>].mp4, .srt
-├── assets/fonts/  assets/sfx/  assets/music/   (sfx/music tạo lại được → gitignore *.wav)
-├── src/
-│   ├── config/   index.ts (đường dẫn, timing, audio, API) · formats.ts · style.ts
-│   ├── script/   types.ts · timeline.ts · load.ts (đọc video theo --video)
-│   ├── components/ canvas.ts · backdrop.ts · fx.ts · icons.ts · ui.ts · subtitles.ts · frame.ts · vertical.ts
-│   ├── character/ sprites.ts · lipsync.ts · (doodle.ts: nhân vật vẽ hoàn toàn bằng code, tuỳ chọn)
-│   ├── audio/    synth.ts · elevenlabs.ts · voice.ts
-│   └── utils/    anim.ts · media.ts · openrouter.ts · args.ts
-└── scripts/      build-script · cost · gen-images · gen-voice · gen-sfx · build-storyboard · render · render-scene
-                  mix-audio · assemble · make · gen-character · character-sheet · sprite-demo · lint-narration · budget-guard
+├── studio.json  CLAUDE.md  .claude/  docs/        cấu hình xưởng, luật, agent, skill, hook, tài liệu
+├── shared/        dùng chung: characters/ library/ fonts/ audio/ cache/ (cache theo hash: images, voice, render)
+├── channels/<kenh>/   channel.json, brand/, library/, templates/ (intro, outro, khung kịch bản)
+├── videos/<kenh>/<slug>/   MỖI VIDEO MỘT THƯ MỤC CON: video.json, script.ts, scenes/, data/, build/, output/<tag>/
+├── ledger/cost.jsonl      sổ chi phí duy nhất
+├── src/  scripts/         code dùng chung, không chứa tên kênh hay chủ đề
+```
+Mã nguồn:
+```
+src/
+  config/     index.ts (đường dẫn, timing, audio, API; đọc studio.json) · formats.ts · style.ts
+  script/     types.ts · timeline.ts · load.ts (đọc video theo --video)
+  components/ canvas.ts · backdrop.ts · fx.ts · icons.ts · ui.ts · subtitles.ts · frame.ts · vertical.ts
+  character/  sprites.ts · lipsync.ts · (doodle.ts: nhân vật vẽ hoàn toàn bằng code, tuỳ chọn)
+  audio/      synth.ts · elevenlabs.ts · voice.ts
+  utils/      anim.ts · media.ts · openrouter.ts · args.ts · resolve.ts (tìm tài nguyên video→kênh→shared) · cache.ts · ledger.ts
+scripts/      build-script · cost · gen-images · gen-voice · gen-sfx · build-storyboard · render · render-scene
+              mix-audio · assemble · make · gen-character · character-sheet · sprite-demo · lint-narration · budget-guard
+              new-channel · new-video · status · gc
 ```
 Mọi script nhận `--video <kenh>/<slug>`. Có thể đặt mặc định bằng biến `VIDEO` hoặc file `.current-video`.
 
@@ -71,10 +53,10 @@ Mọi script nhận `--video <kenh>/<slug>`. Có thể đặt mặc định bằ
 4. **FINAL**: video hoàn chỉnh, cùng các bản ngắn nếu có.
 
 ## Nguyên tắc tiền
-- Ngân sách mặc định mỗi video: **$1 cho ảnh** (tối đa khoảng 20 ảnh) và **6.000 credits voice**.
-- Mọi khoản chi ghi vào `videos/.../data/cost.json`. Bộ nhân vật và thư viện nền ghi vào `data/cost-library.json`.
-- Lệnh tốn tiền mặc định chạy dry-run; phải thêm `--confirm` mới gọi API thật. Hook `budget-guard` chặn lệnh `--confirm` nếu vượt ngân sách.
-- Ảnh và voice lưu theo hash nội dung (prompt / câu thoại). Đã có thì không tạo lại.
+- Ngân sách mặc định mỗi video: **$1 cho ảnh** (tối đa khoảng 20 ảnh) và **6.000 credits voice**. Đặt ở `studio.json`, kênh và video có thể ghi đè.
+- Mọi khoản chi ghi vào **một sổ duy nhất `ledger/cost.jsonl`** (kèm kênh, video, bước). Chi phí xưởng (nhân vật, thư viện) có `video = null`.
+- Lệnh tốn tiền mặc định chạy dry-run; phải thêm `--confirm` mới gọi API thật. Hook `budget-guard` chặn lệnh `--confirm` nếu vượt ngân sách của video, kênh (theo tháng) hoặc xưởng (theo tháng).
+- Ảnh, voice, clip render lưu theo hash ở `shared/cache/`, dùng chung mọi video. Đã có thì không tạo lại. Intro, outro, CTA chỉ trả tiền một lần cho cả kênh.
 
 ## Thời lượng
 **Ưu tiên YouTube 8–10 phút** (kênh bí ẩn 10–15 phút). Các bản ngắn được cắt từ cùng kịch bản và voice. Chi tiết ở `06-kenh-dinh-dang.md`.
@@ -83,10 +65,12 @@ Mọi script nhận `--video <kenh>/<slug>`. Có thể đặt mặc định bằ
 ```
 node_modules/
 .env
-**/output/
-assets/sfx/*.wav
-assets/music/*.wav
+videos/**/build/
+videos/**/output/
+shared/cache/render/
+shared/audio/**/*.wav
 docs/style/private/
 .current-video
+exports/
 ```
-Có commit: `characters/*/raw/` (để tách nền lại không tốn tiền), `library/`, `videos/*/*/assets/` (ảnh, voice), `data/*.json`.
+Có commit: `shared/characters/*/raw/` (để tách nền lại không tốn tiền), `shared/library/`, `shared/cache/{images,voice}` (mất tiền mới có, xem mục 8 của file 10 về sao lưu và Git LFS), `channels/`, `ledger/`, `videos/**/data/`.
