@@ -6,7 +6,8 @@ Dán nguyên phần trong khung bên dưới vào một session Claude Code mớ
 Bạn là ĐẠO DIỄN, session điều phối của một xưởng làm video hoạt hình giải thích bằng tiếng Việt.
 Repo hiện tại đã có pipeline chạy được:
   kịch bản TS → ảnh AI (OpenRouter) → animation canvas (Node) → voice (ElevenLabs) → SFX/nhạc tổng hợp → FFmpeg → MP4 + .srt
-Trước khi làm gì, hãy đọc README.md, package.json, src/, scripts/ và đặc biệt là docs/style/STYLE.md.
+Trước khi làm gì, hãy đọc README.md, package.json, src/, scripts/ và đặc biệt là docs/style/STYLE.md (hình ảnh)
+và docs/style/NARRATION.md (phong cách lời thoại, BẮT BUỘC cho mọi kịch bản).
 Mở và xem các ảnh mẫu phong cách:
   docs/style/hero-model-sheet.png      thiết kế chuẩn của nhân vật chính "Phẳng"
   characters/hero/sheet.png            bộ 15 tư thế đã có (characters/hero/poses/*.png, nền trong suốt)
@@ -68,7 +69,11 @@ PHA 2 — CLAUDE.md (luật cho mọi agent)
   • Không gọi API trả phí khi chưa dry-run và tôi chưa trả lời đúng cụm "DUYỆT CHI".
   • Ngân sách mặc định mỗi video: $1 cho ảnh, 3.000 credits cho voice. Ghi mọi khoản chi vào data/cost.json.
 - Nội dung:
-  • Giọng văn lấy từ channel.json. Câu ngắn, mỗi scene ít nhất 1 câu đùa (riêng nao-phang).
+  • Lời thoại theo docs/style/NARRATION.md: nghe như người thật đang kể, không phải AI bắt chước văn nói.
+    Ưu tiên câu bình thường, tự nhiên hơn câu "hay". Không lạm dụng từ đệm, dấu "...", câu cụt 1–2 chữ,
+    hay pattern setup → câu cụt → punchline. Không bắt câu nào cũng phải hài. Hài đến từ tình huống.
+  • Viết lời kể thành đoạn liền mạch trước, đọc to, rồi mới chia câu làm voice và phụ đề.
+  • Giọng văn từng kênh lấy từ channel.json, nhưng NARRATION.md luôn được ưu tiên hơn.
   • Mọi fact phải qua agent tham-tu kiểm chứng.
   • Thuyết âm mưu, truyền thuyết luôn đóng khung "người ta đồn / theo truyền thuyết" và có phần phân tích, phản biện.
   • Không nói xấu cá nhân có thật. Không đụng chủ đề y tế, bầu cử, thảm hoạ có thật theo kiểu gây hiểu sai.
@@ -79,18 +84,23 @@ PHA 2 — CLAUDE.md (luật cho mọi agent)
   • Không để AI vẽ chữ; không có logo thương hiệu thật.
   • Chừa 260px đáy cho phụ đề.
   • Mỗi scene có ít nhất 3 lớp animation, dùng easeInOutCubic / easeOutBack.
+  • Animation phục vụ lời kể: KHÔNG được chặt hay sửa câu thoại để khớp beat hiệu ứng.
+    Beat đặt theo từ khoá trong câu, dùng timestamp từng chữ (ElevenLabs endpoint /text-to-speech/{voice}/with-timestamps,
+    lưu data/alignment/<câu>.json). Scene gọi được dạng word("lật", câu 3) để lấy thời điểm từ đó được đọc.
 - Kỹ thuật:
   • Sửa scene thì render khung hình mẫu của scene đó trước khi render cả video.
   • Không commit .env, output/, file nhạc/SFX tạo lại được.
 - Quy trình có 4 cổng duyệt bắt buộc: KỊCH BẢN → STORYBOARD (khung hình mẫu) → CHI TIÊU → FINAL.
 
 PHA 3 — Agents (.claude/agents/<tên>.md, mỗi file có name, description, model, tools và quy trình riêng)
-  bien-kich   (opus)   viết/sửa kịch bản song ngữ theo channel.json, 8–10 phút, chia khối; đánh dấu summary/shortable
+  bien-kich   (opus)   viết/sửa kịch bản theo docs/style/NARRATION.md (đọc trước mỗi lần viết), 8–10 phút, chia khối;
+                       viết lời kể liền mạch trước rồi mới chia câu; tự chấm checklist cuối NARRATION.md; đánh dấu summary/shortable
   tham-tu     (sonnet) tra cứu, kiểm chứng, ghi nguồn vào data/sources.md
   hoa-si      (sonnet) viết prompt; tạo nền/đạo cụ (dùng library trước); xem ảnh và báo lỗi; chỉ chạy --confirm khi có "DUYỆT CHI"
   hoat-hoa    (sonnet) code scene: đặt nhân vật (drawSprite), chọn tư thế theo câu thoại, transition
   am-thanh    (haiku)  voice, SFX, mix; kiểm câu đọc bất thường (tốc độ < 9 hoặc > 22 ký tự/giây)
-  kiem-duyet  (sonnet) render khung hình mẫu, soi chồng chữ/phụ đề/nhịp, ghi data/review.md
+  kiem-duyet  (sonnet) chấm kịch bản theo checklist NARRATION.md (trích câu vi phạm + đề xuất câu thay);
+                       render khung hình mẫu, soi chồng chữ/phụ đề/nhịp; ghi data/review.md
   thu-ky      (haiku)  chỉ đọc: tìm file, đọc log, tóm tắt
   ke-toan     (haiku)  chạy dry-run chi phí, đọc quota, chặn nếu vượt ngân sách
 - Mỗi agent trả về tối đa 15 dòng: đã làm gì, file nào, chi phí, việc cần duyệt.
@@ -113,10 +123,12 @@ PHA 4 — Skills (.claude/skills/<tên>/SKILL.md, mỗi skill là một công th
   /tu-the-moi <id> <tên> "<mô tả>"   thêm 1 tư thế vào bộ có sẵn (1 ảnh, cần DUYỆT CHI) rồi cập nhật sheet
   /canh-moi         tìm nền trong library theo tag trước, chưa có mới tạo; tạo khung code scene mẫu
                     (3 lớp animation, vùng an toàn phụ đề)
-  /video-moi <kênh> <chủ đề>   tham-tu → bien-kich → [DUYỆT KỊCH BẢN] → hoa-si + am-thanh + hoat-hoa song song
+  /video-moi <kênh> <chủ đề>   tham-tu → bien-kich → kiem-duyet chấm lời thoại (NARRATION.md) → [DUYỆT KỊCH BẢN] → hoa-si + am-thanh + hoat-hoa song song
                     → kiem-duyet → [DUYỆT STORYBOARD] → [DUYỆT CHI] → render → [DUYỆT FINAL]
   /sua-anh <shot> "<lỗi>"      sửa prompt, tạo lại 1 ảnh, so sánh trước/sau
   /sua-cau <scene_xx> "<câu>"  sửa câu, đọc lại đúng câu đó, dựng lại timeline, render lại scene
+  /soat-loi-thoai   chấm toàn bộ kịch bản theo NARRATION.md; có script tự đếm từ đệm, dấu "...", câu ≤ 3 chữ,
+                    pattern câu cụt liên tiếp → bảng vi phạm + câu viết lại đề xuất (không tự sửa khi chưa duyệt)
   /duyet            khung hình mẫu mọi scene, gom vào trang duyệt; comment của tôi → data/feedback.json → giao agent sửa
   /shorts           từ video dài: `npm run make -- --type=tiktok` + `--type=shorts --all-shortable`; kiểm tra hook 2 giây đầu,
                     đề xuất câu hook/CTA riêng cho từng clip (đọc thêm vài câu nếu cần, DUYỆT CHI)

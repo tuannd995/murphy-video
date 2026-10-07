@@ -1,5 +1,7 @@
 # Kịch bản v3: Nghịch lý Murphy (giọng kể tự nhiên)
 
+> ⚠ **Không dùng làm mẫu.** Bản này vẫn vi phạm [`docs/style/NARRATION.md`](style/NARRATION.md): lạm dụng từ đệm ("nhé", "mà", "thế là", "y như rằng"), dấu "...", và cố chèn câu đùa. Giữ lại chỉ để so sánh.
+
 Viết lại từ bản v2 vì nhiều câu bị cắt cụt, nghe như "câu đùa nén" ("Lần một. Sai.", "Newton không chứng minh nó…").
 
 **Nguyên tắc của bản này:**

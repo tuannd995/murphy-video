@@ -1,6 +1,6 @@
 # Phong cách hình ảnh: kênh Não Phẳng
 
-Mọi ảnh, nhân vật, cảnh và overlay đều phải theo file này. Claude Code: đọc file này và xem các ảnh mẫu bên dưới trước khi viết prompt ảnh hoặc code scene.
+Mọi ảnh, nhân vật, cảnh và overlay đều phải theo file này. Lời thoại theo [`NARRATION.md`](NARRATION.md). Claude Code: đọc file này và xem các ảnh mẫu bên dưới trước khi viết prompt ảnh hoặc code scene.
 
 ## Ảnh mẫu (trong repo)
 
