@@ -1,19 +1,118 @@
 {
   "budget_usd": 2,
-  "spent": [],
-  "total_spent_usd": 0,
+  "spent": [
+    {
+      "ts": "2026-10-07T03:37:12.041Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "character-ref",
+      "usd": 0.0387753
+    },
+    {
+      "ts": "2026-10-07T03:37:20.835Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s01a-morning",
+      "usd": 0.0393477
+    },
+    {
+      "ts": "2026-10-07T03:37:29.139Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s01b-rain-scooter",
+      "usd": 0.0393345
+    },
+    {
+      "ts": "2026-10-07T03:37:37.086Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s02-thinking",
+      "usd": 0.0393309
+    },
+    {
+      "ts": "2026-10-07T03:37:45.452Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s03-kitchen",
+      "usd": 0.0393354
+    },
+    {
+      "ts": "2026-10-07T03:37:53.297Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s04-desk-usb",
+      "usd": 0.0394127
+    },
+    {
+      "ts": "2026-10-07T03:38:01.293Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s05a-dev-confident",
+      "usd": 0.0393627
+    },
+    {
+      "ts": "2026-10-07T03:38:09.490Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s05b-dev-shocked",
+      "usd": 0.0393348
+    },
+    {
+      "ts": "2026-10-07T03:38:17.660Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s06a-traffic",
+      "usd": 0.0393501
+    },
+    {
+      "ts": "2026-10-07T03:38:25.804Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s06b-umbrella-sun",
+      "usd": 0.0393267
+    },
+    {
+      "ts": "2026-10-07T03:38:33.876Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s06c-phone-battery",
+      "usd": 0.0393685
+    },
+    {
+      "ts": "2026-10-07T03:38:42.438Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s07-memory",
+      "usd": 0.0393821
+    },
+    {
+      "ts": "2026-10-07T03:38:50.609Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s08-prepared",
+      "usd": 0.0393324
+    },
+    {
+      "ts": "2026-10-07T03:38:58.774Z",
+      "step": "image",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "s09-calm",
+      "usd": 0.0393785
+    }
+  ],
+  "total_spent_usd": 0.550372,
   "estimate": {
-    "at": "2026-10-07T03:09:12.186Z",
+    "at": "2026-10-07T03:36:26.131Z",
     "image_model": "google/gemini-2.5-flash-image",
-    "usd_per_image": 0.05,
-    "pricing_note": "fallback (không đọc được giá)",
+    "usd_per_image": 0.03918,
+    "pricing_note": "từ /models: prompt=3e-7/tok, completion=0.0000025/tok, image_output=0.00003/tok",
     "images_total": 14,
     "images_missing": 14,
-    "images_usd": 0.7,
+    "images_usd": 0.5485,
     "script_llm_usd": 0,
     "tts_usd": 0,
     "music_sfx_usd": 0,
-    "projected_total_usd": 0.7,
+    "projected_total_usd": 0.5485,
     "within_budget": true
   }
 }
