@@ -36,12 +36,12 @@ export const FORMATS: Record<VideoType, Format> = {
   },
   tiktok: {
     label: "TikTok (9:16)", width: 1080, height: 1920, vertical: true, ideal: [61, 180], hardMax: 600, introOutro: false, summary: true, stretch: false,
-    cta: "Follow để xem thêm kiến thức nguội ngắt 🧠",
+    cta: "Follow để xem thêm kiến thức nguội ngắt",  // không dùng emoji: font không có
     note: "> 1 phút để đủ điều kiện Creator Rewards.",
   },
   shorts: {
     label: "YouTube Shorts (9:16)", width: 1080, height: 1920, vertical: true, ideal: [30, 60], hardMax: 180, introOutro: false, summary: false, stretch: false,
-    cta: "Bản đầy đủ trên kênh Não Phẳng ▶",
+    cta: "Xem bản đầy đủ trên YouTube Não Phẳng",
     note: "1 khối nội dung, kéo người xem về video dài.",
   },
   reels: {

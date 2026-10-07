@@ -9,7 +9,7 @@ import type { Storyboard, TimedScene } from "../script/timeline.js";
 
 export const VW = 1080, VH = 1920;
 const FRAME_Y = 600, FRAME_H = Math.round((VW / W) * H); // 608
-const SUB: SubtitleLayout = { frameW: VW, bottom: 1600, viSize: 56, enSize: 34, maxW: 960 };
+const SUB: SubtitleLayout = { frameW: VW, bottom: 1640, viSize: 54, enSize: 32, maxW: 980, maxLines: 3 };
 
 export function drawVertical(ctx: Ctx, frame: Canvas, t: number, sb: Storyboard, scene: TimedScene) {
   // nền: khung phóng to phủ kín + tối
