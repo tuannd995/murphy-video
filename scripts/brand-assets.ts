@@ -93,46 +93,35 @@ function headCrop(img: Image) {
   save(p, "avatar-preview-circle.png");
 }
 
-// ---------- 2. Watermark 150×150 (nền trong suốt) ----------
-{
-  const c = createCanvas(150, 150), x = c.getContext("2d");
-  x.fillStyle = PAPER; x.beginPath(); x.arc(75, 75, 72, 0, Math.PI * 2); x.fill();
-  x.lineWidth = 6; x.strokeStyle = INK; x.stroke();
-  x.save(); x.beginPath(); x.arc(75, 75, 69, 0, Math.PI * 2); x.clip();
-  const img = ch.img.get("stand")!; const { sx, sy, sw, sh } = headCrop(img);
-  const s = 118 / sh; x.drawImage(img, sx, sy, sw, sh, 75 - (sw * s) / 2, 24, sw * s, sh * s);
-  x.restore();
-  save(c, "watermark-150.png");
-}
+// (Watermark 150×150 do scripts/brand-logo.ts tạo từ biểu tượng rút gọn)
 
-// ---------- 3. Banner 2560×1440 (vùng an toàn 1546×423 ở giữa) ----------
+// ---------- 3. Banner 2560×1440 ----------
+// YouTube: nội dung chính phải nằm trong vùng an toàn 1235×338 (điện thoại chỉ hiện vùng này); máy tính bảng/PC hiện 1546×423; TV hiện cả ảnh.
 {
   const W = 2560, H = 1440, c = createCanvas(W, H), x = c.getContext("2d");
   paper(x, W, H); rays(x, W / 2, H / 2, 2200, 28);
-  // chi tiết trang trí nằm NGOÀI vùng an toàn (chỉ hiện trên TV/máy tính)
+  // trang trí nằm NGOÀI vùng an toàn (chỉ hiện trên TV/máy tính)
   const deco: [string, number, number, number, number][] = [
     ["?", 330, 360, 220, -0.2], ["?", 2250, 1090, 260, 0.25], ["!", 2330, 330, 200, 0.18], ["?", 250, 1120, 180, 0.2],
     ["?", 760, 160, 120, 0.3], ["!", 1850, 1280, 130, -0.25],
   ];
   for (const [m, dx, dy, sz, r] of deco) bigMark(x, m, dx, dy, sz, r);
-  // vùng an toàn
-  const sx0 = (W - 1546) / 2, sy0 = (H - 423) / 2;
-  sprite(x, "think", sx0 + 190, sy0 + 440, 440);
-  const nx = sx0 + 400, ny = sy0 + 264;
-  wordmark(x, NAME, nx, ny, 188, { align: "left", rot: -0.02 });
+  const SW = 1235, SH = 338, x0 = (W - SW) / 2, y0 = (H - SH) / 2;
+  sprite(x, "think", x0 + 120, y0 + 334, 318);
+  const nx = x0 + 250, ny = y0 + 194;
+  wordmark(x, NAME, nx, ny, 138, { align: "left", rot: -0.02 });
   x.textAlign = "left"; x.textBaseline = "alphabetic";
-  x.font = font(50, FONT.round); x.fillStyle = RED; x.fillText(TAGLINE, nx + 8, ny + 82);
-  x.font = font(38, FONT.round); x.fillStyle = INK; x.fillText(SCHEDULE, nx + 8, ny + 128);
-  // bóng đèn và lấp lánh quanh tên kênh (trong vùng an toàn) + ngoài vùng an toàn
-  bulb(x, sx0 + 1400, sy0 + 130, 112, { rot: 0.2 });
-  sparkle(x, nx - 36, sy0 + 70, 24); sparkle(x, sx0 + 1490, sy0 + 330, 18, "#fff", true, 0.3);
+  x.font = font(40, FONT.round); x.fillStyle = RED; x.fillText(TAGLINE, nx + 6, ny + 56);
+  x.font = font(32, FONT.round); x.fillStyle = INK; x.fillText(SCHEDULE, nx + 6, ny + 98);
+  bulb(x, x0 + 1040, y0 + 124, 92, { rot: 0.2 });
+  sparkle(x, nx - 22, y0 + 44, 20); sparkle(x, x0 + 1185, y0 + 250, 15, "#fff", true, 0.3);
   sparkle(x, 480, 700, 34, BRAND.yellow, true, 0.2); sparkle(x, 2150, 720, 40, BRAND.yellow, true, -0.2); sparkle(x, 1900, 260, 28, "#fff", true, 0.4);
   save(c, "banner-2560x1440.png");
-  // xem trước: khung vùng an toàn
+  // xem trước: đỏ = vùng an toàn điện thoại, xanh = máy tính bảng/PC
   const p = createCanvas(1280, 720), px = p.getContext("2d");
-  px.drawImage(c, 0, 0, 1280, 720);
-  px.strokeStyle = "rgba(224,54,44,0.9)"; px.lineWidth = 3; px.setLineDash([12, 8]);
-  px.strokeRect(sx0 / 2, sy0 / 2, 1546 / 2, 423 / 2);
+  px.drawImage(c, 0, 0, 1280, 720); px.lineWidth = 3; px.setLineDash([12, 8]);
+  px.strokeStyle = "rgba(60,110,220,0.9)"; px.strokeRect((W - 1546) / 4, (H - 423) / 4, 1546 / 2, 423 / 2);
+  px.strokeStyle = "rgba(224,54,44,0.95)"; px.strokeRect(x0 / 2, y0 / 2, SW / 2, SH / 2);
   save(p, "banner-preview-safe-area.png");
 }
 

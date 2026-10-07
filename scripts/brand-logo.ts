@@ -31,19 +31,20 @@ function bodyPath(x: Ctx, grow = 0) {
   x.closePath();
 }
 
-function draw(x: Ctx, withBg: boolean) {
+/** markOnly: chỉ biểu tượng (não + bóng đèn), không chữ; dùng cho watermark, ảnh đại diện nhỏ */
+function draw(x: Ctx, withBg: boolean, markOnly = false) {
+  const HY = markOnly ? 440 : 330, K = markOnly ? 0.96 : 0.84, TY = markOnly ? 112 : 20;
   if (withBg) { x.fillStyle = PAPER; x.beginPath(); x.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2); x.fill(); }
   x.lineJoin = "round"; x.lineCap = "round";
   // tia sáng lớn phía sau não + quầng sáng (cắt gọn trong vòng tròn)
   x.save(); x.beginPath(); x.arc(CX, S / 2, S / 2 - 2, 0, Math.PI * 2); x.clip();
-  const halo = x.createRadialGradient(CX, 330, 40, CX, 330, 400);
+  const halo = x.createRadialGradient(CX, HY, 40, CX, HY, 400);
   halo.addColorStop(0, "rgba(255,226,102,0.45)"); halo.addColorStop(1, "rgba(255,226,102,0)");
-  x.fillStyle = halo; x.beginPath(); x.arc(CX, 330, 400, 0, Math.PI * 2); x.fill();
-  burst(x, CX, 330, 300, 380, 22, "rgba(224,190,90,0.55)", 12);
+  x.fillStyle = halo; x.beginPath(); x.arc(CX, HY, 400, 0, Math.PI * 2); x.fill();
+  burst(x, CX, HY, 300, 380, 22, "rgba(224,190,90,0.55)", 12);
   x.restore();
   // não thu nhỏ một chút để nhường chỗ cho bóng đèn và chữ
-  const K = 0.84;
-  x.save(); x.translate(CX * (1 - K), 20); x.scale(K, K);
+  x.save(); x.translate(CX * (1 - K), TY); x.scale(K, K);
 
   // bóng đổ dưới não
   x.fillStyle = "rgba(21,21,21,0.10)"; x.beginPath(); x.ellipse(CX, 640, 290, 20, 0, 0, Math.PI * 2); x.fill();
@@ -121,6 +122,13 @@ function draw(x: Ctx, withBg: boolean) {
 
   x.restore();
   // bóng đèn ý tưởng bật sáng trên đầu, nghiêng nhẹ + lấp lánh
+  if (markOnly) {
+    bulb(x, CX + 128, 214, 168, { rot: 0.18 });
+    sparkle(x, CX - 190, 190, 40, BRAND.yellow, true, 0.2);
+    sparkle(x, CX + 330, 340, 28, "#ffffff", true, -0.2);
+    sparkle(x, CX - 340, 360, 24, BRAND.yellow, true, 0.4);
+    return;
+  }
   bulb(x, CX + 118, 128, 118, { rot: 0.18 });
   sparkle(x, CX - 150, 118, 30, BRAND.yellow, true, 0.2);
   sparkle(x, CX + 292, 214, 22, "#ffffff", true, -0.2);
@@ -137,4 +145,13 @@ const save = (c: Canvas, name: string) => { const f = path.join(OUT, name); fs.w
   const sq = createCanvas(S, S), sx = sq.getContext("2d"); sx.fillStyle = PAPER; sx.fillRect(0, 0, S, S); draw(sx, false); save(sq, `logo-square-${EYES}.png`);
   // bản nền trong suốt để chèn video/banner
   const tr = createCanvas(S, S); draw(tr.getContext("2d"), false); save(tr, `logo-transparent-${EYES}.png`);
+  // biểu tượng rút gọn (không chữ)
+  const mk = createCanvas(S, S); draw(mk.getContext("2d"), false, true); save(mk, "logo-mark-transparent.png");
+  const mkSq = createCanvas(S, S), mx = mkSq.getContext("2d"); mx.fillStyle = PAPER; mx.fillRect(0, 0, S, S); draw(mx, false, true); save(mkSq, "avatar-mark-800.png");
+  // watermark video 150×150: huy hiệu tròn nền kem + viền mực, nhìn rõ trên mọi nền video
+  const wm = createCanvas(150, 150), wx = wm.getContext("2d");
+  wx.fillStyle = PAPER; wx.beginPath(); wx.arc(75, 75, 72, 0, Math.PI * 2); wx.fill();
+  wx.save(); wx.beginPath(); wx.arc(75, 75, 70, 0, Math.PI * 2); wx.clip(); wx.drawImage(mk, 100, 60, 720, 720, 4, 4, 142, 142); wx.restore();
+  wx.strokeStyle = INK; wx.lineWidth = 5; wx.beginPath(); wx.arc(75, 75, 72, 0, Math.PI * 2); wx.stroke();
+  save(wm, "watermark-150.png");
 }
