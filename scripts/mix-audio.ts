@@ -1,12 +1,15 @@
-// Trộn voice-over + nhạc nền (tự duck khi có giọng) + SFX theo timeline → output/audio-mix.wav
+// Trộn voice-over + nhạc nền (tự duck khi có giọng) + SFX theo timeline → output[/<định dạng>]/audio-mix.wav
+//   npm run mix [-- --type=tiktok]
 import fs from "node:fs";
 import path from "node:path";
 import { AUDIO, PATHS } from "../src/config/index.js";
+import { formatPaths, parseFormatArgs } from "../src/config/formats.js";
 import type { Storyboard } from "../src/script/timeline.js";
 import { dbToGain, decodeMono, writeWav } from "../src/utils/media.js";
 
 const SR = AUDIO.sampleRate;
-const sb: Storyboard = JSON.parse(fs.readFileSync(PATHS.storyboard, "utf8"));
+const paths = formatPaths(parseFormatArgs());
+const sb: Storyboard = JSON.parse(fs.readFileSync(paths.storyboard, "utf8"));
 const N = Math.ceil(sb.total_duration * SR);
 const L = new Float32Array(N), R = new Float32Array(N);
 
@@ -26,6 +29,7 @@ const voiceOn = new Float32Array(N);
 let voices = 0;
 for (const s of sb.scenes)
   for (const c of s.captions) {
+    if (c.skip) continue;
     if (c.voice) { place(load(path.join(PATHS.voice, c.voice)), s.start + c.start, dbToGain(AUDIO.voiceGainDb)); voices++; }
     const a = Math.round((s.start + c.start) * SR), b = Math.min(N, Math.round((s.start + c.end) * SR));
     for (let i = a; i < b; i++) voiceOn[i] = 1;
@@ -74,7 +78,7 @@ for (const s of sb.scenes)
 // 4) soft limiter
 for (const ch of [L, R]) for (let i = 0; i < N; i++) { const x = ch[i]; ch[i] = Math.abs(x) < 0.8 ? x : Math.sign(x) * (0.8 + 0.2 * Math.tanh((Math.abs(x) - 0.8) / 0.2)); }
 
-fs.mkdirSync(PATHS.output, { recursive: true });
-const out = path.join(PATHS.output, "audio-mix.wav");
+fs.mkdirSync(paths.out, { recursive: true });
+const out = path.join(paths.out, "audio-mix.wav");
 writeWav(out, [L, R], SR);
-console.log(`Audio mix: ${sb.total_duration.toFixed(1)}s | voice ${voices} câu | SFX ${sfxCount} | → output/audio-mix.wav`);
+console.log(`Audio mix: ${sb.total_duration.toFixed(1)}s | voice ${voices} câu | SFX ${sfxCount} | → ${path.relative(process.cwd(), out)}`);

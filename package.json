@@ -17,7 +17,8 @@
     "final": "tsx scripts/assemble.ts",
     "preview": "npm run script && npm run sfx && npm run storyboard && npm run render && npm run mix && npm run final",
     "all": "npm run script && npm run voice -- --confirm && npm run sfx && npm run storyboard && npm run render && npm run mix && npm run final",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "make": "tsx scripts/make.ts"
   },
   "dependencies": {
     "@napi-rs/canvas": "^1.0.10"

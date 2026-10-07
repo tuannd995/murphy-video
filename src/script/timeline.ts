@@ -6,6 +6,8 @@ export interface TimedCaption {
   start: number; // giây, tính từ đầu scene
   end: number;
   voice: string | null;
+  /** câu bị lược trong bản rút gọn (thời lượng 0, không phụ đề, không voice) */
+  skip?: boolean;
 }
 
 export interface TimedShot {
@@ -27,6 +29,10 @@ export interface TimedScene {
 }
 
 export interface Storyboard {
+  type: string;
+  title: string;
+  vertical: boolean;
+  cta?: string;
   width: number;
   height: number;
   fps: number;

@@ -31,6 +31,10 @@ export interface SceneDef {
   animation: string;
   sfx: SfxCue[];
   music: "curious" | "warm";
+  /** chỉ số các câu giữ lại trong bản tóm tắt (TikTok/Facebook). Bỏ trống = giữ cả scene */
+  summary?: number[];
+  /** scene tự đứng được một mình → cắt làm Shorts/Reels */
+  shortable?: boolean;
 }
 
 /** Định dạng data/script.json */
@@ -48,6 +52,8 @@ export interface ScriptScene {
   animation: string;
   sfx: SfxCue[];
   music: "curious" | "warm";
+  summary?: number[];
+  shortable?: boolean;
 }
 
 export interface ScriptFile {

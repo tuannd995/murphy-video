@@ -23,6 +23,8 @@ const scenes = SCENES.map((s) => {
     animation: s.animation,
     sfx: s.sfx,
     music: s.music,
+    summary: s.summary,
+    shortable: s.shortable,
   };
 });
 

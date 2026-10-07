@@ -108,3 +108,18 @@ npx tsx scripts/sprite-demo.ts hero                   # output/sprite-demo.mp4
 ```
 
 Dùng ảnh tự vẽ: lưu mỗi tư thế thành `characters/<id>/raw/<pose>.png` trên **nền một màu trơn** (khác màu nhân vật), rồi chạy `--key-only`.
+
+## Định dạng theo nền tảng
+
+**Ưu tiên video YouTube dài 8–10 phút.** Các bản ngắn được cắt từ cùng kịch bản và voice, không đọc lại:
+
+| Lệnh | Kết quả |
+|---|---|
+| `npm run make` | YouTube 16:9 đầy đủ |
+| `npm run make -- --type=tiktok` | Tóm tắt dọc 9:16, 1–3 phút |
+| `npm run make -- --type=facebook` | Tóm tắt ngang 3–5 phút |
+| `npm run make -- --type=shorts --scenes=scene-04` | 1 khối thành YouTube Shorts |
+| `npm run make -- --type=reels --all-shortable` | Mỗi scene `shortable` thành 1 Reels |
+| `npm run make -- --type=youtube --summary` | Tóm tắt ngang của video dài |
+
+Các câu giữ lại trong bản tóm tắt được khai báo bằng `summary: [...]` trong từng scene của kịch bản. Định nghĩa định dạng nằm ở `src/config/formats.ts`.

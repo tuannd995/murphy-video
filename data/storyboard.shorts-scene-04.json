@@ -1,0 +1,120 @@
+{
+  "type": "shorts",
+  "title": "Nghịch lý Murphy: Vì sao mọi thứ luôn hỏng đúng lúc?",
+  "vertical": true,
+  "cta": "Bản đầy đủ trên kênh Não Phẳng ▶",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "total_duration": 25.867,
+  "voice_ready": true,
+  "images_ready": 1,
+  "images_total": 1,
+  "scenes": [
+    {
+      "id": "scene-04",
+      "title": "USB",
+      "start": 0,
+      "duration": 25.866666666666667,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Bài kiểm tra nhân phẩm của thời đại công nghệ: cắm USB.",
+          "en": "The ultimate character test of the tech age: plugging in a USB.",
+          "start": 0.6,
+          "end": 4.466,
+          "voice": "scene-04_00.mp3"
+        },
+        {
+          "vi": "USB chỉ có hai mặt. Xác suất cắm đúng: năm mươi phần trăm. Dễ ợt.",
+          "en": "A USB plug has two sides. Odds of getting it right: fifty percent. Easy.",
+          "start": 4.716,
+          "end": 11.482,
+          "voice": "scene-04_01.mp3"
+        },
+        {
+          "vi": "Lần một. Sai.",
+          "en": "Try one. Wrong.",
+          "start": 11.732,
+          "end": 13.691,
+          "voice": "scene-04_02.mp3"
+        },
+        {
+          "vi": "Lật lại. Vẫn sai?!",
+          "en": "Flip it. Still wrong?!",
+          "start": 13.941,
+          "end": 16.057,
+          "voice": "scene-04_03.mp3"
+        },
+        {
+          "vi": "Lật thêm lần nữa... và nó vào. Đúng y cái hướng ban đầu.",
+          "en": "Flip it once more... and it goes in. Exactly the way you had it at first.",
+          "start": 16.307,
+          "end": 20.826,
+          "voice": "scene-04_04.mp3"
+        },
+        {
+          "vi": "Toán học nói năm mươi phần trăm. Cuộc đời nói: còn lâu nhé.",
+          "en": "Math says fifty percent. Life says: nice try.",
+          "start": 21.076,
+          "end": 24.864,
+          "voice": "scene-04_05.mp3"
+        }
+      ],
+      "shots": [
+        {
+          "id": "s04-desk-usb",
+          "image": "s04-desk-usb.png",
+          "start": 0,
+          "end": 25.867
+        }
+      ],
+      "sfx": [
+        {
+          "id": "whoosh",
+          "caption": 0,
+          "offset": -0.3,
+          "time": 0.3
+        },
+        {
+          "id": "error",
+          "caption": 2,
+          "offset": 0.9,
+          "time": 12.632
+        },
+        {
+          "id": "whoosh",
+          "caption": 3,
+          "offset": 0.1,
+          "gainDb": -6,
+          "time": 14.041
+        },
+        {
+          "id": "error",
+          "caption": 3,
+          "offset": 1,
+          "time": 14.941
+        },
+        {
+          "id": "whoosh",
+          "caption": 4,
+          "offset": 0.2,
+          "gainDb": -6,
+          "time": 16.507
+        },
+        {
+          "id": "success",
+          "caption": 4,
+          "offset": 2,
+          "time": 18.307
+        },
+        {
+          "id": "ding",
+          "caption": 5,
+          "offset": 0.2,
+          "time": 21.276
+        }
+      ]
+    }
+  ]
+}

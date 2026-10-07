@@ -9,6 +9,7 @@ export const SCENES: SceneDef[] = [
     title: "Intro kênh",
     targetDuration: 16,
     music: "curious",
+    summary: [0, 1, 3, 4],
     captions: [
       { vi: "Xin chào các bạn, chào mừng đến với Não Phẳng!", en: "Hi everyone, and welcome to Não Phẳng, the Flat Brain channel!" },
       { vi: "Nơi tụi mình hâm nóng lại những kiến thức nguội ngắt,", en: "The place where we reheat stone-cold facts," },
@@ -35,6 +36,7 @@ export const SCENES: SceneDef[] = [
     title: "Hook",
     targetDuration: 24,
     music: "curious",
+    summary: [0, 4, 6, 7],
     captions: [
       { vi: "Bảy giờ sáng. Bạn, một người trưởng thành có trách nhiệm, đang vội đi làm.", en: "7 a.m. You, a responsible adult, are rushing off to work." },
       { vi: "Lần này bạn đã chuẩn bị từ tối hôm trước, kỹ như sắp đi thi đại học.", en: "This time you prepped the night before, like it was a university entrance exam." },
@@ -92,6 +94,7 @@ export const SCENES: SceneDef[] = [
     title: "Murphy's Law là gì?",
     targetDuration: 36,
     music: "curious",
+    summary: [1, 4],
     captions: [
       { vi: "Nghịch lý Murphy gói gọn trong một câu nghe rất... bi quan:", en: "Murphy's Law fits into one very... pessimistic sentence:" },
       { vi: "“Điều gì có thể xảy ra sai, thì nó sẽ xảy ra sai.”", en: "“Anything that can go wrong, will go wrong.”" },
@@ -134,6 +137,8 @@ export const SCENES: SceneDef[] = [
     title: "Bánh mì phết bơ",
     targetDuration: 36,
     music: "curious",
+    summary: [1, 4],
+    shortable: true,
     captions: [
       { vi: "Ví dụ kinh điển số một: lát bánh mì phết bơ.", en: "Classic example number one: buttered toast." },
       { vi: "Bạn lỡ tay làm rơi. Và như có định mệnh, mặt bơ úp thẳng xuống sàn. Bẹp.", en: "You drop it. And as if by fate, it lands butter-side down. Splat." },
@@ -173,6 +178,8 @@ export const SCENES: SceneDef[] = [
     title: "USB",
     targetDuration: 34,
     music: "curious",
+    summary: [1, 2, 3, 4, 5],
+    shortable: true,
     captions: [
       { vi: "Bài kiểm tra nhân phẩm của thời đại công nghệ: cắm USB.", en: "The ultimate character test of the tech age: plugging in a USB." },
       { vi: "USB chỉ có hai mặt. Xác suất cắm đúng: năm mươi phần trăm. Dễ ợt.", en: "A USB plug has two sides. Odds of getting it right: fifty percent. Easy." },
@@ -213,6 +220,8 @@ export const SCENES: SceneDef[] = [
     title: "Khi viết code",
     targetDuration: 48,
     music: "curious",
+    summary: [0, 2, 3, 4, 7],
+    shortable: true,
     captions: [
       { vi: "Còn nếu bạn là lập trình viên, chắc chắn bạn từng thốt lên câu thần chú: “Ở máy em chạy mà!”", en: "If you're a developer, you've definitely said the magic words: “But it works on my machine!”" },
       { vi: "Ở local, mọi thứ đẹp như mơ. Build xanh, test xanh, tâm hồn cũng xanh.", en: "Locally, it's a dream. Green build, green tests, green soul." },
@@ -268,6 +277,8 @@ export const SCENES: SceneDef[] = [
     title: "Trong đời sống",
     targetDuration: 38,
     music: "curious",
+    summary: [1, 2, 5],
+    shortable: true,
     captions: [
       { vi: "Và Murphy không chỉ ám dân IT. Ông ấy ám tất cả chúng ta.", en: "And Murphy doesn't just haunt IT folks. He haunts all of us." },
       { vi: "Đang muộn giờ? Đèn đỏ cả thành phố hẹn nhau chờ bạn.", en: "Running late? Every red light in town teams up to wait for you." },
@@ -333,6 +344,7 @@ export const SCENES: SceneDef[] = [
     title: "Vì sao ta thấy Murphy đúng?",
     targetDuration: 48,
     music: "curious",
+    summary: [2, 3, 5],
     captions: [
       { vi: "Vậy tại sao ta lại thấy Murphy linh nghiệm đến thế?", en: "So why does Murphy's Law feel so spot-on?" },
       { vi: "Lý do một: não của chúng ta là fan cứng của drama.", en: "Reason one: our brain is a die-hard drama fan." },
@@ -375,6 +387,7 @@ export const SCENES: SceneDef[] = [
     title: "Murphy có vô nghĩa?",
     targetDuration: 38,
     music: "warm",
+    summary: [2, 4],
     captions: [
       { vi: "Vậy Nghịch lý Murphy chỉ để than thở thôi à? Không hề!", en: "So is Murphy's Law just for complaining? Not at all!" },
       { vi: "Dùng đúng cách, nó là một bí kíp quản lý rủi ro cực xịn.", en: "Used right, it's a top-tier risk-management cheat code." },
@@ -415,6 +428,7 @@ export const SCENES: SceneDef[] = [
     title: "Kết luận",
     targetDuration: 28,
     music: "warm",
+    summary: [1, 3, 4],
     captions: [
       { vi: "Tóm lại, Nghịch lý Murphy không có nghĩa là cuộc đời luôn chống lại bạn.", en: "So, Murphy's Law doesn't mean life is always against you." },
       { vi: "Nó có nghĩa là: nếu một điều có thể đi sai, hãy chuẩn bị cho nó.", en: "It means: if something can go wrong, prepare for it." },
@@ -451,6 +465,7 @@ export const SCENES: SceneDef[] = [
     title: "Outro kênh",
     targetDuration: 20,
     music: "warm",
+    summary: [3, 4],
     captions: [
       { vi: "Ơ... video vẫn chạy kìa. Chắc hôm nay Murphy đi nghỉ phép.", en: "Huh... the video's still running. Murphy must be on vacation today." },
       { vi: "Cảm ơn bạn đã xem đến tận đây. Nếu thấy vui, bấm like cho tụi mình nhé.", en: "Thanks for watching all the way to the end. If you had fun, hit like." },

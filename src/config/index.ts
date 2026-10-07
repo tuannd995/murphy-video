@@ -32,9 +32,9 @@ export const TIMING = {
   sceneTail: 1.0,
   fade: 0.45, // fade đen ở mép scene
   charsPerSecond: 15.5, // ước lượng khi chưa có voice (đo từ ElevenLabs ~15–16 ký tự/giây)
-  // nếu tổng thời lượng < minTotal, tự giãn khoảng nghỉ giữa các câu (tối đa maxExtraGap/câu)
-  minTotal: 285,
-  maxExtraGap: 0.9,
+  // nếu ngắn hơn mục tiêu của định dạng (formats.ts), giãn nhẹ khoảng nghỉ giữa các câu, tối đa maxExtraGap/câu.
+  // Muốn đạt 8–10 phút thì THÊM NỘI DUNG, đừng giãn nhịp (nhịp chậm làm người xem bỏ đi).
+  maxExtraGap: 0.25,
 };
 
 export const AUDIO = {

@@ -24,7 +24,7 @@ export async function loadSceneCtx(scene: TimedScene): Promise<SceneCtx> {
   };
 }
 
-export function drawFrame(ctx: Ctx, s: SceneCtx, t: number, isFirst: boolean) {
+export function drawFrame(ctx: Ctx, s: SceneCtx, t: number, isFirst: boolean, opts: { subtitles?: boolean } = {}) {
   const render = SCENE_RENDERERS[s.scene.id];
   if (!render) throw new Error(`Chưa có renderer cho ${s.scene.id}`);
   ctx.save();
@@ -32,7 +32,7 @@ export function drawFrame(ctx: Ctx, s: SceneCtx, t: number, isFirst: boolean) {
   ctx.restore();
   vignette(ctx, 0.38);
   grain(ctx, t, 0.04);
-  drawSubtitle(ctx, t, s.scene.captions);
+  if (opts.subtitles !== false) drawSubtitle(ctx, t, s.scene.captions);
   // dip-to-black giữa các scene
   const fin = isFirst ? 0.9 : TIMING.fade;
   fadeBlack(ctx, 1 - prog(t, 0, fin));

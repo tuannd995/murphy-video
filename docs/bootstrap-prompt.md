@@ -22,6 +22,21 @@ hooks, và nhân vật dùng lại được. Làm lần lượt theo các PHA d�
 - KHÔNG in giá trị key ra màn hình.
 - Chỉ hỏi tôi khi cần quyết định thật sự. Cuối mỗi pha, báo ngắn gọn 3–5 dòng.
 
+ĐỊNH DẠNG & THỜI LƯỢNG (áp dụng cho mọi video)
+- ƯU TIÊN SỐ 1: video YouTube dài 8–10 phút (16:9). Từ 8 phút mới có quảng cáo giữa video (mid-roll). Kênh bí ẩn có thể 10–15 phút.
+  Muốn đủ 8–10 phút thì thêm khối nội dung, KHÔNG giãn nhịp đọc.
+- Kịch bản viết theo KHỐI 60–90 giây, mỗi khối tự đứng được (hook riêng, kết riêng). Mỗi scene khai báo:
+  summary: [chỉ số các câu giữ lại trong bản tóm tắt], shortable: true nếu cắt riêng làm Shorts/Reels được.
+- Bản ngắn cắt từ cùng kịch bản và cùng voice, không đọc lại (định nghĩa ở src/config/formats.ts):
+  npm run make                                     YouTube 16:9 đầy đủ (mặc định)
+  npm run make -- --type=tiktok                    tóm tắt dọc 9:16, > 1 phút (đủ điều kiện Creator Rewards)
+  npm run make -- --type=facebook                  tóm tắt ngang 3–5 phút
+  npm run make -- --type=shorts --scenes=scene-04  1 khối → YouTube Shorts (30–60s)
+  npm run make -- --type=reels --all-shortable     mỗi scene shortable → 1 Reels
+  npm run make -- --type=youtube --summary         bản tóm tắt ngang của video dài
+  (cùng tham số dùng được cho storyboard / render / mix / final. Kết quả nằm ở output/<định dạng>/)
+- Mỗi video dài nên kèm 1 TikTok + 4–6 Shorts/Reels. Storyboard sẽ cảnh báo nếu thời lượng lệch mục tiêu của từng nền tảng.
+
 PHA 0 — Kiểm tra môi trường (chỉ đọc)
 - Kiểm tra: Node ≥ 22, ffmpeg, `npm install`.
 - Kiểm tra các biến môi trường OPENROUTER_API_KEY, ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID: chỉ báo có hay không.
@@ -70,7 +85,7 @@ PHA 2 — CLAUDE.md (luật cho mọi agent)
 - Quy trình có 4 cổng duyệt bắt buộc: KỊCH BẢN → STORYBOARD (khung hình mẫu) → CHI TIÊU → FINAL.
 
 PHA 3 — Agents (.claude/agents/<tên>.md, mỗi file có name, description, model, tools và quy trình riêng)
-  bien-kich   (opus)   viết/sửa kịch bản song ngữ theo channel.json; xuất bản Shorts 45–60s
+  bien-kich   (opus)   viết/sửa kịch bản song ngữ theo channel.json, 8–10 phút, chia khối; đánh dấu summary/shortable
   tham-tu     (sonnet) tra cứu, kiểm chứng, ghi nguồn vào data/sources.md
   hoa-si      (sonnet) viết prompt; tạo nền/đạo cụ (dùng library trước); xem ảnh và báo lỗi; chỉ chạy --confirm khi có "DUYỆT CHI"
   hoat-hoa    (sonnet) code scene: đặt nhân vật (drawSprite), chọn tư thế theo câu thoại, transition
@@ -103,7 +118,8 @@ PHA 4 — Skills (.claude/skills/<tên>/SKILL.md, mỗi skill là một công th
   /sua-anh <shot> "<lỗi>"      sửa prompt, tạo lại 1 ảnh, so sánh trước/sau
   /sua-cau <scene_xx> "<câu>"  sửa câu, đọc lại đúng câu đó, dựng lại timeline, render lại scene
   /duyet            khung hình mẫu mọi scene, gom vào trang duyệt; comment của tôi → data/feedback.json → giao agent sửa
-  /shorts           cắt 3 clip dọc 9:16 (45–60s) từ video dài, phụ đề lớn giữa màn hình, hook 2 giây đầu
+  /shorts           từ video dài: `npm run make -- --type=tiktok` + `--type=shorts --all-shortable`; kiểm tra hook 2 giây đầu,
+                    đề xuất câu hook/CTA riêng cho từng clip (đọc thêm vài câu nếu cần, DUYỆT CHI)
   /chi-phi          báo cáo chi tiêu tháng (OpenRouter + ElevenLabs)
 
 PHA 5 — Hooks (.claude/settings.json + .claude/hooks/*.sh, script đọc JSON đầu vào từ stdin)
