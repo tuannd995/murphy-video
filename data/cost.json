@@ -210,9 +210,114 @@
       "model": "elevenlabs/eleven_v3",
       "item": "69 câu, 4217 ký tự",
       "usd": 0
+    },
+    {
+      "ts": "2026-10-07T04:59:32.610Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/stand",
+      "usd": 0.0392955
+    },
+    {
+      "ts": "2026-10-07T05:00:22.419Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/think",
+      "usd": 0.0392973
+    },
+    {
+      "ts": "2026-10-07T05:00:30.024Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/point",
+      "usd": 0.0392967
+    },
+    {
+      "ts": "2026-10-07T05:00:38.163Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/shock",
+      "usd": 0.0392973
+    },
+    {
+      "ts": "2026-10-07T05:00:45.911Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/happy",
+      "usd": 0.0392967
+    },
+    {
+      "ts": "2026-10-07T05:00:54.034Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/sad",
+      "usd": 0.0392958
+    },
+    {
+      "ts": "2026-10-07T05:01:02.016Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/angry",
+      "usd": 0.0392958
+    },
+    {
+      "ts": "2026-10-07T05:01:09.992Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/facepalm",
+      "usd": 0.0392958
+    },
+    {
+      "ts": "2026-10-07T05:01:18.045Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/shrug",
+      "usd": 0.0392958
+    },
+    {
+      "ts": "2026-10-07T05:01:26.040Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/thumbsup",
+      "usd": 0.0392946
+    },
+    {
+      "ts": "2026-10-07T05:01:34.093Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/walk-a",
+      "usd": 0.039297
+    },
+    {
+      "ts": "2026-10-07T05:01:41.946Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/walk-b",
+      "usd": 0.0392982
+    },
+    {
+      "ts": "2026-10-07T05:01:49.695Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/run",
+      "usd": 0.0392982
+    },
+    {
+      "ts": "2026-10-07T05:01:57.018Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/stand-talk",
+      "usd": 0.0392535
+    },
+    {
+      "ts": "2026-10-07T05:02:07.208Z",
+      "step": "character",
+      "model": "google/gemini-2.5-flash-image",
+      "item": "hero/stand-blink",
+      "usd": 0.0392541
     }
   ],
-  "total_spent_usd": 1.100729,
+  "total_spent_usd": 1.690092,
   "estimate": {
     "at": "2026-10-07T03:46:51.093Z",
     "image_model": "google/gemini-2.5-flash-image",

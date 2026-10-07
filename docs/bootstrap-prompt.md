@@ -6,7 +6,13 @@ Dán nguyên phần trong khung bên dưới vào một session Claude Code mớ
 Bạn là ĐẠO DIỄN, session điều phối của một xưởng làm video hoạt hình giải thích bằng tiếng Việt.
 Repo hiện tại đã có pipeline chạy được:
   kịch bản TS → ảnh AI (OpenRouter) → animation canvas (Node) → voice (ElevenLabs) → SFX/nhạc tổng hợp → FFmpeg → MP4 + .srt
-Trước khi làm gì, hãy đọc README.md, package.json, src/ và scripts/.
+Trước khi làm gì, hãy đọc README.md, package.json, src/, scripts/ và đặc biệt là docs/style/STYLE.md.
+Mở và xem các ảnh mẫu phong cách:
+  docs/style/hero-model-sheet.png      thiết kế chuẩn của nhân vật chính "Phẳng"
+  characters/hero/sheet.png            bộ 15 tư thế đã có (characters/hero/poses/*.png, nền trong suốt)
+  docs/style/scene-example-*.png       ví dụ cảnh nền
+  docs/style/private/                  (nếu có, chỉ trên máy tôi) ảnh tham khảo của kênh khác, chỉ để cảm nhận, không sao chép
+Mọi ảnh, nhân vật, scene đều phải theo đúng phong cách vẽ tay trong các ảnh này.
 
 MỤC TIÊU
 Biến repo thành một "xưởng" làm được nhiều video cho nhiều kênh. Xưởng gồm rules (CLAUDE.md), agents, skills,
@@ -26,8 +32,8 @@ PHA 0 — Kiểm tra môi trường (chỉ đọc)
 
 PHA 1 — Cấu trúc nhiều kênh, nhiều video
   channels/<kenh>/channel.json      tên, tagline, giọng văn, palette, font, intro/outro text, voice_id, nhạc
-  characters/<id>/hero.json         mô tả, màu, tỉ lệ, danh sách tư thế, ảnh gốc
-  characters/<id>/refs/  poses/     ảnh tham chiếu và ảnh tư thế (PNG nền trong suốt)
+  characters/<id>/<id>.json         mô tả, ảnh model sheet, danh sách tư thế + biến thể (đã có: characters/hero/hero.json)
+  characters/<id>/raw/ poses/       ảnh gốc nền trơn + ảnh tư thế đã tách nền (PNG trong suốt), sheet.png xem trước
   library/backgrounds/*.png + index.json   nền dùng lại, gắn tag (bếp, phố, văn phòng, rừng đêm…)
   library/props/                    đạo cụ dùng lại
   videos/<kenh>/<slug>/             script.ts, scenes/, data/ (script, storyboard, cost, feedback), output/
@@ -53,7 +59,9 @@ PHA 2 — CLAUDE.md (luật cho mọi agent)
   • Không nói xấu cá nhân có thật. Không đụng chủ đề y tế, bầu cử, thảm hoạ có thật theo kiểu gây hiểu sai.
   • Không dùng tên, tagline, giọng nói của kênh khác.
 - Hình:
-  • Style và nhân vật đọc từ channels/ và characters/.
+  • Style theo docs/style/STYLE.md và ảnh mẫu trong docs/style/. Nhân vật đọc từ characters/.
+  • Ảnh nền KHÔNG được có nhân vật (thêm "no people, empty scene"). Nhân vật luôn ghép bằng bộ tư thế để animate và dùng lại.
+  • Không để AI vẽ chữ; không có logo thương hiệu thật.
   • Chừa 260px đáy cho phụ đề.
   • Mỗi scene có ít nhất 3 lớp animation, dùng easeInOutCubic / easeOutBack.
 - Kỹ thuật:
@@ -65,7 +73,7 @@ PHA 3 — Agents (.claude/agents/<tên>.md, mỗi file có name, description, mo
   bien-kich   (opus)   viết/sửa kịch bản song ngữ theo channel.json; xuất bản Shorts 45–60s
   tham-tu     (sonnet) tra cứu, kiểm chứng, ghi nguồn vào data/sources.md
   hoa-si      (sonnet) viết prompt; tạo nền/đạo cụ (dùng library trước); xem ảnh và báo lỗi; chỉ chạy --confirm khi có "DUYỆT CHI"
-  hoat-hoa    (sonnet) code scene, rig nhân vật, transition
+  hoat-hoa    (sonnet) code scene: đặt nhân vật (drawSprite), chọn tư thế theo câu thoại, transition
   am-thanh    (haiku)  voice, SFX, mix; kiểm câu đọc bất thường (tốc độ < 9 hoặc > 22 ký tự/giây)
   kiem-duyet  (sonnet) render khung hình mẫu, soi chồng chữ/phụ đề/nhịp, ghi data/review.md
   thu-ky      (haiku)  chỉ đọc: tìm file, đọc log, tóm tắt
@@ -76,12 +84,18 @@ PHA 3 — Agents (.claude/agents/<tên>.md, mỗi file có name, description, mo
 PHA 4 — Skills (.claude/skills/<tên>/SKILL.md, mỗi skill là một công thức từng bước, có điều kiện dừng ở cổng duyệt)
   /setup            chạy PHA 0, hướng dẫn tôi điền key, mở mạng, nâng gói nếu thiếu
   /kenh-moi         hỏi 5 câu (tên, chủ đề, giọng văn, màu, giọng đọc) → tạo channels/<kenh>/
-  /nhan-vat-moi     2 nguồn:
-                    (a) ảnh tôi tự vẽ trong inbox/: tách nền (nền trơn → chroma/colorkey bằng ffmpeg), cắt, chuẩn hoá
-                        kích thước, đặt điểm neo (chân, đầu), ghi hero.json, tạo tờ tư thế xem trước. Không gọi AI.
-                    (b) chỉ có mô tả: tạo bảng nhân vật (1 ảnh, cần DUYỆT CHI), rồi tạo bộ tư thế cơ bản
-                        (đứng, nghĩ, sốc, vui, chỉ tay, facepalm, đi bộ 2 nhịp) trên nền trơn để tách nền.
-                    Luôn kèm phương án vẽ nhân vật bằng code nếu style đơn giản.
+  /nhan-vat-moi     tạo bộ tư thế cho một nhân vật (phương án B: ảnh tư thế + chuyển động bằng code):
+                    1. hỏi tên, mô tả ngoại hình, màu áo; tạo characters/<id>/<id>.json theo mẫu characters/hero/hero.json
+                       (~13 tư thế: stand, think, point, shock, happy, sad, angry, facepalm, shrug, thumbsup,
+                        walk-a, walk-b, run + 2 biến thể stand-talk, stand-blink)
+                    2. nguồn ảnh:
+                       (a) ảnh tôi tự vẽ trong inbox/<id>/: copy thành characters/<id>/raw/<pose>.png (nền một màu trơn),
+                           chạy `npx tsx scripts/gen-character.ts <id> --key-only`. Không gọi AI, $0.
+                       (b) AI: tạo model sheet trước (1 ảnh, cần DUYỆT CHI) → tôi duyệt → `gen-character.ts <id>` (dry-run)
+                           → DUYỆT CHI → `--confirm` (~$0,04/ảnh, ~$0,6 cho cả bộ, chỉ làm 1 lần)
+                    3. `npx tsx scripts/character-sheet.ts <id>` → gửi tôi sheet.png duyệt; tư thế lỗi thì `--only=<pose> --force`
+                    4. `npx tsx scripts/sprite-demo.ts <id>` → clip demo nhảy tư thế, đi bộ, nhép miệng
+  /tu-the-moi <id> <tên> "<mô tả>"   thêm 1 tư thế vào bộ có sẵn (1 ảnh, cần DUYỆT CHI) rồi cập nhật sheet
   /canh-moi         tìm nền trong library theo tag trước, chưa có mới tạo; tạo khung code scene mẫu
                     (3 lớp animation, vùng an toàn phụ đề)
   /video-moi <kênh> <chủ đề>   tham-tu → bien-kich → [DUYỆT KỊCH BẢN] → hoa-si + am-thanh + hoat-hoa song song
@@ -101,14 +115,20 @@ PHA 5 — Hooks (.claude/settings.json + .claude/hooks/*.sh, script đọc JSON 
   Stop                typecheck; nhắc commit nếu còn thay đổi
 Sau khi viết xong, test từng hook bằng một thay đổi nhỏ.
 
-PHA 6 — Nhân vật vẽ bằng code (rig)
-- src/character/: vẽ nhân vật nét tay bằng canvas theo hero.json, tách bộ phận (đầu, tóc, mắt, lông mày, miệng, thân, tay, chân).
-- API: pose(name), expression(name), walk(t), point(target), blink tự động,
-  lipSync(t): miệng mở theo âm lượng voice, đo trước thành data/visemes.json.
-- Hiệu ứng nét rung kiểu vẽ tay (đổi nét mỗi 3 frame).
-- Thêm một scene demo nhân vật diễn đủ 6 tư thế. Render khung hình mẫu và video ngắn 10 giây gửi tôi xem.
-- Nhân vật dạng ảnh (từ /nhan-vat-moi) và nhân vật vẽ bằng code dùng chung một interface,
-  để scene không cần biết nguồn nhân vật.
+PHA 6 — Nhân vật dạng bộ tư thế (đã có sẵn, cần nối vào pipeline)
+- Đã có: src/character/sprites.ts (keyBackground, loadSprites, drawSprite), scripts/gen-character.ts,
+  scripts/character-sheet.ts, scripts/sprite-demo.ts, bộ 15 tư thế của hero.
+  Chuyển động bằng code: nảy khi đổi tư thế, thở, nét rung 8 lần/giây, chớp mắt, nhép miệng
+  (đổi stand ↔ stand-talk theo âm lượng voice), đi bộ (walk-a/b), chạy, lật hướng.
+- Việc cần làm:
+  • Script video khai báo nhân vật theo câu thoại, ví dụ { caption: 3, pose: "shock", x: 1300, flip: false }.
+    Scene gọi drawSprite. Câu nào nhân vật đang nói thì tự nhép miệng.
+  • Nối lipsync: đo trước độ mở miệng của từng file voice thành data/mouth.json để render không phải đo lại.
+  • Ảnh nền mới tạo KHÔNG có nhân vật. Ảnh cũ có nhân vật vẽ sẵn (assets/images/) thì giữ cho video Murphy.
+  • Thêm hàm moveTo(x, t0, t1) để nhân vật đi hoặc chạy giữa hai điểm.
+- src/character/doodle.ts (nhân vật vẽ hoàn toàn bằng canvas) chỉ để tham khảo hoặc làm nhân vật phụ/đám đông,
+  không dùng cho nhân vật chính.
+- Render một scene demo nhân vật diễn theo câu thoại thật của video Murphy, gửi tôi xem.
 
 PHA 7 — Báo cáo cuối
 - Bảng: file đã tạo, cách gọi từng skill, ví dụ một lượt /video-moi.

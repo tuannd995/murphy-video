@@ -5,3 +5,6 @@ output/
 # tái tạo được bằng `npm run sfx`
 assets/music/*.wav
 assets/sfx/*.wav
+
+# ảnh tham khảo của bên thứ ba (bản quyền) — chỉ để local
+docs/style/private/

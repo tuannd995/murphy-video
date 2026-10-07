@@ -94,3 +94,17 @@ output/        scenes/*.mp4, audio-mix.wav, murphy-law.mp4, *.srt
 - **Nhân vật nhất quán**: tạo `character-ref.png` trước, rồi gửi ảnh này kèm mọi prompt shot. Prompt theo template `[CHARACTER][SCENE][ENVIRONMENT][COMPOSITION][LIGHTING][MOOD][CAMERA][STYLE]` trong `src/config/style.ts`.
 - **Bố cục chừa chỗ cho overlay**: prompt yêu cầu chừa khoảng trống (thường ở bên trái) để đặt UI, nên không cần tạo ảnh nền riêng.
 - **Scale lên nhiều video**: chỉ cần thay `src/script/<topic>.ts` và các file `scenes/`. Pipeline, audio, cost guard giữ nguyên.
+
+## Nhân vật (bộ tư thế)
+
+Phong cách và ảnh mẫu: [`docs/style/STYLE.md`](docs/style/STYLE.md).
+
+```bash
+npx tsx scripts/gen-character.ts hero                 # dry-run: liệt kê tư thế + chi phí
+npx tsx scripts/gen-character.ts hero --confirm       # AI vẽ các tư thế còn thiếu (nền xanh) → tự tách nền
+npx tsx scripts/gen-character.ts hero --key-only      # tách nền lại từ raw/ (dùng cho ảnh tự vẽ), $0
+npx tsx scripts/character-sheet.ts hero               # characters/hero/sheet.png
+npx tsx scripts/sprite-demo.ts hero                   # output/sprite-demo.mp4
+```
+
+Dùng ảnh tự vẽ: lưu mỗi tư thế thành `characters/<id>/raw/<pose>.png` trên **nền một màu trơn** (khác màu nhân vật), rồi chạy `--key-only`.
