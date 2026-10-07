@@ -36,8 +36,8 @@ export async function elevenTts(text: string, previous?: string, next?: string):
       text,
       model_id: ELEVENLABS.model,
       language_code: "vi",
-      previous_text: previous,
-      next_text: next,
+      // eleven_v3 chưa hỗ trợ previous/next text
+      ...(ELEVENLABS.model === "eleven_v3" ? {} : { previous_text: previous, next_text: next }),
       voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.15, use_speaker_boost: true, speed: ELEVENLABS.speed },
     }),
   });

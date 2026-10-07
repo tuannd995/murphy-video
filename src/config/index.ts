@@ -26,10 +26,10 @@ export const VIDEO = {
 };
 
 export const TIMING = {
-  sceneLeadIn: 0.8, // im lặng đầu scene (cho transition + SFX)
-  captionGap: 0.4, // nghỉ giữa hai câu
-  pauseAfterEllipsis: 0.8, // nghỉ dài hơn sau "..."
-  sceneTail: 1.3,
+  sceneLeadIn: 0.6, // im lặng đầu scene (cho transition + SFX)
+  captionGap: 0.25, // nghỉ giữa hai câu
+  pauseAfterEllipsis: 0.6, // nghỉ dài hơn sau "..."
+  sceneTail: 1.0,
   fade: 0.45, // fade đen ở mép scene
   charsPerSecond: 15.5, // ước lượng khi chưa có voice (đo từ ElevenLabs ~15–16 ký tự/giây)
   // nếu tổng thời lượng < minTotal, tự giãn khoảng nghỉ giữa các câu (tối đa maxExtraGap/câu)

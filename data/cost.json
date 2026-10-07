@@ -196,6 +196,20 @@
       "model": "google/gemini-2.5-flash-image",
       "item": "s09-calm",
       "usd": 0.0393426
+    },
+    {
+      "ts": "2026-10-07T03:57:35.106Z",
+      "step": "tts",
+      "model": "elevenlabs/eleven_v3",
+      "item": "1 câu, 46 ký tự",
+      "usd": 0
+    },
+    {
+      "ts": "2026-10-07T03:59:58.853Z",
+      "step": "tts",
+      "model": "elevenlabs/eleven_v3",
+      "item": "69 câu, 4217 ký tự",
+      "usd": 0
     }
   ],
   "total_spent_usd": 1.100729,
