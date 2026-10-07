@@ -12,12 +12,19 @@ Viết lại từ bản v2 vì nhiều câu bị cắt cụt, nghe như "câu đ
 ## Scene 00 — Intro kênh
 1. Xin chào các bạn, chào mừng các bạn quay trở lại với Não Phẳng!
    *Hey everyone, welcome back to Não Phẳng!*
-2. Đây là nơi tụi mình hâm nóng lại những kiến thức nguội ngắt,
-   *This is where we reheat stone-cold facts,*
-3. kiểu biết rồi cũng chẳng giàu thêm, mà cũng chẳng đẹp trai hơn được tí nào,
-   *the kind that won't make you any richer, or any better-looking,*
-4. nhưng ít ra sẽ cứu bạn những lúc cả bàn nhậu tự dưng im lặng.
-   *but at least they'll save you when the whole table suddenly goes quiet.*
+2. Nơi tụi mình kể cho bạn nghe những điều thú vị mà không phải ai cũng biết,
+   *This is where we tell you fascinating things that not everyone knows,*
+3. để bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, hay thậm chí là lúc nằm chờ giấc ngủ,
+   *perfect for listening while you work, eat, clean the house, or even while you drift off to sleep,*
+4. và biết đâu, lại có thêm chút vốn để chém gió trên bàn nhậu, hoặc để bắt chuyện với crush.
+   *and who knows, you might pick up a few stories to impress your friends, or to start a chat with your crush.*
+
+   > Phương án B (lầy hơn) cho câu 2–4:
+   > 2. Nơi tụi mình đào lên những kiến thức hay ho mà không phải ai cũng biết,
+   > 3. nghe được lúc làm việc, lúc ăn uống, lúc dọn nhà, hay bật lên cho dễ ngủ cũng được luôn,
+   > 4. và quan trọng nhất là có thêm tài liệu để chém gió trên bàn nhậu, hoặc… đi tán gái.
+   >
+   > Khi áp dụng, đổi 3 thẻ chữ trên màn hình của intro (scene00.ts) thành: "Lúc làm việc", "Lúc dọn nhà", "Trước khi ngủ" và thẻ cuối "Chém gió ✓".
 5. Và hôm nay mình sẽ nói về một câu hỏi rất đời: tại sao cứ lúc nào mình vội nhất là y như rằng có chuyện?
    *And today's question is a very real one: why does something always go wrong exactly when you're in a hurry?*
 
