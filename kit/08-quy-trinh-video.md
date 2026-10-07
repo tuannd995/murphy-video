@@ -1,6 +1,6 @@
-# 08 · Quy trình làm một video (áp dụng cho mọi video, mọi kênh)
+# 08 · Quy trình làm một video (áp dụng cho mọi video của kênh)
 
-Gọi bằng `/video-moi <kênh> "<chủ đề>"`. Slug = chủ đề viết không dấu, gạch nối. Mọi file riêng của video nằm trong **một thư mục con** `videos/<kênh>/<slug>/` (cấu trúc ở `10-cau-truc-du-an.md`); tài nguyên dùng lại nằm ở `channels/<kênh>/` và `shared/`. Mỗi cổng đạt thì cập nhật `status` trong `video.json`.
+Gọi bằng `/video-moi "<chủ đề>" [series]`. Slug = chủ đề viết không dấu, gạch nối. Mọi file riêng của video nằm trong **một thư mục con** `videos/<slug>/` (cấu trúc ở `10-cau-truc-du-an.md`); tài nguyên dùng lại nằm ở gốc project (`characters/`, `library/`, `templates/`, `cache/`). Mỗi cổng đạt thì cập nhật `status` trong `video.json`.
 
 ## Các bước
 | # | Ai | Làm gì | Đầu ra |

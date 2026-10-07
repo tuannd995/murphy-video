@@ -1,6 +1,6 @@
 # 03 · Đặc tả pipeline
 
-Phần đặc tả này rút ra từ một pipeline đã chạy thật (đã làm ra một video hoàn chỉnh khoảng 5,5 phút, kèm bản TikTok và Shorts). Dùng chung cho mọi kênh và mọi video. Bám đúng các con số và mẹo ghi ở đây. Những chỗ ghi "⚠" là lỗi đã từng gặp.
+Phần đặc tả này rút ra từ một pipeline đã chạy thật (đã làm ra một video hoàn chỉnh khoảng 5,5 phút, kèm bản TikTok và Shorts). Dùng chung cho mọi video của kênh. Bám đúng các con số và mẹo ghi ở đây. Những chỗ ghi "⚠" là lỗi đã từng gặp.
 
 ## 1. Lệnh npm
 ```jsonc
@@ -18,16 +18,15 @@ Phần đặc tả này rút ra từ một pipeline đã chạy thật (đã là
   "final":      "tsx scripts/assemble.ts",
   "make":       "tsx scripts/make.ts",                                 // storyboard → render → mix → final
   "character":  "tsx --env-file-if-exists=.env scripts/gen-character.ts",
-  "new:channel": "tsx scripts/new-channel.ts",                         // tạo channels/<k>/ từ mẫu
-  "new:video":  "tsx scripts/new-video.ts",                            // tạo videos/<k>/<slug>/ + video.json
+  "new:video":  "tsx scripts/new-video.ts",                            // tạo videos/<slug>/ + video.json
   "status":     "tsx scripts/status.ts",                               // bảng trạng thái, chi phí cả xưởng
   "gc":         "tsx scripts/gc.ts",                                   // liệt kê cache mồ côi (chỉ báo)
   "typecheck":  "tsc --noEmit"
 }
 ```
-Mọi lệnh nhận `--video <kenh>/<slug>`; tài nguyên luôn tìm qua `src/utils/resolve.ts` (video → kênh → shared, xem 10). Các lệnh từ `storyboard` trở đi nhận thêm `--type`, `--summary`, `--scenes`.
+Mọi lệnh nhận `--video <slug>`; tài nguyên luôn tìm qua `src/utils/resolve.ts` (thư mục video → gốc kênh, xem 10). Các lệnh từ `storyboard` trở đi nhận thêm `--type`, `--summary`, `--scenes`.
 
-## 2. Kịch bản (`videos/<kenh>/<slug>/script.ts`)
+## 2. Kịch bản (`videos/<slug>/script.ts`)
 ```ts
 export interface Line { vi: string; en: string }           // 1 câu nói tự nhiên (đủ ý), = 1 file voice + 1 phụ đề
 export interface Shot { id: string; fromLine: number; background?: string /* id trong library */; prompt?: PromptParts }
@@ -54,10 +53,10 @@ export interface VideoScript { channel: string; slug: string; title_vi: string; 
 - `build-script` xuất `data/script.json`: các trường gốc, cộng prompt ảnh đã ghép theo template, cộng số âm tiết tiếng Việt. Nếu tổng ngắn hơn khoảng 1.500 âm tiết (dưới 8 phút) thì in cảnh báo.
 
 ## 3. Ảnh nền (`gen-images`)
-- **Ưu tiên library**: shot có `background: "kitchen-01"` thì không tạo ảnh mới. Tìm theo thứ tự `channels/<k>/library/backgrounds` rồi `shared/library/backgrounds` (hàm `resolve`). Shot không chỉ định id thì tìm theo tag trong `index.json` trước. Chỉ tạo ảnh khi không có nền phù hợp. Sau khi duyệt, ảnh mới được **thăng hạng** vào library của kênh (hoặc shared nếu chung chung) kèm tag.
+- **Ưu tiên library**: shot có `background: "kitchen-01"` thì không tạo ảnh mới. Tìm theo thứ tự `videos/<slug>/library/backgrounds` rồi `library/backgrounds` (hàm `resolve`). Shot không chỉ định id thì tìm theo tag trong `index.json` trước. Chỉ tạo ảnh khi không có nền phù hợp. Sau khi duyệt, ảnh mới được **thăng hạng** vào library của kênh (hoặc shared nếu chung chung) kèm tag.
 - **Ảnh nền KHÔNG có nhân vật** (`no people, no characters, empty scene`). Nhân vật luôn ghép bằng bộ tư thế (04).
 - Prompt ghép theo template `[SCENE][ENVIRONMENT][COMPOSITION][LIGHTING][MOOD][CAMERA][STYLE]` (STYLE lấy từ `src/config/style.ts`, xem 04). Composition nên **chừa khoảng trống** cho chữ và nhân vật, nhưng **không được viết "empty area on the left"**, vì model sẽ vẽ thành khung chữ nhật thừa (⚠). Viết là: `"uncluttered left third of the frame, plain wall"`.
-- Lưu ở `shared/cache/images/<hash>.png` với `hash = sha1(model + prompt + hash(ảnh style tham chiếu)).slice(0,12)` (kèm `.json`: prompt, model, usd). Video chỉ ghi `shot.id → hash` trong `data/manifest.json`. Dry-run in "trúng cache N/M" và số tiền tiết kiệm.
+- Lưu ở `cache/images/<hash>.png` với `hash = sha1(model + prompt + hash(ảnh style tham chiếu)).slice(0,12)` (kèm `.json`: prompt, model, usd). Video chỉ ghi `shot.id → hash` trong `data/manifest.json`. Dry-run in "trúng cache N/M" và số tiền tiết kiệm.
 - Request OpenRouter:
 ```ts
 const r = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -82,7 +81,7 @@ const usd = j.usage?.cost ?? 0;
 - Trước **mỗi** ảnh: nếu `đã chi + ước tính > ngân sách` thì dừng. Ước tính lấy từ `/models` (completion khoảng $30/1M token × ~1.300 token mỗi ảnh); nếu đã có số đo thật thì lấy trung bình thực tế.
 
 ## 4. Voice (`gen-voice`)
-- 1 `Line` = 1 lần gọi = `shared/cache/voice/<sha1(voiceId+model+settings+text).slice(0,12)>.mp3`, kèm `.json` timestamp. Câu giống nhau ở video khác (intro, outro, CTA, câu lặp) tự trúng cache. Video ghi `line.id → hash` trong `data/manifest.json`. Sửa một câu thì chỉ câu đó phải đọc lại.
+- 1 `Line` = 1 lần gọi = `cache/voice/<sha1(voiceId+model+settings+text).slice(0,12)>.mp3`, kèm `.json` timestamp. Câu giống nhau ở video khác (intro, outro, CTA, câu lặp) tự trúng cache. Video ghi `line.id → hash` trong `data/manifest.json`. Sửa một câu thì chỉ câu đó phải đọc lại.
 - **Dùng endpoint có timestamp** để đặt beat theo từ:
 ```ts
 POST https://api.elevenlabs.io/v1/text-to-speech/{voiceId}/with-timestamps?output_format=mp3_44100_128
@@ -130,14 +129,14 @@ acts → thời điểm đổi tư thế = start của line (hoặc wordTime)
   7. dip-to-black ở mép scene (0.45s; scene đầu 0.9s).
 - Không vẽ overlay ở **260px đáy** (dành cho phụ đề).
 - ⚠ Grain đổi mỗi frame làm file nặng gấp khoảng 3,5 lần (290MB thay vì 82MB). Chỉ đổi pattern **6 lần/giây**.
-- Mỗi scene render thành một mp4 riêng, **lưu theo hash** `sha1(code scene + dữ liệu storyboard của scene + hash ảnh/voice dùng + định dạng)` ở `build/scenes/` (riêng intro/outro của kênh thì ở `shared/cache/render/`), scene không đổi thì bỏ qua. Chạy song song `RENDER_JOBS` tiến trình (mỗi tiến trình là `npx tsx scripts/render-scene.ts <id> ...`):
+- Mỗi scene render thành một mp4 riêng, **lưu theo hash** `sha1(code scene + dữ liệu storyboard của scene + hash ảnh/voice dùng + định dạng)` ở `build/scenes/` (riêng intro/outro của kênh thì ở `cache/render/`), scene không đổi thì bỏ qua. Chạy song song `RENDER_JOBS` tiến trình (mỗi tiến trình là `npx tsx scripts/render-scene.ts <id> ...`):
 ```ts
 const ff = spawn("ffmpeg", ["-y","-v","error","-f","rawvideo","-pix_fmt","rgba","-s",`${w}x${h}`,"-r","30","-i","-",
   "-c:v","libx264","-preset","medium","-crf","22","-pix_fmt","yuv420p","-r","30", out]);
 for (let f = 0; f < frames; f++) { paint(f/30); if (!ff.stdin.write(Buffer.from(canvas.data()))) await once(ff.stdin,"drain"); }
 ```
 - `--still=2.5,8` xuất PNG để soát nhanh (`build/stills/`). Luôn render khung hình mẫu trước khi render cả video.
-- Font: copy Inter (Bold/ExtraBold/SemiBold/Medium) vào `shared/fonts/` và đăng ký bằng `GlobalFonts.registerFromPath`. Inter có đủ dấu tiếng Việt. ⚠ **Không dùng emoji** trong chữ vẽ lên canvas (hiện thành ô vuông).
+- Font: copy Inter (Bold/ExtraBold/SemiBold/Medium) vào `fonts/` và đăng ký bằng `GlobalFonts.registerFromPath`. Inter có đủ dấu tiếng Việt. ⚠ **Không dùng emoji** trong chữ vẽ lên canvas (hiện thành ô vuông).
 - Tốc độ tham khảo: 1080p30, 4 nhân CPU, khoảng 5 phút render cho 5,5 phút video.
 
 ## 7. Phụ đề
@@ -181,7 +180,7 @@ for (let f = 0; f < frames; f++) { paint(f/30); if (!ff.stdin.write(Buffer.from(
 ## 11. Chi phí và kiểm soát
 - `src/utils/openrouter.ts` và `src/audio/elevenlabs.ts` là các client mỏng. Mọi lần gọi có tính phí đều thêm một dòng vào **`ledger/cost.jsonl`**: `{ts, channel, video|null, step, model, item, usd|credits}`. Chỉ ghi thêm, không sửa dòng cũ.
 - `scripts/budget-guard.ts "<lệnh>"`: đọc `--video` trong lệnh, cộng sổ theo video, kênh (tháng này), xưởng (tháng này), ước tính phần còn thiếu (đã trừ phần trúng cache). Vượt `budget` ở bất kỳ mức nào thì exit 1 và in lý do. Hook PreToolUse gọi script này cho mọi lệnh có `--confirm`.
-- `scripts/cost.ts`: chỉ gọi endpoint miễn phí; `--report [--channel k] [--month YYYY-MM]` in bảng tổng hợp từ sổ.
+- `scripts/cost.ts`: chỉ gọi endpoint miễn phí; `--report [--series s] [--month YYYY-MM]` in bảng tổng hợp từ sổ.
 
 ## 12. Soát lời thoại (`lint-narration`)
 Đếm trên `lines[].vi`, in bảng vi phạm theo `05-loi-thoai.md`:

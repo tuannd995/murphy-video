@@ -1,35 +1,34 @@
 # 10 · Cấu trúc project đích (đọc ngay sau 01)
 
-Project đích là **một xưởng duy nhất**, chứa nhiều kênh, mỗi kênh nhiều video. Mỗi lần làm video thì mọi thứ riêng của video đó nằm gọn trong **một thư mục con**; mọi thứ dùng lại được nằm ở tầng trên để chia sẻ. Cấu trúc này thay thế mọi sơ đồ thư mục cũ trong các file khác nếu có chỗ chưa khớp.
+Project đích là **xưởng của MỘT kênh duy nhất**, làm ra nhiều video. Gốc project chứa mọi thứ dùng chung của kênh (thương hiệu, nhân vật, thư viện nền, cache, sổ chi phí). Mỗi lần làm video thì mọi thứ riêng của video đó nằm gọn trong **một thư mục con** `videos/<slug>/`. Các mảng nội dung khác nhau (What If, nghịch lý đời thường, câu hỏi kỳ lạ…) là **series** trong cùng kênh, không phải kênh riêng.
 
-## 1. Ba tầng + một kho cache
+Cấu trúc này thay thế mọi sơ đồ thư mục khác nếu có chỗ chưa khớp.
+
+## 1. Hai tầng + một kho cache
 
 ```
-.                                      ← gốc xưởng (git repo)
-├── studio.json                        mặc định toàn xưởng: fps, kích thước, ngân sách, model ảnh/voice, RENDER_JOBS
+.                                      ← gốc xưởng = gốc kênh (git repo)
+├── channel.json                       TOÀN BỘ cấu hình kênh (mục 2)
 ├── CLAUDE.md  .claude/  docs/         luật, agent, skill, hook, tài liệu (xem 07)
 │
-├── shared/                            TẦNG 1 · dùng chung mọi kênh, mọi video
-│   ├── characters/<id>/               <id>.json, raw/, poses/, sheet.png
-│   ├── library/backgrounds/           <id>.png + index.json (tag, nguồn, kênh gốc, ngày)
-│   ├── library/props/
-│   ├── fonts/
-│   ├── audio/sfx/  audio/music/       sinh bằng code (gitignore *.wav, tạo lại bằng `npm run sfx`)
-│   └── cache/                         KHO THEO HASH, dùng chung toàn xưởng (mục 3)
-│       ├── images/<hash>.png (+ .json: prompt, model, usd, ngày)
-│       ├── voice/<hash>.mp3  (+ .json: text, voiceId, model, alignment)
-│       └── render/<hash>.mp4          clip scene/intro/outro đã render (mục 4)
+├── brand/                             logo, banner, watermark, avatar, thumbnail mẫu, bảng màu
+├── characters/<id>/                   <id>.json, raw/, poses/, sheet.png
+├── library/
+│   ├── backgrounds/                   <id>.png + index.json (tag, nguồn video, ngày)
+│   └── props/
+├── fonts/
+├── audio/sfx/  audio/music/           sinh bằng code (gitignore *.wav, tạo lại bằng `npm run sfx`)
+├── templates/
+│   ├── intro.ts  outro.ts             scene intro/outro CỐ ĐỊNH của kênh (lời + animation)
+│   └── <series>.skeleton.ts           khung kịch bản cho từng series (hook → bối cảnh → thân → kết)
+├── series/<id>.json                   mỗi series: tên, mô tả, khung dùng, thumbnail template, thời lượng, nhạc
 │
-├── channels/<kenh>/                   TẦNG 2 · riêng từng kênh = nhận diện thương hiệu
-│   ├── channel.json                   tên, tagline, giọng văn, palette, voice, nhạc, CTA, nhân vật mặc định
-│   ├── brand/                         logo, banner, watermark, avatar, thumbnail mẫu, bảng màu
-│   ├── library/backgrounds/           nền riêng của kênh (ưu tiên hơn shared)
-│   ├── templates/
-│   │   ├── intro.ts  outro.ts         scene intro/outro CỐ ĐỊNH của kênh (lời, animation)
-│   │   └── <loai>.skeleton.ts         khung kịch bản cho từng dạng video (what-if, nghịch lý…)
-│   └── series.json                    (tuỳ chọn) danh sách series, số tập, thumbnail template
+├── cache/                             KHO THEO HASH, dùng chung mọi video (mục 3)
+│   ├── images/<hash>.png (+ .json: prompt, model, usd, ngày)
+│   ├── voice/<hash>.mp3  (+ .json: text, voiceId, model, alignment)
+│   └── render/<hash>.mp4              clip scene/intro/outro đã render
 │
-├── videos/<kenh>/<slug>/              TẦNG 3 · MỖI VIDEO MỘT THƯ MỤC CON
+├── videos/<slug>/                     MỖI VIDEO MỘT THƯ MỤC CON
 │   ├── video.json                     metadata + trạng thái (mục 5)
 │   ├── script.ts                      kịch bản (nguồn chính)
 │   ├── scenes/sceneXX.ts              animation riêng của video (chỉ những gì không dùng lại được)
@@ -41,97 +40,105 @@ Project đích là **một xưởng duy nhất**, chứa nhiều kênh, mỗi k�
 │                                      <tag> = youtube | tiktok-summary | shorts-scene-04 | …
 │
 ├── ledger/cost.jsonl                  SỔ CHI PHÍ DUY NHẤT, chỉ ghi thêm (mục 6)
-├── src/  scripts/                     code dùng chung (không chứa tên kênh/chủ đề)
+├── topics/queue.md                    hàng đợi chủ đề (mỗi dòng: series | chủ đề | trạng thái)
+├── src/  scripts/                     code dùng chung (không chứa chủ đề video cụ thể)
 └── exports/                           (gitignore) bản bàn giao gom từ nhiều video, nếu cần
 ```
 
-## 2. Quy tắc tìm tài nguyên theo tầng (cascade)
+## 2. `channel.json`: một file cho cả kênh
 
-Mọi script tìm tài nguyên bằng **một hàm duy nhất** `resolve(kind, id, { channel, video })` trong `src/utils/resolve.ts`. Thứ tự: **video → kênh → shared**. Gặp trước thì dùng.
+Gồm: `name`, `tagline`, `topic`, `tone`, `palette`, `character` mặc định, `voice`, `music`, `intro`, `outro`, `cta`, `targetMinutes`, `audience`, `defaults` (fps, kích thước, `RENDER_JOBS`, model ảnh/voice) và `budget`:
+```jsonc
+"budget": { "videoImagesUsd": 1, "videoVoiceCredits": 6000, "monthlyUsd": 8, "monthlyVoiceCredits": 60000 }
+```
+Mẫu đầy đủ ở `06-kenh-dinh-dang.md`. Không còn `studio.json` hay thư mục `channels/`.
+
+## 3. Quy tắc tìm tài nguyên
+
+Mọi script tìm tài nguyên bằng **một hàm duy nhất** `resolve(kind, id, { video })` trong `src/utils/resolve.ts`. Thứ tự: **thư mục video → gốc kênh**.
 - `kind` gồm: `background`, `character`, `prop`, `font`, `sfx`, `music`, `template`.
-- Không script nào được ghép đường dẫn tài nguyên bằng tay. Nhờ vậy muốn một kênh dùng nền hoặc nhân vật riêng thì chỉ cần đặt file vào thư mục kênh.
-- Cấu hình cũng xếp tầng: `studio.json` < `channel.json` < `video.json`. Tầng dưới ghi đè tầng trên theo từng khoá (deep merge). Ví dụ kênh đổi `voice.id`, một video đổi `budget.imagesUsd`.
-- Nhân vật: `channel.json` khai báo `character` mặc định. Scene dùng nhân vật khác thì ghi `character` trong `Act`.
+- Ví dụ: video có `videos/<slug>/library/backgrounds/x.png` (nền chỉ dùng riêng) thì dùng nó; không có thì lấy `library/backgrounds/x.png`.
+- Không script nào được ghép đường dẫn tài nguyên bằng tay.
+- Cấu hình xếp tầng `channel.json` < `video.json` (deep merge theo khoá). Ví dụ một video đổi `budget.videoImagesUsd`, hay đổi `character`.
+- Series cho thêm một tầng giữa: `channel.json` < `series/<id>.json` < `video.json` (series có thể đổi thời lượng mục tiêu, nhạc mặc định, khung kịch bản).
 
-## 3. Cache theo hash (tiết kiệm tiền nhiều nhất)
+## 4. Cache theo hash (tiết kiệm tiền nhiều nhất)
 
-Mọi thứ tốn tiền đều lưu ở `shared/cache/` với tên = hash nội dung tạo ra nó, **không gắn với video nào**:
+Mọi thứ tốn tiền đều lưu ở `cache/` với tên = hash nội dung tạo ra nó, **không gắn với video nào**:
 
 | Loại | Khoá hash | Hệ quả |
 |---|---|---|
-| Ảnh | `sha1(model + prompt + hash(ảnh style tham chiếu))` | cùng prompt ở video khác hoặc kênh khác không tốn thêm |
+| Ảnh | `sha1(model + prompt + hash(ảnh style tham chiếu))` | cùng prompt ở video khác không tốn thêm |
 | Voice | `sha1(voiceId + model + settings + text đã chuẩn hoá)` | **intro, outro, CTA, câu lặp lại giữa các video đọc 1 lần duy nhất** |
 | Clip render | `sha1(code scene + dữ liệu storyboard của scene + hash ảnh/voice dùng trong scene + định dạng)` | sửa 1 scene thì chỉ render lại scene đó |
 
-- Video không sao chép file. `videos/.../data/manifest.json` chỉ ghi **tham chiếu**: `shot.id → hash ảnh`, `line.id → hash voice`, `scene.id → hash clip`. Xoá hay đổi tên video không làm mất cache.
-- Trước mỗi lần gọi API: tính hash → có trong cache thì dùng luôn, dry-run ghi rõ "trúng cache N / M". Báo cáo `ke-toan` luôn nêu **tiền đã tiết kiệm nhờ cache**.
+- Video không sao chép file. `videos/<slug>/data/manifest.json` chỉ ghi **tham chiếu**: `shot.id → hash ảnh`, `line.id → hash voice`, `scene.id → hash clip`. Xoá hay đổi tên video không làm mất cache.
+- Trước mỗi lần gọi API: tính hash → có trong cache thì dùng luôn. Dry-run ghi rõ "trúng cache N / M" và số tiền tiết kiệm. Báo cáo `ke-toan` luôn nêu số này.
 - `npm run gc` liệt kê file cache không video nào tham chiếu (đọc mọi `manifest.json`). **Chỉ báo, không tự xoá.**
-- **Thăng hạng ảnh:** sau khi duyệt, ảnh mới của video được `hoa-si` đưa vào `channels/<k>/library/backgrounds/` (hoặc `shared/library/` nếu chung chung) kèm tag. Video sau gặp bối cảnh tương tự sẽ tìm thấy trong library trước khi nghĩ tới tạo mới (xem `gen-images` trong 03).
+- **Thăng hạng ảnh:** sau khi duyệt, ảnh mới của video được `hoa-si` đưa vào `library/backgrounds/` kèm tag. Video sau gặp bối cảnh tương tự sẽ tìm thấy trong library trước khi nghĩ tới tạo mới (xem `gen-images` trong 03).
 
-## 4. Intro, outro và clip dựng sẵn
+## 5. Intro, outro và clip dựng sẵn
 
-- `channels/<k>/templates/intro.ts` và `outro.ts` là scene bình thường nhưng **cố định**: cùng lời, cùng animation cho mọi video của kênh. Chỉ khác nhau ở tham số tối thiểu (ví dụ tên video hiển thị).
+- `templates/intro.ts` và `outro.ts` là scene bình thường nhưng **cố định**: cùng lời, cùng animation cho mọi video. Chỉ khác ở tham số tối thiểu (ví dụ tên video hiển thị).
 - Voice của intro/outro nhờ cache nên chỉ trả tiền ở video đầu tiên. Clip render của chúng cũng được cache theo định dạng (youtube, tiktok…). Video sau ghép lại, không render lại.
 - Đổi nội dung intro/outro thì hash đổi, tự đọc và render lại, các video cũ không bị ảnh hưởng.
-- Khung kịch bản `<loai>.skeleton.ts` giúp các video cùng dạng có cùng cấu trúc khối (hook → bối cảnh → thân → kết). `bien-kich` bắt đầu từ khung này thay vì từ trang trắng.
+- Khung kịch bản `<series>.skeleton.ts` giúp các video cùng series có cùng cấu trúc khối. `bien-kich` bắt đầu từ khung này thay vì từ trang trắng.
 
-## 5. `video.json` và trạng thái
+## 6. `video.json` và trạng thái
 
 ```jsonc
 {
-  "channel": "naophang", "slug": "neu-trai-dat-ngung-quay", "title_vi": "...", "title_en": "...",
+  "slug": "neu-trai-dat-ngung-quay", "series": "what-if", "title_vi": "...", "title_en": "...",
   "format": "youtube",                       // định dạng chính
   "status": "draft",                         // draft → script-approved → storyboard-approved → paid → rendered → final-approved → published
   "character": "hero",                       // ghi đè mặc định của kênh nếu cần
-  "budget": { "imagesUsd": 1, "voiceCredits": 6000 },   // ghi đè studio.json nếu cần
+  "budget": { "videoImagesUsd": 1, "videoVoiceCredits": 6000 },   // ghi đè channel.json nếu cần
   "created": "2026-10-07", "kitVersion": "1"
 }
 ```
 - Mỗi cổng duyệt đạt thì `status` tiến một bậc (do skill `video-moi` cập nhật, không sửa tay).
-- `npm run status` in bảng mọi video: kênh, slug, trạng thái, số scene, chi phí đã dùng, định dạng đã xuất. Đây là bảng điều khiển của cả xưởng.
-- `data/runs.jsonl`: mỗi lần chạy `make` hoặc lệnh render/voice/ảnh ghi một dòng `{ts, lệnh, tag, giây, số clip trúng cache, usd, credits}`. Dùng để biết lần chạy nào tốn gì.
+- `npm run status` in bảng mọi video: slug, series, trạng thái, số scene, chi phí đã dùng, định dạng đã xuất. Đây là bảng điều khiển của cả kênh.
+- `data/runs.jsonl`: mỗi lần chạy `make` hoặc lệnh render/voice/ảnh ghi một dòng `{ts, lệnh, tag, giây, số clip trúng cache, usd, credits}`.
 
-## 6. Sổ chi phí duy nhất `ledger/cost.jsonl`
+## 7. Sổ chi phí duy nhất `ledger/cost.jsonl`
 
-Mỗi dòng: `{ts, channel, video|null, step, model, item, usd|credits, cacheHit:false}`.
-- `video = null` cho chi phí xưởng (tạo nhân vật, thư viện, thử giọng).
-- Chỉ ghi thêm vào cuối, không sửa dòng cũ. Báo cáo theo kênh, theo video, theo tháng đều là truy vấn trên một file này (`npm run cost -- --report`).
-- `budget-guard` kiểm tra 3 mức: **video** (`video.json`), **kênh theo tháng** (`channel.json.budget.monthly`), **xưởng theo tháng** (`studio.json`). Vượt mức nào cũng chặn lệnh `--confirm`.
-- Thay cho `data/cost.json` theo video và `data/cost-library.json` ở các mô tả cũ.
+Mỗi dòng: `{ts, video|null, step, model, item, usd|credits}`.
+- `video = null` cho chi phí chung (tạo nhân vật, thư viện, thử giọng).
+- Chỉ ghi thêm vào cuối, không sửa dòng cũ. Báo cáo theo video, theo series, theo tháng đều là truy vấn trên một file này (`npm run cost -- --report [--series s] [--month YYYY-MM]`).
+- `budget-guard` kiểm tra 2 mức: **video** (`videoImagesUsd`, `videoVoiceCredits`) và **kênh theo tháng** (`monthlyUsd`, `monthlyVoiceCredits`). Vượt mức nào cũng chặn lệnh `--confirm`.
 
-## 7. Dòng chảy dữ liệu một lần chạy
+## 8. Dòng chảy dữ liệu một lần chạy
 
 ```
-videos/k/s/script.ts ──build-script──► data/script.json
-        │                                   │
-        │ resolve(background…) ◄── channel library ◄── shared library
+videos/<slug>/script.ts ──build-script──► data/script.json
+        │                                      │
+        │ resolve(background…) ◄── library/ (video → gốc kênh)
         ▼
- gen-images (hash → shared/cache/images) ┐
- gen-voice  (hash → shared/cache/voice)  ├──► data/manifest.json
- intro/outro (channels/k/templates)      ┘
+ gen-images (hash → cache/images) ┐
+ gen-voice  (hash → cache/voice)  ├──► data/manifest.json
+ templates/intro,outro            ┘
         ▼
- storyboard ─► render từng scene (hash → shared/cache/render, hoặc build/scenes)
+ storyboard ─► render từng scene (hash → cache/render hoặc build/scenes)
         ▼
  mix (build/audio-mix.wav) ─► assemble ─► output/<tag>/final.mp4 + .srt + thumbnail + publish.md
         └──► mỗi bước ghi ledger/cost.jsonl và data/runs.jsonl
 ```
 
-## 8. Git, dung lượng, sao lưu
+## 9. Git, dung lượng, sao lưu
 
-- **Commit:** code, `studio.json`, `channels/**` (cả `brand/`), `shared/characters/**` (cả `raw/`), `shared/library/**`, `videos/**/{video.json,script.ts,scenes,data}`, `ledger/`, `shared/cache/{images,voice}`.
-- **Không commit:** `.env`, `videos/**/build/`, `videos/**/output/`, `shared/cache/render/`, `shared/audio/**/*.wav`, `docs/style/private/`, `.current-video`, `exports/`.
-- Ảnh và voice trong `shared/cache` là thứ **mất tiền mới có**, nên phải sao lưu. Cache lớn dần thì dùng Git LFS: tạo `.gitattributes` với `shared/cache/images/*.png`, `shared/cache/voice/*.mp3`, `shared/library/**/*.png`, `shared/characters/**/*.png` filter=lfs. Hỏi người dùng trước khi bật LFS.
+- **Commit:** code, `channel.json`, `brand/`, `characters/**` (cả `raw/`), `library/**`, `templates/`, `series/`, `topics/`, `ledger/`, `cache/{images,voice}`, `videos/**/{video.json,script.ts,scenes,data}`.
+- **Không commit:** `.env`, `videos/**/build/`, `videos/**/output/`, `cache/render/`, `audio/**/*.wav`, `docs/style/private/`, `.current-video`, `exports/`.
+- Ảnh và voice trong `cache/` là thứ **mất tiền mới có**, nên phải sao lưu. Cache lớn dần thì dùng Git LFS: tạo `.gitattributes` với `cache/images/*.png`, `cache/voice/*.mp3`, `library/**/*.png`, `characters/**/*.png` filter=lfs. Hỏi người dùng trước khi bật LFS.
 - Ảnh nền lưu PNG khi tạo, nhưng có thể chuyển WebP chất lượng 92 cho library để nhẹ (vẫn giữ hash cũ trong manifest).
-- Mỗi lần gửi duyệt gắn git tag `<kenh>/<slug>-v1`, `-v2`… để quay lại bản cũ.
+- Mỗi lần gửi duyệt gắn git tag `<slug>-v1`, `-v2`… để quay lại bản cũ.
 
-## 9. Lệnh dùng chung
+## 10. Lệnh dùng chung
 
 ```
-npm run new:channel -- <kenh>          tạo channels/<kenh>/ (qua skill /kenh-moi)
-npm run new:video   -- <kenh> "<chủ đề>"   tạo videos/<kenh>/<slug>/ + video.json (qua skill /video-moi)
-npm run status                         bảng trạng thái cả xưởng
-npm run cost -- --report [--channel k] [--month 2026-10]
-npm run gc                             báo file cache mồ côi
-npm run make -- --video k/slug [--type …]
+npm run new:video -- "<chủ đề>" [--series what-if]   tạo videos/<slug>/ + video.json (qua skill /video-moi)
+npm run status                                        bảng trạng thái cả kênh
+npm run cost -- --report [--series s] [--month YYYY-MM]
+npm run gc                                            báo file cache mồ côi
+npm run make -- --video <slug> [--type …]
 ```
-Mọi script khác vẫn nhận `--video <kenh>/<slug>` và dùng `src/utils/resolve.ts` để tìm tài nguyên.
+Mọi script khác nhận `--video <slug>` (hoặc đọc `.current-video`) và dùng `src/utils/resolve.ts` để tìm tài nguyên.

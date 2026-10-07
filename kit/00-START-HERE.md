@@ -15,14 +15,14 @@ Không cần pull source cũ. Kit này chứa đủ đặc tả để Claude d�
 ```text
 Bạn là ĐẠO DIỄN, session điều phối của một xưởng làm video hoạt hình giải thích bằng tiếng Việt, chạy trên máy local của tôi.
 Thư mục hiện tại đang trống, chỉ có thư mục kit/. Nhiệm vụ của bạn là dựng toàn bộ dự án theo đặc tả trong kit/.
-Đây là xưởng DÙNG CHUNG cho nhiều kênh và nhiều video: code, agent, skill, hook đều phải tổng quát,
-tham số theo kênh (channels/<kênh>) và video (videos/<kênh>/<slug>, mỗi video một thư mục con riêng).
+Đây là xưởng của MỘT KÊNH DUY NHẤT, làm ra NHIỀU VIDEO: code, agent, skill, hook đều phải tổng quát,
+tham số theo video (videos/<slug>, mỗi video một thư mục con riêng). Các mảng nội dung là series trong cùng kênh.
 Project đích được TẠO MỚI từ đặc tả trong kit/, kit chỉ là tài liệu và tài nguyên mẫu. Mọi ví dụ trong kit chỉ là ví dụ.
 
 BƯỚC 0: ĐỌC TRƯỚC KHI LÀM
 Đọc lần lượt, đầy đủ, theo đúng thứ tự (không lướt):
   kit/01-tong-quan.md            mục tiêu, kiến trúc, cấu trúc thư mục, các cổng duyệt, nguyên tắc tiền
-  kit/10-cau-truc-du-an.md       CẤU TRÚC PROJECT ĐÍCH: shared/ → channels/ → videos/<k>/<slug>/, cache theo hash, sổ chi phí (đọc kỹ, ưu tiên hơn sơ đồ thư mục ở file khác)
+  kit/10-cau-truc-du-an.md       CẤU TRÚC PROJECT ĐÍCH: gốc kênh (brand, characters, library, templates, cache) → videos/<slug>/, cache theo hash, sổ chi phí (đọc kỹ, ưu tiên hơn sơ đồ thư mục ở file khác)
   kit/02-moi-truong.md           công cụ, biến môi trường, mạng, cách kiểm tra
   kit/03-pipeline.md             đặc tả kỹ thuật từng bước (script → ảnh → voice → animation → mix → MP4), kèm code mẫu
   kit/04-hinh-anh-nhan-vat.md    phong cách hình ảnh, prompt ảnh, hệ thống bộ tư thế nhân vật
@@ -48,23 +48,23 @@ QUY TẮC TOÀN CỤC (áp dụng suốt quá trình)
 CÁC PHA (chi tiết từng pha nằm trong các file md tương ứng)
   PHA 0  Môi trường: kiểm tra công cụ, key, mạng theo 02-moi-truong.md. Thiếu gì thì đưa tôi checklist, không tự cài đặt hệ thống.
   PHA 1  Khung dự án: git init, package.json, tsconfig, cấu trúc thư mục theo 01-tong-quan.md.
-         Tạo đúng cấu trúc ở kit/10-cau-truc-du-an.md (studio.json, shared/, channels/, videos/, ledger/).
-         Copy kit/assets vào đúng chỗ (docs/style/, shared/characters/hero/).
+         Tạo đúng cấu trúc ở kit/10-cau-truc-du-an.md (channel.json, brand/, characters/, library/, templates/, series/, cache/, videos/, ledger/).
+         Copy kit/assets vào đúng chỗ (docs/style/, characters/hero/).
   PHA 2  Claude setup: CLAUDE.md, .claude/agents, .claude/skills, .claude/hooks, .claude/settings.json theo 07-claude-setup.md
          (copy từ kit/claude/ rồi chỉnh đường dẫn nếu cần). Test từng hook bằng một thao tác nhỏ.
   PHA 3  Pipeline lõi theo 03-pipeline.md: config, formats, script types, cost ledger, OpenRouter client, ElevenLabs client,
          SFX/nhạc tổng hợp, storyboard, render (canvas → ffmpeg), mix, assemble, make.
          Kiểm tra: tạo một video thử tạm `videos/_test/demo/` (2 scene ngắn), rồi `npm run make -- --video _test/demo` phải chạy được mà không gọi API
          (ảnh placeholder, thời lượng ước lượng, không có voice).
-         Phải có: resolve.ts (video→kênh→shared), cache theo hash, ledger/cost.jsonl, video.json + status, new-channel, new-video, status, gc.
+         Phải có: resolve.ts (thư mục video → gốc kênh), cache theo hash, ledger/cost.jsonl, video.json + status, new-video, status, gc.
   PHA 4  Nhân vật: hệ thống bộ tư thế theo 04-hinh-anh-nhan-vat.md (tách nền, loadSprites, drawSprite, lipsync,
-         gen-character dry-run, character-sheet, sprite-demo). Dùng bộ tư thế "hero" có sẵn trong kit (nhân vật mẫu, dùng cho kênh nào cũng được), KHÔNG tạo lại.
+         gen-character dry-run, character-sheet, sprite-demo). Dùng bộ tư thế "hero" có sẵn trong kit (nhân vật mẫu, dùng được cho mọi series), KHÔNG tạo lại.
          Kiểm tra: render sprite-demo và gửi tôi xem.
   PHA 5  Định dạng nhiều nền tảng theo 06-kenh-dinh-dang.md (--type youtube|facebook|tiktok|shorts|reels, --summary, --scenes,
          bố cục dọc 9:16). Kiểm tra bằng video demo.
-  PHA 6  Kênh đầu tiên + video mẫu end-to-end: chạy /kenh-moi (hỏi tôi tên và chủ đề kênh; gợi ý có trong 06-kenh-dinh-dang.md),
+  PHA 6  Thiết lập kênh + video mẫu end-to-end: chạy /thiet-lap-kenh (hỏi tôi tên kênh và các series; gợi ý có trong 06-kenh-dinh-dang.md),
          rồi /video-moi với 1 chủ đề tôi chọn. Dừng ở từng cổng duyệt theo 08-quy-trinh-video.md.
-         Xưởng dùng cho MỌI kênh và MỌI video: không hard-code tên kênh, chủ đề hay nhân vật vào code chung.
+         Xưởng dùng cho MỌI video của kênh: không hard-code chủ đề video hay nhân vật vào code chung (thông tin kênh đọc từ channel.json).
   PHA 7  Viết docs/HUONG-DAN.md (tiếng Việt): cách dùng từng skill, các lệnh npm, ví dụ một lượt làm video, việc tôi cần làm.
 
 BẮT ĐẦU từ BƯỚC 0.

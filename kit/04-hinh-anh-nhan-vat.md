@@ -31,7 +31,7 @@ export const STYLE =
 export const BACKGROUND_SUFFIX = "no people, no characters, empty scene";
 ```
 
-## 3. Nền dùng lại (`channels/<k>/library/backgrounds/` rồi `shared/library/backgrounds/`)
+## 3. Nền dùng lại (`library/backgrounds/`; video có thể có nền riêng trong `videos/<slug>/library/`)
 - `index.json`: `[{ id, file, tags: ["bếp","trong nhà","buổi sáng"], prompt, created, usd }]`.
 - Skill `/canh-moi` luôn tìm theo tag trước, không có mới tạo (cần DUYỆT CHI).
 - Ảnh mới được thăng hạng vào library của kênh sau khi duyệt (xem 10). Mục tiêu sau khoảng 5 video: mỗi video mới chỉ cần 3–5 nền mới.
@@ -39,7 +39,7 @@ export const BACKGROUND_SUFFIX = "no people, no characters, empty scene";
 ## 4. Hệ thống bộ tư thế (sprite)
 Nhân vật **không** vẽ vào ảnh nền. Mỗi nhân vật có một bộ ảnh tư thế được tạo **một lần** rồi dùng mãi. Mọi chuyển động do code tạo.
 
-### `shared/characters/<id>/<id>.json` (mẫu: `kit/assets/characters/hero/hero.json`)
+### `characters/<id>/<id>.json` (mẫu: `kit/assets/characters/hero/hero.json`)
 ```json
 { "id": "hero", "name": "Phẳng", "description": "...", "reference": "docs/style/hero-model-sheet.png", "heightPx": 620,
   "poses": [ { "id": "stand", "prompt": "standing relaxed facing the viewer..." }, { "id": "happy", "prompt": "...", "height": 1.18 } ],
@@ -64,7 +64,7 @@ Nhân vật **không** vẽ vào ảnh nền. Mỗi nhân vật có một bộ �
 // 4) điểm sát vùng đã xoá: alpha = clamp((dist - tol*0.5)/(tol*1.2)); khử màu nền: c' = (c - bg*(1-a))/a
 // 5) cắt sát theo bounding box (alpha > 24), chừa lề 6px
 ```
-Ảnh tự vẽ: lưu mỗi tư thế vào `shared/characters/<id>/raw/<pose>.png` trên **nền một màu trơn**, khác màu nhân vật, rồi chạy `--key-only` ($0).
+Ảnh tự vẽ: lưu mỗi tư thế vào `characters/<id>/raw/<pose>.png` trên **nền một màu trơn**, khác màu nhân vật, rồi chạy `--key-only` ($0).
 
 ### Vẽ nhân vật trong scene: `drawSprite(ctx, char, state, {x, y, height, flip})`
 - **Đổi khung** theo tư thế; khi đổi thì **nảy** nhẹ (scale 0.9 → easeOutBack → 1 trong 0,35s).

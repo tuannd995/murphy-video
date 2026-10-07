@@ -1,6 +1,6 @@
 # 06 · Kênh, định dạng, chính sách nền tảng
 
-## 1. `channels/<kenh>/channel.json` (ví dụ cho một kênh kiến thức; mỗi kênh một file)
+## 1. `channel.json` ở gốc project (một kênh duy nhất; ví dụ cho kênh kiến thức)
 ```json
 {
   "id": "nao-phang",
@@ -15,21 +15,25 @@
   "intro": { "lines": ["Xin chào các bạn, chào mừng các bạn quay trở lại với Não Phẳng."] },
   "outro": { "lines": [] },
   "cta": { "tiktok": "Follow để xem thêm", "shorts": "Xem bản đầy đủ trên YouTube Não Phẳng", "reels": "Theo dõi Não Phẳng để xem thêm" },
-  "budget": { "monthlyUsd": 8, "monthlyVoiceCredits": 60000 },   // chặn ở mức kênh (ghi đè studio.json)
+  "budget": { "videoImagesUsd": 1, "videoVoiceCredits": 6000, "monthlyUsd": 8, "monthlyVoiceCredits": 60000 },
   "targetMinutes": [8, 10],
   "audience": "not_made_for_kids"
 }
 ```
-Mỗi kênh còn có thư mục `brand/` (logo, banner, watermark, avatar, thumbnail mẫu) và `templates/` (`intro.ts`, `outro.ts`, khung kịch bản theo dạng video) như mô tả ở `10-cau-truc-du-an.md`. Lời intro và outro cũng phải tuân theo `NARRATION.md`. Ví dụ hướng intro người dùng thích: *"nơi tìm hiểu những điều không phải ai cũng biết, để nghe lúc làm việc, ăn uống, dọn nhà hay trước khi ngủ, và có thêm chuyện để kể với bạn bè."* Viết lại cho tự nhiên, không chèn câu đùa.
+Kênh còn có `brand/` (logo, banner, watermark, avatar, thumbnail mẫu), `templates/` (`intro.ts`, `outro.ts`, khung kịch bản theo series) và `series/` như mô tả ở `10-cau-truc-du-an.md`. Lời intro và outro cũng phải tuân theo `NARRATION.md`. Ví dụ hướng intro người dùng thích: *"nơi tìm hiểu những điều không phải ai cũng biết, để nghe lúc làm việc, ăn uống, dọn nhà hay trước khi ngủ, và có thêm chuyện để kể với bạn bè."* Viết lại cho tự nhiên, không chèn câu đùa.
 
-## 2. Ba kênh và thứ tự triển khai
-| Kênh | Chủ đề | Thời lượng | Ghi chú |
+## 2. Một kênh, nhiều series
+Chỉ có **một kênh**. Các mảng nội dung là **series** (`series/<id>.json`) trong cùng kênh, dùng chung nhân vật, thương hiệu, intro/outro, library và cache. Mỗi series chỉ khác khung kịch bản, thumbnail mẫu, thời lượng và nhạc mặc định.
+
+| Series | Chủ đề | Thời lượng | Ghi chú |
 |---|---|---|---|
-| **Não Phẳng** (làm trước) | Kiến thức ít ai biết | 8–10 phút | Pipeline hợp nhất. Tông vẽ tay nền kem. |
-| **Phòng 404** (thử 2–3 tập dạng series "Não Phẳng giải mã", số liệu tốt thì tách kênh) | Bí ẩn, truyền thuyết đô thị, thuyết âm mưu | 10–15 phút | Luôn đóng khung "người ta kể / theo truyền thuyết" và có phần phân tích. Tránh y tế, bầu cử, thảm hoạ có thật. |
-| **Kênh trẻ em** (làm sau cùng) | Bài hát, kể chuyện | Clip 3–5 phút và bản tổng hợp 30–60 phút | Xem mục 5. Nhân vật và palette riêng, tươi, tròn trịa. |
+| **What If** | "Nếu… thì sao?" | 8–10 phút | Series chủ lực, dễ lan truyền. |
+| **Câu hỏi kỳ lạ** | Những thắc mắc ai cũng từng nghĩ mà ít người trả lời | 8–10 phút | Lấy câu hỏi làm hook. |
+| **Nghịch lý đời thường** | Hiện tượng quen thuộc có lời giải bất ngờ | 8–10 phút | Ví dụ bánh mì luôn úp bơ xuống sàn. |
 
-Gợi ý tên kênh (cần kiểm tra trùng): Não Phẳng · Ủa Vậy Hả? · Biết Rồi Khổ Lắm / Phòng 404 · Hồ Sơ Nửa Đêm · Đèn Pin Lúc 3 Giờ / Cú Mèo Kể Chuyện · Nốt Nhạc Tí Hon · Làng Bé Bông.
+Thêm series mới chỉ cần thêm `series/<id>.json` và một khung `templates/<id>.skeleton.ts`, không cần tạo kênh. Nếu chủ đề lệch hẳn (ví dụ nội dung trẻ em, mục 5) thì đó là **một project khác** dùng lại kit này, không trộn vào kênh.
+
+Gợi ý tên kênh (cần kiểm tra trùng): Não Phẳng · Ủa Vậy Hả? · Biết Rồi Khổ Lắm.
 
 ## 3. Định dạng theo nền tảng
 - **Ưu tiên số 1: YouTube dài 8–10 phút.** Từ 8 phút trở lên mới chèn được quảng cáo giữa video (mid-roll). Muốn đủ độ dài thì **thêm khối nội dung**, không giãn nhịp đọc.
@@ -47,26 +51,20 @@ Gợi ý tên kênh (cần kiểm tra trùng): Não Phẳng · Ủa Vậy Hả? 
 - **TikTok Creator Rewards:** chỉ trả tiền cho video trên 1 phút. Tài khoản cần 10k follower, 100k view trong 30 ngày, chủ tài khoản 18+. Kiểm tra trong Creator Tools xem Việt Nam đã được tham gia chưa.
 - **Bản quyền:** nhạc và SFX tự tổng hợp. Nhạc AI chỉ dùng từ gói có quyền thương mại. Không dùng tên, tagline, nhân vật hay giọng của kênh khác.
 
-## 5. Kênh trẻ em: luật riêng
-- **Bắt buộc gắn nhãn "Made for Kids"** (luật COPPA). Khi gắn nhãn, YouTube **tắt**: quảng cáo cá nhân hoá (chỉ còn quảng cáo theo ngữ cảnh, RPM thấp), bình luận, chuông thông báo, màn hình kết thúc và thẻ, nút lưu playlist, bài đăng cộng đồng.
-- **Kiếm tiền:**
-  - video tổng hợp 30–60 phút (nhiều quảng cáo giữa video);
-  - phát hành bài hát lên các nền tảng nhạc (Spotify/Apple Music, qua nhà phân phối), chỉ khi sở hữu quyền bài hát;
-  - tài trợ nhắm tới **phụ huynh**;
-  - bán bản quyền nội dung cho app hoặc nền tảng trẻ em.
-- Quảng bá bằng quảng cáo trả phí: chỉ nhắm **phụ huynh** (25–44 tuổi, sở thích nuôi dạy con). Không nhắm trẻ em.
-- **Rủi ro:** áp lực lớn về "AI slop" cho trẻ em (tháng 4/2026 hơn 200 tổ chức đã gửi thư tới Google/YouTube). YouTube Kids chỉ nhận một nhóm nhỏ kênh AI chất lượng cao. Nội dung phải có giá trị giáo dục: không giật gân, không màu nhấp nháy, không đề tài đáng sợ. TikTok gần như không dùng được cho mảng này (người dùng phải 13+).
+## 5. Nội dung trẻ em: không trộn vào kênh này
+- Gắn nhãn "Made for Kids" (luật COPPA) **tắt** quảng cáo cá nhân hoá, bình luận, chuông thông báo, màn hình kết thúc và thẻ, nút lưu playlist, bài đăng cộng đồng. Vì vậy kênh này đặt `"audience": "not_made_for_kids"` và không làm nội dung nhắm trẻ em.
+- Nếu sau này muốn làm kênh trẻ em, tạo **project mới** từ kit (nhân vật, palette, kênh riêng). YouTube đang siết mạnh "AI slop" cho trẻ em (tháng 4/2026 hơn 200 tổ chức gửi thư tới Google/YouTube) nên cần quy trình duyệt chất lượng chặt, nội dung giáo dục thật, không giật gân, không màu nhấp nháy.
 
 ## 6. Lộ trình gợi ý
-1. **Từ nay đến 2/2027:** dồn sức cho Não Phẳng, mỗi tuần 1 video dài và khoảng 5 clip ngắn, cố đạt điều kiện kiếm tiền cũ. Thử 2–3 tập bí ẩn.
+1. **Từ nay đến 2/2027:** mỗi tuần 1 video dài và khoảng 5 clip ngắn, cố đạt điều kiện kiếm tiền cũ. Xoay vòng 3 series để xem series nào có số liệu tốt nhất.
 2. **Đánh giá sau khoảng 12 video dài:** CTR trên 4–5%, thời gian xem trung bình trên 35–40%. Chưa có video nào vượt mức trung bình của kênh khoảng 3 lần thì đổi chủ đề hoặc cách trình bày trước khi tăng số lượng.
-3. **Quý 1–2/2027:** tách Phòng 404 nếu số liệu tốt. Kênh trẻ em chỉ làm khi đã có quy trình duyệt chất lượng chặt.
+3. **Sau đó:** dồn video vào series tốt nhất, giữ các series còn lại ở nhịp thưa hơn.
 
 ## 7. Chi phí tham khảo mỗi video (khi đã có bộ nhân vật và thư viện nền)
-| | Kiến thức 8–10 phút | Bí ẩn 10–15 phút | Trẻ em |
-|---|---|---|---|
-| Ảnh | $0,25–0,40 | $0,40–0,60 | $0,30–0,50 |
-| Voice (ElevenLabs) | ~3–3,5k credits | ~4,5–6,5k credits | ~1,5–2,5k credits |
-| Nhạc / SFX / render | $0 | $0 | Bài hát AI ~$0,02–0,05 |
+| | Video 8–10 phút |
+|---|---|
+| Ảnh | $0,25–0,40 (giảm dần khi library đầy) |
+| Voice (ElevenLabs) | ~3–3,5k credits (intro/outro/CTA nhờ cache không tính lại) |
+| Nhạc / SFX / render | $0 |
 
-Chi phí cố định mỗi tháng nếu chạy đủ 3 kênh: ElevenLabs Creator $22, Suno Pro khoảng $10, gói Claude, cộng tiền API.
+Chi phí cố định mỗi tháng: ElevenLabs (gói Starter hoặc Creator tuỳ nhu cầu), gói Claude, cộng tiền API.

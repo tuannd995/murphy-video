@@ -33,11 +33,11 @@ Chọn model theo việc: tìm kiếm và thao tác máy móc dùng **haiku**; c
 | Skill | Khi nào |
 |---|---|
 | `/setup` | Máy mới, hoặc lỗi môi trường |
-| `/kenh-moi` | Mở kênh hoặc series mới |
+| `/thiet-lap-kenh` | Thiết lập kênh (một lần) và thêm series mới |
 | `/nhan-vat-moi` | Nhân vật mới: ảnh tự vẽ ($0) hoặc AI (~$0,6 cả bộ) |
 | `/tu-the-moi <id> <tư thế> "<mô tả>"` | Thêm 1 tư thế cho nhân vật có sẵn |
 | `/canh-moi` | Nền cho scene (library trước) + khung code scene |
-| `/video-moi <kênh> "<chủ đề>"` | Trọn quy trình 1 video, 4 cổng duyệt |
+| `/video-moi "<chủ đề>" [series]` | Trọn quy trình 1 video, 4 cổng duyệt |
 | `/sua-anh` · `/sua-cau` | Sửa 1 ảnh / 1 câu, chỉ làm lại phần liên quan |
 | `/soat-loi-thoai` | Chấm lời thoại theo NARRATION.md |
 | `/duyet` | Tờ duyệt storyboard, gom góp ý thành việc cần sửa |
@@ -68,5 +68,5 @@ Skill là "công thức": từng bước, có điểm dừng ở cổng duyệt.
 - Mỗi vòng loop tốn token. Chỉ loop việc thật sự phải chờ, và đặt khoảng cách vòng dài.
 
 ## 6. Bộ nhớ dự án
-- `.current-video` (một dòng `kenh/slug`) là video đang làm. Script đọc file này khi không truyền `--video`.
+- `.current-video` (một dòng `slug`) là video đang làm. Script đọc file này khi không truyền `--video`.
 - `docs/plans/` lưu kế hoạch đã duyệt. `data/activity.log` lưu nhật ký agent. `videos/.../data/review.md` lưu kết quả soát. `ledger/cost.jsonl` là sổ chi phí duy nhất. `npm run status` cho bảng trạng thái cả xưởng.
