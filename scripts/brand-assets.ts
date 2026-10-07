@@ -6,6 +6,7 @@ import { createCanvas, type Canvas, type Image } from "@napi-rs/canvas";
 import { FONT, font, registerFonts, type Ctx } from "../src/components/canvas.js";
 import { drawSprite, loadSprites, type SpriteChar } from "../src/character/sprites.js";
 import { ROOT } from "../src/config/index.js";
+import { BRAND, bulb, chip, sparkle, wordmark } from "../src/brand/draw.js";
 
 const args = process.argv.slice(2);
 const charId = args.find((a) => !a.startsWith("--")) ?? "hero";
@@ -117,12 +118,15 @@ function headCrop(img: Image) {
   // vùng an toàn
   const sx0 = (W - 1546) / 2, sy0 = (H - 423) / 2;
   sprite(x, "think", sx0 + 190, sy0 + 440, 440);
-  x.textAlign = "left";
-  x.font = font(150, FONT.xbold); x.lineJoin = "round";
-  const nx = sx0 + 400, ny = sy0 + 205;
-  x.strokeStyle = INK; x.lineWidth = 0; x.fillStyle = INK; x.fillText(NAME, nx, ny);
-  x.font = font(48, FONT.semi); x.fillStyle = RED; x.fillText(TAGLINE, nx + 6, ny + 80);
-  x.font = font(38, FONT.med); x.fillStyle = INK; x.fillText(SCHEDULE, nx + 6, ny + 145);
+  const nx = sx0 + 400, ny = sy0 + 264;
+  wordmark(x, NAME, nx, ny, 188, { align: "left", rot: -0.02 });
+  x.textAlign = "left"; x.textBaseline = "alphabetic";
+  x.font = font(50, FONT.round); x.fillStyle = RED; x.fillText(TAGLINE, nx + 8, ny + 82);
+  x.font = font(38, FONT.round); x.fillStyle = INK; x.fillText(SCHEDULE, nx + 8, ny + 128);
+  // bóng đèn và lấp lánh quanh tên kênh (trong vùng an toàn) + ngoài vùng an toàn
+  bulb(x, sx0 + 1400, sy0 + 130, 112, { rot: 0.2 });
+  sparkle(x, nx - 36, sy0 + 70, 24); sparkle(x, sx0 + 1490, sy0 + 330, 18, "#fff", true, 0.3);
+  sparkle(x, 480, 700, 34, BRAND.yellow, true, 0.2); sparkle(x, 2150, 720, 40, BRAND.yellow, true, -0.2); sparkle(x, 1900, 260, 28, "#fff", true, 0.4);
   save(c, "banner-2560x1440.png");
   // xem trước: khung vùng an toàn
   const p = createCanvas(1280, 720), px = p.getContext("2d");
@@ -138,20 +142,30 @@ const thumbs: { file: string; lines: Seg[][]; pose: string; mark: string; tag?: 
   { file: "thumb-sample-2-curiosity.png", lines: [[{ t: "VÌ SAO TA" }], [{ t: "HAY QUÊN", red: true }], [{ t: "TÊN NGƯỜI?" }]], pose: "think", mark: "?", tag: "CÂU HỎI KỲ LẠ" },
   { file: "thumb-sample-3-paradox.png", lines: [[{ t: "BÁNH MÌ" }], [{ t: "LUÔN ÚP BƠ", red: true }], [{ t: "XUỐNG SÀN?" }]], pose: "facepalm", mark: "!", tag: "NGHỊCH LÝ ĐỜI THƯỜNG" },
 ];
+/** dòng chữ nhiều đoạn: đoạn "red" dùng gradient vàng → đỏ, đoạn thường trắng viền mực; cả khối nghiêng nhẹ */
+function title(x: Ctx, lines: Seg[][], px: number, py: number, size: number) {
+  x.save(); x.translate(px, py); x.rotate(-0.035);
+  lines.forEach((segs, li) => {
+    let cur = 0; const y = li * size * 1.03;
+    segs.forEach((sg) => { cur += wordmark(x, sg.t, cur, y, size, { align: "left", rot: 0, bounce: 0.015, extrude: 0.06, fill: sg.red ? "hot" : "white", outline: 0.17 }) + size * 0.3; });
+  });
+  x.restore();
+}
+
 for (const t of thumbs) {
   const W = 1280, H = 720, c = createCanvas(W, H), x = c.getContext("2d");
   paper(x, W, H); rays(x, 960, 420, 1000, 20);
-  bigMark(x, t.mark, 1175, 300, 250, 0.16);
-  sprite(x, t.pose, 1010, 700, 540);
-  headline(x, t.lines, 56, 300, 100);
-  if (t.tag) {
-    x.font = font(40, FONT.xbold); const tw = x.measureText(t.tag).width + 56;
-    x.fillStyle = INK; x.beginPath(); x.roundRect(56, 52, tw, 70, 14); x.fill();
-    x.fillStyle = PAPER; x.textAlign = "left"; x.fillText(t.tag, 84, 100);
-  }
-  // logo kênh nhỏ góc dưới
-  x.font = font(34, FONT.xbold); x.fillStyle = INK; x.textAlign = "left"; x.fillText(NAME, 56, 676);
-  x.fillStyle = RED; x.fillRect(56, 688, 70, 6);
+  // quầng sáng vàng sau nhân vật
+  const g = x.createRadialGradient(1000, 330, 40, 1000, 330, 520); g.addColorStop(0, "rgba(255,226,102,0.55)"); g.addColorStop(1, "rgba(255,226,102,0)");
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  bigMark(x, t.mark, 1190, 470, 200, 0.16);
+  sprite(x, t.pose, 1000, 700, 540);
+  bulb(x, 1160, 142, 130, { rot: 0.16 });
+  sparkle(x, 760, 110, 28); sparkle(x, 1240, 300, 22, "#fff", true, 0.3); sparkle(x, 820, 640, 24, BRAND.yellow, true, 0.2); sparkle(x, 90, 600, 18, "#fff", true, -0.2);
+  title(x, t.lines, 56, 292, 140);
+  if (t.tag) chip(x, t.tag, 56, 44, 34);
+  // tên kênh nhỏ góc dưới trái
+  wordmark(x, NAME, 56, 684, 64, { align: "left", rot: -0.02, extrude: 0.05, outline: 0.18 });
   save(c, t.file);
 }
 console.log("Xong → brand/");

@@ -16,6 +16,10 @@ export const FONT = {
   med: "InterMed",
   mono: "DejaMono",
   monoBold: "DejaMonoB",
+  /** font tiêu đề kiểu truyện tranh (Bangers), chỉ chữ in hoa, đủ dấu tiếng Việt */
+  display: "Bangers",
+  /** font tròn vui cho nhãn nhỏ (Baloo 2) */
+  round: "Baloo2",
 };
 
 let fontsReady = false;
@@ -28,6 +32,8 @@ export function registerFonts() {
   f("Inter-Medium.otf", FONT.med);
   f("DejaVuSansMono.ttf", FONT.mono);
   f("DejaVuSansMono-Bold.ttf", FONT.monoBold);
+  f("Bangers-Regular.ttf", FONT.display);
+  f("Baloo2.ttf", FONT.round);
   fontsReady = true;
 }
 

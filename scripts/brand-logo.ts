@@ -5,6 +5,7 @@ import path from "node:path";
 import { createCanvas, type Canvas } from "@napi-rs/canvas";
 import { FONT, font, registerFonts, type Ctx } from "../src/components/canvas.js";
 import { ROOT } from "../src/config/index.js";
+import { BRAND, bulb, burst, sparkle, wordmark } from "../src/brand/draw.js";
 
 const args = process.argv.slice(2);
 const opt = (n: string, d: string) => args.find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3) ?? d;
@@ -33,7 +34,16 @@ function bodyPath(x: Ctx, grow = 0) {
 function draw(x: Ctx, withBg: boolean) {
   if (withBg) { x.fillStyle = PAPER; x.beginPath(); x.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2); x.fill(); }
   x.lineJoin = "round"; x.lineCap = "round";
-  x.save(); x.translate(0, -34); // nâng não lên để không chạm chữ
+  // tia sáng lớn phía sau não + quầng sáng (cắt gọn trong vòng tròn)
+  x.save(); x.beginPath(); x.arc(CX, S / 2, S / 2 - 2, 0, Math.PI * 2); x.clip();
+  const halo = x.createRadialGradient(CX, 330, 40, CX, 330, 400);
+  halo.addColorStop(0, "rgba(255,226,102,0.45)"); halo.addColorStop(1, "rgba(255,226,102,0)");
+  x.fillStyle = halo; x.beginPath(); x.arc(CX, 330, 400, 0, Math.PI * 2); x.fill();
+  burst(x, CX, 330, 300, 380, 22, "rgba(224,190,90,0.55)", 12);
+  x.restore();
+  // não thu nhỏ một chút để nhường chỗ cho bóng đèn và chữ
+  const K = 0.84;
+  x.save(); x.translate(CX * (1 - K), 20); x.scale(K, K);
 
   // bóng đổ dưới não
   x.fillStyle = "rgba(21,21,21,0.10)"; x.beginPath(); x.ellipse(CX, 640, 290, 20, 0, 0, Math.PI * 2); x.fill();
@@ -110,12 +120,14 @@ function draw(x: Ctx, withBg: boolean) {
   x.fillStyle = "#d9534f"; x.beginPath(); x.ellipse(FX + 2, ey + 111, 12, 7, 0, 0, Math.PI * 2); x.fill();
 
   x.restore();
+  // bóng đèn ý tưởng bật sáng trên đầu, nghiêng nhẹ + lấp lánh
+  bulb(x, CX + 118, 128, 118, { rot: 0.18 });
+  sparkle(x, CX - 150, 118, 30, BRAND.yellow, true, 0.2);
+  sparkle(x, CX + 292, 214, 22, "#ffffff", true, -0.2);
+  sparkle(x, CX - 305, 292, 18, BRAND.yellow, true, 0.4);
+  sparkle(x, CX + 330, 100, 16, BRAND.yellow, true, 0.1);
   // ---- chữ ----
-  x.save(); x.translate(CX, 770); x.rotate(-0.03);
-  x.font = font(108, FONT.xbold); x.textAlign = "center"; x.lineJoin = "round";
-  x.strokeStyle = INK; x.lineWidth = 24; x.strokeText(NAME, 0, 0);
-  x.fillStyle = RED; x.fillText(NAME, 0, 0);
-  x.restore();
+  wordmark(x, NAME, CX, 770, 148, { rot: -0.025 });
 }
 
 const save = (c: Canvas, name: string) => { const f = path.join(OUT, name); fs.writeFileSync(f, c.toBuffer("image/png")); console.log(path.relative(ROOT, f)); };
