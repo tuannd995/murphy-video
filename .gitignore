@@ -1,0 +1,7 @@
+node_modules/
+output/
+.env
+!.env.example
+# tái tạo được bằng `npm run sfx`
+assets/music/*.wav
+assets/sfx/*.wav

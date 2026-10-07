@@ -1,0 +1,19 @@
+{
+  "budget_usd": 2,
+  "spent": [],
+  "total_spent_usd": 0,
+  "estimate": {
+    "at": "2026-10-07T03:09:12.186Z",
+    "image_model": "google/gemini-2.5-flash-image",
+    "usd_per_image": 0.05,
+    "pricing_note": "fallback (không đọc được giá)",
+    "images_total": 14,
+    "images_missing": 14,
+    "images_usd": 0.7,
+    "script_llm_usd": 0,
+    "tts_usd": 0,
+    "music_sfx_usd": 0,
+    "projected_total_usd": 0.7,
+    "within_budget": true
+  }
+}

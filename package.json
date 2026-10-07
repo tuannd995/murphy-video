@@ -1,0 +1,30 @@
+{
+  "name": "murphy-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Video giáo dục 5 phút về Nghịch lý Murphy: AI image + JavaScript animation + voice-over + FFmpeg",
+  "type": "module",
+  "scripts": {
+    "script": "tsx scripts/build-script.ts",
+    "cost": "tsx --env-file-if-exists=.env scripts/cost.ts",
+    "images": "tsx --env-file-if-exists=.env scripts/gen-images.ts",
+    "voice": "tsx --env-file-if-exists=.env scripts/gen-voice.ts",
+    "voices": "tsx --env-file-if-exists=.env scripts/list-voices.ts",
+    "sfx": "tsx scripts/gen-sfx.ts",
+    "storyboard": "tsx scripts/build-storyboard.ts",
+    "render": "tsx scripts/render.ts",
+    "mix": "tsx scripts/mix-audio.ts",
+    "final": "tsx scripts/assemble.ts",
+    "preview": "npm run script && npm run sfx && npm run storyboard && npm run render && npm run mix && npm run final",
+    "all": "npm run script && npm run voice -- --confirm && npm run sfx && npm run storyboard && npm run render && npm run mix && npm run final",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

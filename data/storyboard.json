@@ -1,0 +1,1017 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "total_duration": 291.333,
+  "voice_ready": false,
+  "images_ready": 0,
+  "images_total": 13,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "title": "Hook",
+      "start": 0,
+      "duration": 37.63333333333333,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Bảy giờ sáng. Bạn đang vội đi làm.",
+          "en": "Seven a.m. You're rushing off to work.",
+          "start": 0.8,
+          "end": 3.319,
+          "voice": null
+        },
+        {
+          "vi": "Nhưng lần này, bạn đã chuẩn bị mọi thứ từ tối hôm trước.",
+          "en": "But this time, you got everything ready the night before.",
+          "start": 3.719,
+          "end": 7.867,
+          "voice": null
+        },
+        {
+          "vi": "Quần áo đã là phẳng. Điện thoại đầy pin. Báo thức đã đặt.",
+          "en": "Clothes ironed. Phone fully charged. Alarm set.",
+          "start": 8.267,
+          "end": 12.489,
+          "voice": null
+        },
+        {
+          "vi": "Bạn tự tin bước ra khỏi nhà...",
+          "en": "You step out the door, full of confidence...",
+          "start": 12.889,
+          "end": 15.111,
+          "voice": null
+        },
+        {
+          "vi": "Và đúng lúc đó, trời bắt đầu mưa. Xe thì không chịu nổ máy.",
+          "en": "And right then, it starts to rain. Your scooter refuses to start.",
+          "start": 16.311,
+          "end": 20.681,
+          "voice": null
+        },
+        {
+          "vi": "Còn chìa khóa nhà... vừa biến mất.",
+          "en": "And your house keys... have just vanished.",
+          "start": 21.081,
+          "end": 23.6,
+          "voice": null
+        },
+        {
+          "vi": "Bạn có bao giờ cảm thấy cuộc đời dường như cố tình chống lại kế hoạch của mình không?",
+          "en": "Have you ever felt like life is deliberately working against your plans?",
+          "start": 24,
+          "end": 30.296,
+          "voice": null
+        },
+        {
+          "vi": "Nếu có, bạn không cô đơn. Cảm giác này có hẳn một cái tên: Nghịch lý Murphy.",
+          "en": "If so, you're not alone. This feeling even has a name: Murphy's Law.",
+          "start": 30.696,
+          "end": 36.326,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s01a-morning",
+          "image": null,
+          "start": 0,
+          "end": 16.161
+        },
+        {
+          "id": "s01b-rain-scooter",
+          "image": null,
+          "start": 16.161,
+          "end": 37.633
+        }
+      ],
+      "sfx": [
+        {
+          "id": "tick",
+          "caption": 0,
+          "offset": 0,
+          "time": 0.8
+        },
+        {
+          "id": "ding",
+          "caption": 2,
+          "offset": 0.4,
+          "time": 8.667
+        },
+        {
+          "id": "ding",
+          "caption": 2,
+          "offset": 1.5,
+          "time": 9.767
+        },
+        {
+          "id": "ding",
+          "caption": 2,
+          "offset": 2.6,
+          "time": 10.867
+        },
+        {
+          "id": "whoosh",
+          "caption": 4,
+          "offset": -0.3,
+          "time": 16.011
+        },
+        {
+          "id": "rain",
+          "caption": 4,
+          "offset": 0,
+          "time": 16.311
+        },
+        {
+          "id": "crank",
+          "caption": 4,
+          "offset": 2.2,
+          "time": 18.511
+        },
+        {
+          "id": "scratch",
+          "caption": 5,
+          "offset": 0.9,
+          "time": 21.981
+        },
+        {
+          "id": "swell",
+          "caption": 7,
+          "offset": 2,
+          "time": 32.696
+        }
+      ]
+    },
+    {
+      "id": "scene-02",
+      "title": "Murphy's Law là gì?",
+      "start": 37.633,
+      "duration": 36.266666666666666,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Nghịch lý Murphy thường được tóm gọn trong một câu:",
+          "en": "Murphy's Law is usually summed up in a single sentence:",
+          "start": 0.8,
+          "end": 4.578,
+          "voice": null
+        },
+        {
+          "vi": "“Điều gì có thể xảy ra sai, thì nó sẽ xảy ra sai.”",
+          "en": "“Anything that can go wrong, will go wrong.”",
+          "start": 4.978,
+          "end": 8.681,
+          "voice": null
+        },
+        {
+          "vi": "Cái tên được cho là đến từ Edward Murphy, một kỹ sư hàng không Mỹ cuối thập niên 1940.",
+          "en": "The name is said to come from Edward Murphy, an American aerospace engineer in the late 1940s.",
+          "start": 9.081,
+          "end": 15.452,
+          "voice": null
+        },
+        {
+          "vi": "Nghe như định luật vật lý, nhưng thật ra không phải.",
+          "en": "It sounds like a law of physics, but it really isn't.",
+          "start": 15.852,
+          "end": 19.704,
+          "voice": null
+        },
+        {
+          "vi": "Không có phương trình nào chứng minh vũ trụ ghét bạn.",
+          "en": "No equation proves that the universe hates you.",
+          "start": 20.104,
+          "end": 24.03,
+          "voice": null
+        },
+        {
+          "vi": "Nó là một cách nói hài hước về rủi ro, xác suất và sự chuẩn bị.",
+          "en": "It's a humorous way of talking about risk, probability, and preparation.",
+          "start": 24.43,
+          "end": 29.096,
+          "voice": null
+        },
+        {
+          "vi": "Và về một thói quen rất con người: ta nhớ rất rõ những lần mọi thứ đi sai.",
+          "en": "And about a very human habit: we remember the times things went wrong extremely well.",
+          "start": 29.496,
+          "end": 34.978,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s02-thinking",
+          "image": null,
+          "start": 0,
+          "end": 36.267
+        }
+      ],
+      "sfx": [
+        {
+          "id": "whoosh",
+          "caption": 0,
+          "offset": -0.4,
+          "time": 0.4
+        },
+        {
+          "id": "typing",
+          "caption": 1,
+          "offset": 0,
+          "time": 4.978
+        },
+        {
+          "id": "pop",
+          "caption": 5,
+          "offset": 0.2,
+          "time": 24.63
+        },
+        {
+          "id": "pop",
+          "caption": 5,
+          "offset": 0.9,
+          "time": 25.33
+        },
+        {
+          "id": "pop",
+          "caption": 5,
+          "offset": 1.6,
+          "time": 26.03
+        },
+        {
+          "id": "pop",
+          "caption": 6,
+          "offset": 0.4,
+          "time": 29.896
+        },
+        {
+          "id": "pop",
+          "caption": 6,
+          "offset": 1.1,
+          "time": 30.596
+        },
+        {
+          "id": "error",
+          "caption": 3,
+          "offset": 2.2,
+          "gainDb": -6,
+          "time": 18.052
+        }
+      ]
+    },
+    {
+      "id": "scene-03",
+      "title": "Bánh mì phết bơ",
+      "start": 73.9,
+      "duration": 32.46666666666667,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Bắt đầu với một ví dụ kinh điển: lát bánh mì phết bơ.",
+          "en": "Let's start with a classic: a slice of buttered toast.",
+          "start": 0.8,
+          "end": 4.726,
+          "voice": null
+        },
+        {
+          "vi": "Bạn lỡ tay làm rơi nó. Và gần như chắc chắn, mặt có bơ sẽ úp xuống sàn.",
+          "en": "You drop it by accident. And almost inevitably, it lands butter-side down.",
+          "start": 5.126,
+          "end": 10.385,
+          "voice": null
+        },
+        {
+          "vi": "Vũ trụ đang trêu bạn chăng? Không hẳn.",
+          "en": "Is the universe teasing you? Not exactly.",
+          "start": 10.785,
+          "end": 13.6,
+          "voice": null
+        },
+        {
+          "vi": "Bánh thường rơi từ độ cao mặt bàn, và bắt đầu xoay khi trượt khỏi mép.",
+          "en": "Toast usually falls from table height, and starts spinning as soon as it slips off the edge.",
+          "start": 14,
+          "end": 19.185,
+          "voice": null
+        },
+        {
+          "vi": "Với độ cao đó, nó thường chỉ kịp xoay khoảng nửa vòng trước khi chạm đất.",
+          "en": "From that height, it usually only manages about half a turn before it hits the floor.",
+          "start": 19.585,
+          "end": 24.993,
+          "voice": null
+        },
+        {
+          "vi": "Thêm nữa, lần úp bơ để lại vết bẩn đáng nhớ, còn lần may mắn thì ta quên ngay.",
+          "en": "Plus, a butter-down landing leaves a memorable mess, while the lucky landings are forgotten instantly.",
+          "start": 25.393,
+          "end": 31.17,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s03-kitchen",
+          "image": null,
+          "start": 0,
+          "end": 32.467
+        }
+      ],
+      "sfx": [
+        {
+          "id": "whoosh",
+          "caption": 1,
+          "offset": 0.5,
+          "time": 5.626
+        },
+        {
+          "id": "thud",
+          "caption": 1,
+          "offset": 1.4,
+          "time": 6.526
+        },
+        {
+          "id": "scratch",
+          "caption": 2,
+          "offset": 0.1,
+          "time": 10.885
+        },
+        {
+          "id": "pop",
+          "caption": 3,
+          "offset": 0.6,
+          "time": 14.6
+        },
+        {
+          "id": "pop",
+          "caption": 4,
+          "offset": 0.6,
+          "time": 20.185
+        },
+        {
+          "id": "thud",
+          "caption": 4,
+          "offset": 2.4,
+          "gainDb": -6,
+          "time": 21.985
+        }
+      ]
+    },
+    {
+      "id": "scene-04",
+      "title": "USB",
+      "start": 106.367,
+      "duration": 27.066666666666666,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Còn đây là bài kiểm tra tâm lý của thời đại công nghệ: cắm USB.",
+          "en": "And here's the psychological test of the tech age: plugging in a USB.",
+          "start": 0.8,
+          "end": 5.467,
+          "voice": null
+        },
+        {
+          "vi": "Một chiếc USB chỉ có hai mặt. Xác suất cắm đúng là năm mươi phần trăm.",
+          "en": "A USB plug has only two sides. Your odds of getting it right: fifty percent.",
+          "start": 5.867,
+          "end": 11.052,
+          "voice": null
+        },
+        {
+          "vi": "Bạn cắm lần đầu. Sai.",
+          "en": "First try. Wrong.",
+          "start": 11.452,
+          "end": 13.007,
+          "voice": null
+        },
+        {
+          "vi": "Bạn xoay lại. Vẫn sai.",
+          "en": "You flip it. Still wrong.",
+          "start": 13.407,
+          "end": 15.037,
+          "voice": null
+        },
+        {
+          "vi": "Bạn xoay thêm lần nữa... và nó vào. Đúng hướng ban đầu.",
+          "en": "You flip it once more... and it slides in. The original way.",
+          "start": 15.437,
+          "end": 19.511,
+          "voice": null
+        },
+        {
+          "vi": "Toán học nói năm mươi phần trăm. Kinh nghiệm thì nói: không bao giờ là lần đầu.",
+          "en": "Math says fifty percent. Experience says: never on the first try.",
+          "start": 19.911,
+          "end": 25.763,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s04-desk-usb",
+          "image": null,
+          "start": 0,
+          "end": 27.067
+        }
+      ],
+      "sfx": [
+        {
+          "id": "whoosh",
+          "caption": 0,
+          "offset": -0.3,
+          "time": 0.5
+        },
+        {
+          "id": "error",
+          "caption": 2,
+          "offset": 0.9,
+          "time": 12.352
+        },
+        {
+          "id": "whoosh",
+          "caption": 3,
+          "offset": 0.1,
+          "gainDb": -6,
+          "time": 13.507
+        },
+        {
+          "id": "error",
+          "caption": 3,
+          "offset": 1,
+          "time": 14.407
+        },
+        {
+          "id": "whoosh",
+          "caption": 4,
+          "offset": 0.2,
+          "gainDb": -6,
+          "time": 15.637
+        },
+        {
+          "id": "success",
+          "caption": 4,
+          "offset": 2,
+          "time": 17.437
+        },
+        {
+          "id": "ding",
+          "caption": 5,
+          "offset": 0.2,
+          "time": 20.111
+        }
+      ]
+    },
+    {
+      "id": "scene-05",
+      "title": "Khi viết code",
+      "start": 133.433,
+      "duration": 39.8,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Nếu bạn là lập trình viên, hẳn bạn thuộc câu thần chú: “Ở máy em thì chạy mà.”",
+          "en": "If you're a developer, you know the magic words by heart: “It works on my machine.”",
+          "start": 0.8,
+          "end": 6.578,
+          "voice": null
+        },
+        {
+          "vi": "Ở local, mọi thứ hoàn hảo. Build xanh, test qua hết.",
+          "en": "Locally, everything is perfect. Build green, all tests passing.",
+          "start": 6.978,
+          "end": 10.83,
+          "voice": null
+        },
+        {
+          "vi": "Rồi bạn deploy lên production. Và mọi thứ sụp đổ.",
+          "en": "Then you deploy to production. And everything falls apart.",
+          "start": 11.23,
+          "end": 14.859,
+          "voice": null
+        },
+        {
+          "vi": "Thiếu một biến môi trường. API bị timeout.",
+          "en": "A missing environment variable. An API timeout.",
+          "start": 15.259,
+          "end": 18.37,
+          "voice": null
+        },
+        {
+          "vi": "Một package lệch phiên bản. Database từ chối kết nối.",
+          "en": "A package on a different version. The database refuses to connect.",
+          "start": 18.77,
+          "end": 22.696,
+          "voice": null
+        },
+        {
+          "vi": "Nhưng Murphy không nói rằng code của bạn chắc chắn sẽ lỗi.",
+          "en": "But Murphy isn't saying your code is guaranteed to fail.",
+          "start": 23.096,
+          "end": 27.393,
+          "voice": null
+        },
+        {
+          "vi": "Ông ấy nhắc rằng: nếu một kiểu lỗi có thể xảy ra mà bạn không chuẩn bị,",
+          "en": "He's reminding you: if a failure mode can happen and you haven't prepared for it,",
+          "start": 27.793,
+          "end": 33.052,
+          "voice": null
+        },
+        {
+          "vi": "thì một ngày nào đó, nó sẽ xảy ra, đúng vào lúc bạn không muốn nhất.",
+          "en": "one day it will happen, at exactly the moment you least want it to.",
+          "start": 33.452,
+          "end": 38.489,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s05a-dev-confident",
+          "image": null,
+          "start": 0,
+          "end": 11.08
+        },
+        {
+          "id": "s05b-dev-shocked",
+          "image": null,
+          "start": 11.08,
+          "end": 39.8
+        }
+      ],
+      "sfx": [
+        {
+          "id": "typing",
+          "caption": 1,
+          "offset": 0,
+          "time": 6.978
+        },
+        {
+          "id": "success",
+          "caption": 1,
+          "offset": 3,
+          "time": 9.978
+        },
+        {
+          "id": "whoosh",
+          "caption": 2,
+          "offset": 0.6,
+          "time": 11.83
+        },
+        {
+          "id": "error",
+          "caption": 3,
+          "offset": 0.1,
+          "time": 15.359
+        },
+        {
+          "id": "error",
+          "caption": 3,
+          "offset": 1.6,
+          "time": 16.859
+        },
+        {
+          "id": "error",
+          "caption": 4,
+          "offset": 0.1,
+          "time": 18.87
+        },
+        {
+          "id": "error",
+          "caption": 4,
+          "offset": 1.8,
+          "time": 20.57
+        },
+        {
+          "id": "swell",
+          "caption": 6,
+          "offset": 0,
+          "time": 27.793
+        }
+      ]
+    },
+    {
+      "id": "scene-06",
+      "title": "Trong đời sống",
+      "start": 173.233,
+      "duration": 26.766666666666666,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Và Murphy không chỉ sống trong máy tính. Ông ấy ở khắp nơi.",
+          "en": "And Murphy doesn't just live inside computers. He's everywhere.",
+          "start": 0.8,
+          "end": 5.17,
+          "voice": null
+        },
+        {
+          "vi": "Đang muộn giờ? Đèn đỏ nào cũng đứng chờ sẵn bạn.",
+          "en": "Running late? Every single traffic light is waiting for you, red.",
+          "start": 5.57,
+          "end": 9.126,
+          "voice": null
+        },
+        {
+          "vi": "Cần Internet gấp? Wi-Fi chọn đúng lúc đó để mất sóng.",
+          "en": "Need the internet urgently? That's exactly when the Wi-Fi drops out.",
+          "start": 9.526,
+          "end": 13.452,
+          "voice": null
+        },
+        {
+          "vi": "Mang ô theo, trời nắng đẹp cả ngày.",
+          "en": "Bring an umbrella, and it's sunny all day.",
+          "start": 13.852,
+          "end": 16.444,
+          "voice": null
+        },
+        {
+          "vi": "Quên ô ở nhà, trời đổ mưa như trút.",
+          "en": "Leave it at home, and it pours.",
+          "start": 16.844,
+          "end": 19.437,
+          "voice": null
+        },
+        {
+          "vi": "Và khi cần gọi một cuộc điện thoại quan trọng... pin còn đúng một phần trăm.",
+          "en": "And when you need to make an important call... your battery is at exactly one percent.",
+          "start": 19.837,
+          "end": 25.467,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s06a-traffic",
+          "image": null,
+          "start": 0,
+          "end": 13.702
+        },
+        {
+          "id": "s06b-umbrella-sun",
+          "image": null,
+          "start": 13.702,
+          "end": 19.687
+        },
+        {
+          "id": "s06c-phone-battery",
+          "image": null,
+          "start": 19.687,
+          "end": 26.767
+        }
+      ],
+      "sfx": [
+        {
+          "id": "whoosh",
+          "caption": 1,
+          "offset": -0.2,
+          "time": 5.37
+        },
+        {
+          "id": "click",
+          "caption": 1,
+          "offset": 1.2,
+          "time": 6.77
+        },
+        {
+          "id": "whoosh",
+          "caption": 2,
+          "offset": -0.2,
+          "time": 9.326
+        },
+        {
+          "id": "error",
+          "caption": 2,
+          "offset": 1.6,
+          "time": 11.126
+        },
+        {
+          "id": "whoosh",
+          "caption": 3,
+          "offset": -0.2,
+          "time": 13.652
+        },
+        {
+          "id": "rain",
+          "caption": 4,
+          "offset": 0.2,
+          "time": 17.044
+        },
+        {
+          "id": "whoosh",
+          "caption": 5,
+          "offset": -0.2,
+          "time": 19.637
+        },
+        {
+          "id": "error",
+          "caption": 5,
+          "offset": 2.6,
+          "time": 22.437
+        }
+      ]
+    },
+    {
+      "id": "scene-07",
+      "title": "Vì sao ta thấy Murphy đúng?",
+      "start": 200,
+      "duration": 38.96666666666667,
+      "music": "curious",
+      "captions": [
+        {
+          "vi": "Vậy tại sao chúng ta lại thấy Murphy đúng đến vậy?",
+          "en": "So why does Murphy's Law feel so true?",
+          "start": 0.8,
+          "end": 4.504,
+          "voice": null
+        },
+        {
+          "vi": "Thứ nhất, não ghi nhớ chuyện xấu đậm hơn chuyện tốt.",
+          "en": "First, the brain records bad events more vividly than good ones.",
+          "start": 4.904,
+          "end": 8.756,
+          "voice": null
+        },
+        {
+          "vi": "Một lần lỡ chuyến bay nhớ cả chục năm, còn trăm chuyến đúng giờ chẳng ai kể lại.",
+          "en": "One missed flight can stay with you for a decade, but a hundred on-time flights never get mentioned.",
+          "start": 9.156,
+          "end": 15.081,
+          "voice": null
+        },
+        {
+          "vi": "Các nhà tâm lý học gọi đó là thiên kiến tiêu cực.",
+          "en": "Psychologists call this negativity bias.",
+          "start": 15.481,
+          "end": 19.111,
+          "voice": null
+        },
+        {
+          "vi": "Thứ hai, khi đã tin mình xui, ta chỉ để ý bằng chứng cho thấy mình xui.",
+          "en": "Second, once we believe we're unlucky, we only notice the evidence that proves it.",
+          "start": 19.511,
+          "end": 24.77,
+          "voice": null
+        },
+        {
+          "vi": "Đó là thiên kiến xác nhận.",
+          "en": "That's confirmation bias.",
+          "start": 25.17,
+          "end": 27.096,
+          "voice": null
+        },
+        {
+          "vi": "Và thứ ba, chuyện gì càng dễ nhớ lại, ta càng nghĩ nó xảy ra thường xuyên.",
+          "en": "And third, the easier something is to recall, the more often we think it happens.",
+          "start": 27.496,
+          "end": 32.978,
+          "voice": null
+        },
+        {
+          "vi": "Ngày bình yên lặng lẽ trôi qua. Chỉ ngày xui xẻo là ở lại.",
+          "en": "The peaceful days slip quietly by. Only the unlucky ones stay with us.",
+          "start": 33.378,
+          "end": 37.674,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s07-memory",
+          "image": null,
+          "start": 0,
+          "end": 38.967
+        }
+      ],
+      "sfx": [
+        {
+          "id": "bubble",
+          "caption": 1,
+          "offset": 0.3,
+          "time": 5.204
+        },
+        {
+          "id": "bubble",
+          "caption": 2,
+          "offset": 0.2,
+          "time": 9.356
+        },
+        {
+          "id": "bubble",
+          "caption": 2,
+          "offset": 1.2,
+          "time": 10.356
+        },
+        {
+          "id": "ding",
+          "caption": 3,
+          "offset": 0.3,
+          "time": 15.781
+        },
+        {
+          "id": "ding",
+          "caption": 5,
+          "offset": 0.1,
+          "time": 25.27
+        },
+        {
+          "id": "bubble",
+          "caption": 6,
+          "offset": 0.3,
+          "time": 27.796
+        },
+        {
+          "id": "ding",
+          "caption": 6,
+          "offset": 0.2,
+          "gainDb": -6,
+          "time": 27.696
+        }
+      ]
+    },
+    {
+      "id": "scene-08",
+      "title": "Murphy có vô nghĩa?",
+      "start": 238.967,
+      "duration": 29.2,
+      "music": "warm",
+      "captions": [
+        {
+          "vi": "Vậy Nghịch lý Murphy có vô nghĩa không? Hoàn toàn không.",
+          "en": "So is Murphy's Law meaningless? Not at all.",
+          "start": 0.8,
+          "end": 4.948,
+          "voice": null
+        },
+        {
+          "vi": "Nếu xem nó như một nguyên tắc quản lý rủi ro, nó cực kỳ hữu ích.",
+          "en": "Treated as a risk-management principle, it's extremely useful.",
+          "start": 5.348,
+          "end": 10.089,
+          "voice": null
+        },
+        {
+          "vi": "Bạn sao lưu dữ liệu, vì ổ cứng có thể hỏng.",
+          "en": "You back up your data, because hard drives can fail.",
+          "start": 10.489,
+          "end": 13.674,
+          "voice": null
+        },
+        {
+          "vi": "Bạn chạy test trước khi deploy, vì code có thể lỗi.",
+          "en": "You run tests before deploying, because code can break.",
+          "start": 14.074,
+          "end": 17.852,
+          "voice": null
+        },
+        {
+          "vi": "Bạn mang sạc dự phòng, đến sân bay sớm, và luôn có một phương án B.",
+          "en": "You carry a power bank, get to the airport early, and always keep a Plan B.",
+          "start": 18.252,
+          "end": 23.215,
+          "voice": null
+        },
+        {
+          "vi": "Kỹ sư, phi công hay bác sĩ đều làm việc với cách nghĩ này.",
+          "en": "Engineers, pilots, and doctors all work with this mindset.",
+          "start": 23.615,
+          "end": 27.911,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s08-prepared",
+          "image": null,
+          "start": 0,
+          "end": 29.2
+        }
+      ],
+      "sfx": [
+        {
+          "id": "swell",
+          "caption": 0,
+          "offset": 1.5,
+          "time": 2.3
+        },
+        {
+          "id": "whoosh",
+          "caption": 1,
+          "offset": 0.4,
+          "time": 5.748
+        },
+        {
+          "id": "success",
+          "caption": 2,
+          "offset": 0.5,
+          "time": 10.989
+        },
+        {
+          "id": "success",
+          "caption": 3,
+          "offset": 0.5,
+          "time": 14.574
+        },
+        {
+          "id": "click",
+          "caption": 4,
+          "offset": 0.4,
+          "time": 18.652
+        },
+        {
+          "id": "click",
+          "caption": 4,
+          "offset": 1.6,
+          "time": 19.852
+        },
+        {
+          "id": "success",
+          "caption": 4,
+          "offset": 3.2,
+          "time": 21.452
+        }
+      ]
+    },
+    {
+      "id": "scene-09",
+      "title": "Kết luận",
+      "start": 268.167,
+      "duration": 23.166666666666668,
+      "music": "warm",
+      "captions": [
+        {
+          "vi": "Vậy nên, Nghịch lý Murphy không có nghĩa là cuộc đời luôn chống lại bạn.",
+          "en": "So Murphy's Law doesn't mean life is always against you.",
+          "start": 0.8,
+          "end": 6.133,
+          "voice": null
+        },
+        {
+          "vi": "Nó có nghĩa là: nếu một điều có thể đi sai, hãy chuẩn bị cho nó.",
+          "en": "It means: if something can go wrong, prepare for it.",
+          "start": 6.533,
+          "end": 11.274,
+          "voice": null
+        },
+        {
+          "vi": "Bình tĩnh, có kế hoạch, và có cả phương án dự phòng.",
+          "en": "Stay calm, make a plan, and keep a backup plan too.",
+          "start": 11.674,
+          "end": 15.526,
+          "voice": null
+        },
+        {
+          "vi": "Và nếu bạn nghĩ video này không thể lỗi...",
+          "en": "And if you think this video can't possibly go wrong...",
+          "start": 15.926,
+          "end": 19.037,
+          "voice": null
+        },
+        {
+          "vi": "...hãy nhớ đến Murphy.",
+          "en": "...remember Murphy.",
+          "start": 20.237,
+          "end": 21.867,
+          "voice": null
+        }
+      ],
+      "shots": [
+        {
+          "id": "s09-calm",
+          "image": null,
+          "start": 0,
+          "end": 23.167
+        }
+      ],
+      "sfx": [
+        {
+          "id": "swell",
+          "caption": 1,
+          "offset": 0,
+          "time": 6.533
+        },
+        {
+          "id": "ding",
+          "caption": 2,
+          "offset": 0.5,
+          "gainDb": -6,
+          "time": 12.174
+        },
+        {
+          "id": "glitch",
+          "caption": 4,
+          "offset": -0.2,
+          "time": 20.037
+        },
+        {
+          "id": "scratch",
+          "caption": 4,
+          "offset": 0,
+          "gainDb": -4,
+          "time": 20.237
+        }
+      ]
+    }
+  ]
+}
