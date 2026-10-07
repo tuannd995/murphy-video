@@ -17,7 +17,8 @@ export interface Shot {
   id: string; // = tên file ảnh assets/images/<id>.png
   /** câu thoại bắt đầu hiển thị shot này */
   fromCaption: number;
-  prompt: PromptParts;
+  /** bỏ trống = dùng lại ảnh của shot cùng id ở scene khác (không tạo ảnh mới) */
+  prompt?: PromptParts;
 }
 
 export interface SceneDef {

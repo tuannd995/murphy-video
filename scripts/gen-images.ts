@@ -25,8 +25,9 @@ if (!ledger.estimate) {
 const REF = "character-ref";
 const jobs = [
   { id: REF, prompt: script.character_reference_prompt, useRef: false },
-  ...script.scenes.flatMap((s) => s.shots.map((sh) => ({ id: sh.id, prompt: sh.image_prompt, useRef: true }))),
-].filter((j) => (only ? only.includes(j.id) : true))
+  ...script.scenes.flatMap((s) => s.shots.filter((sh) => !sh.image_prompt.startsWith("reuse:")).map((sh) => ({ id: sh.id, prompt: sh.image_prompt, useRef: true }))),
+].filter((j, i, arr) => arr.findIndex((x) => x.id === j.id) === i)
+ .filter((j) => (only ? only.includes(j.id) : true))
  .filter((j) => force || !fs.existsSync(path.join(PATHS.images, `${j.id}.png`)));
 
 console.log(`Ảnh cần tạo: ${jobs.length} | ~$${est.toFixed(4)}/ảnh | đã chi $${ledger.total_spent_usd.toFixed(4)} / $${API.budgetUsd}`);

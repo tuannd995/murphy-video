@@ -8,7 +8,7 @@ import type { ScriptFile } from "../src/script/types.js";
 const words = (s: string) => s.split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
 
 const scenes = SCENES.map((s) => {
-  const shots = s.shots.map((sh) => ({ id: sh.id, fromCaption: sh.fromCaption, image_prompt: buildPrompt(sh.prompt) }));
+  const shots = s.shots.map((sh) => ({ id: sh.id, fromCaption: sh.fromCaption, image_prompt: sh.prompt ? buildPrompt(sh.prompt) : `reuse:${sh.id}` }));
   return {
     id: s.id,
     title: s.title,

@@ -80,6 +80,6 @@ export const scene04: SceneRenderer = (ctx, t, s) => {
   // kết luận hài
   if (t > cap(5)) {
     pill(ctx, "Toán học: 50%", 270, 755, { size: 36, fill: PALETTE.teal, scale: pop(t, cap(5) + 0.2) });
-    pill(ctx, "Kinh nghiệm: không bao giờ lần đầu", 790, 755, { size: 36, fill: PALETTE.coral, scale: pop(t, cap(5) + 1.6) });
+    pill(ctx, "Cuộc đời: còn lâu nhé", 790, 755, { size: 36, fill: PALETTE.coral, scale: pop(t, cap(5) + 1.6) });
   }
 };

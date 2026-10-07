@@ -31,7 +31,7 @@ export const TIMING = {
   pauseAfterEllipsis: 0.8, // nghỉ dài hơn sau "..."
   sceneTail: 1.3,
   fade: 0.45, // fade đen ở mép scene
-  charsPerSecond: 13.5, // ước lượng khi chưa có voice
+  charsPerSecond: 15.5, // ước lượng khi chưa có voice (đo từ ElevenLabs ~15–16 ký tự/giây)
   // nếu tổng thời lượng < minTotal, tự giãn khoảng nghỉ giữa các câu (tối đa maxExtraGap/câu)
   minTotal: 285,
   maxExtraGap: 0.9,
@@ -54,7 +54,8 @@ export const TTS = {
 };
 
 export const ELEVENLABS = {
-  voiceId: process.env.ELEVENLABS_VOICE_ID ?? "",
+  // mặc định: "Phong - Warm, Clear and Expressive" (giọng Bắc, Voice Library — cần gói Starter trở lên)
+  voiceId: process.env.ELEVENLABS_VOICE_ID ?? "RxhjHDfpO54FYotYtKpw",
   // turbo/flash v2.5 hỗ trợ tiếng Việt, 0.5 credit/ký tự; eleven_v3 tự nhiên hơn nhưng 1 credit/ký tự
   model: process.env.ELEVENLABS_MODEL ?? "eleven_turbo_v2_5",
   creditsPerChar: Number(process.env.ELEVENLABS_CREDITS_PER_CHAR ?? ((process.env.ELEVENLABS_MODEL ?? "eleven_turbo_v2_5").includes("v2_5") ? 0.5 : 1)),

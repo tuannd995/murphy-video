@@ -6,7 +6,7 @@ import type { ScriptFile } from "../src/script/types.js";
 import { keyInfo, listModels, loadLedger, saveLedger } from "../src/utils/openrouter.js";
 
 const script: ScriptFile = JSON.parse(fs.readFileSync(PATHS.script, "utf8"));
-const allImages = ["character-ref", ...script.scenes.flatMap((s) => s.shots.map((sh) => sh.id))];
+const allImages = [...new Set(["character-ref", ...script.scenes.flatMap((s) => s.shots.filter((sh) => !sh.image_prompt.startsWith("reuse:")).map((sh) => sh.id))])];
 const missing = allImages.filter((id) => !fs.existsSync(path.join(PATHS.images, `${id}.png`)));
 
 const ledger = loadLedger();

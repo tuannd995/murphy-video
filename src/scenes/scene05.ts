@@ -89,6 +89,6 @@ export const scene05: SceneRenderer = (ctx, t, s) => {
     text(ctx, "“Code chắc chắn sẽ lỗi.”", 140, 300, { size: 52, family: FONT.xbold, color: PALETTE.paper, alpha: la });
     const strike = prog(t, cap(5) + 1.6, 0.4);
     if (strike > 0) { ctx.save(); ctx.globalAlpha = la; ctx.strokeStyle = PALETTE.red; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(140, 284); ctx.lineTo(140 + 620 * strike, 284); ctx.stroke(); ctx.restore(); }
-    quote(ctx, ["Lỗi có thể xảy ra + không chuẩn bị", "= sẽ xảy ra, đúng lúc tệ nhất."], 140, 400, t, cap(6) + 0.2, { size: 44, color: PALETTE.ochre, stagger: 1.6 });
+    quote(ctx, ["Lỗi có thể xảy ra + không chuẩn bị", "= sẽ xảy ra, đúng lúc sếp đang xem."], 140, 400, t, cap(6) + 0.2, { size: 44, color: PALETTE.ochre, stagger: 1.6 });
   }
 };
