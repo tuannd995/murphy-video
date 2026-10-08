@@ -1,6 +1,6 @@
 # 05 · Phong cách lời thoại (BẮT BUỘC)
 
-> Copy file này thành `docs/style/NARRATION.md`. Agent viết kịch bản phải đọc lại mỗi lần viết. Agent kiểm duyệt chấm theo checklist ở cuối file.
+> **Đọc kèm `11-phong-cach-giong-ke.md` (phong cách giọng và cấu trúc mục tiêu) và `12-kich-ban-mau.md`.** Copy file này thành `docs/style/NARRATION.md`. Agent viết kịch bản phải đọc lại mỗi lần viết. Agent kiểm duyệt chấm theo checklist ở cuối file.
 
 ## Phong cách lời thoại
 

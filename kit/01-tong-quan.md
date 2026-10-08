@@ -32,6 +32,8 @@ Chi tiết đầy đủ, quy tắc tầng và cache nằm ở **`10-cau-truc-du-
 ├── ledger/cost.jsonl      sổ chi phí duy nhất
 ├── src/  scripts/         code dùng chung, không chứa tên kênh hay chủ đề
 ```
+Tài liệu phong cách (copy từ kit vào project): `docs/style/STYLE.md` + ảnh mẫu, `docs/style/NARRATION.md` (= kit/05), `docs/style/VOICE-STYLE.md` (= kit/11), `docs/style/mau-kich-ban.md` (= kit/12); công cụ đo giọng `tools/voice-profile.py`; kế hoạch đã duyệt `docs/plans/`; ảnh tham khảo bên thứ ba `docs/style/private/` (gitignore).
+
 Mã nguồn:
 ```
 src/

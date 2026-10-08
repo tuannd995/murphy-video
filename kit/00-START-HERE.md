@@ -27,6 +27,8 @@ BƯỚC 0: ĐỌC TRƯỚC KHI LÀM
   kit/03-pipeline.md             đặc tả kỹ thuật từng bước (script → ảnh → voice → animation → mix → MP4), kèm code mẫu
   kit/04-hinh-anh-nhan-vat.md    phong cách hình ảnh, prompt ảnh, hệ thống bộ tư thế nhân vật
   kit/05-loi-thoai.md            phong cách lời thoại (BẮT BUỘC cho mọi kịch bản)
+  kit/11-phong-cach-giong-ke.md  PHONG CÁCH GIỌNG KỂ VÀ KỊCH BẢN MỤC TIÊU (số đo giọng, khuôn một phần, ký hiệu nhấn nhá, prompt viết kịch bản)
+  kit/12-kich-ban-mau.md         kịch bản mẫu theo phong cách đó (chỉ lấy nhịp và cấu trúc, không dùng lại nội dung); công cụ đo giọng: kit/tools/voice-profile.py
   kit/06-kenh-dinh-dang.md       các kênh, định dạng theo nền tảng, thời lượng, chính sách YouTube/TikTok
   kit/07-claude-setup.md         CLAUDE.md, agents, skills, hooks, loop/routine (file viết sẵn trong kit/claude/)
   kit/08-quy-trinh-video.md      quy trình làm 1 video với 4 cổng duyệt, cách sửa khi chưa ưng
@@ -49,7 +51,7 @@ CÁC PHA (chi tiết từng pha nằm trong các file md tương ứng)
   PHA 0  Môi trường: kiểm tra công cụ, key, mạng theo 02-moi-truong.md. Thiếu gì thì đưa tôi checklist, không tự cài đặt hệ thống.
   PHA 1  Khung dự án: git init, package.json, tsconfig, cấu trúc thư mục theo 01-tong-quan.md.
          Tạo đúng cấu trúc ở kit/10-cau-truc-du-an.md (channel.json, brand/, characters/, library/, templates/, series/, cache/, videos/, ledger/).
-         Copy kit/assets vào đúng chỗ (docs/style/, characters/hero/).
+         Copy kit/assets vào đúng chỗ (docs/style/, characters/hero/); copy kit/05 → docs/style/NARRATION.md, kit/11 → docs/style/VOICE-STYLE.md, kit/12 → docs/style/mau-kich-ban.md, kit/tools → tools/.
   PHA 2  Claude setup: CLAUDE.md, .claude/agents, .claude/skills, .claude/hooks, .claude/settings.json theo 07-claude-setup.md
          (copy từ kit/claude/ rồi chỉnh đường dẫn nếu cần). Test từng hook bằng một thao tác nhỏ.
   PHA 3  Pipeline lõi theo 03-pipeline.md: config, formats, script types, cost ledger, OpenRouter client, ElevenLabs client,

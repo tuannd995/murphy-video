@@ -28,7 +28,12 @@ Mọi lệnh nhận `--video <slug>`; tài nguyên luôn tìm qua `src/utils/res
 
 ## 2. Kịch bản (`videos/<slug>/script.ts`)
 ```ts
-export interface Line { vi: string; en: string }           // 1 câu nói tự nhiên (đủ ý), = 1 file voice + 1 phụ đề
+export interface Line {                                      // 1 câu nói tự nhiên (đủ ý), = 1 file voice + 1 phụ đề
+  vi: string; en: string;
+  say?: string;            // cách đọc cho TTS khi tên riêng/thuật ngữ bị đọc sai (phụ đề vẫn dùng vi)
+  pauseAfter?: number;     // giây nghỉ sau câu, thay GAP mặc định (chỗ "//" trong 11-phong-cach-giong-ke.md)
+  delivery?: string;       // ghi chú nhấn nhá theo ký hiệu của 11; không vào phụ đề, không gửi TTS
+}
 export interface Shot { id: string; fromLine: number; background?: string /* id trong library */; prompt?: PromptParts }
 export interface Cue  { sfx: string; line?: number; word?: string; offset?: number; gainDb?: number }
 export interface Act {                                      // 1 sân khấu nhân vật theo câu thoại
@@ -49,6 +54,7 @@ export interface SceneDef {
 }
 export interface VideoScript { channel: string; slug: string; title_vi: string; title_en: string; character: string; scenes: SceneDef[] }
 ```
+- **Phong cách mục tiêu** (nhịp, cấu trúc, ví von, ký hiệu nhấn nhá): `11-phong-cach-giong-ke.md`; kịch bản mẫu: `12-kich-ban-mau.md`.
 - **Quy tắc viết** (bắt buộc, xem `05-loi-thoai.md`): viết lời kể cả đoạn trước, đọc to, rồi mới tách thành `lines`. Mỗi `Line` là một câu (đôi khi hai câu) **đủ ý**. **Không** tách câu chỉ để có beat animation. Beat đặt theo từ khoá (mục 5).
 - `build-script` xuất `data/script.json`: các trường gốc, cộng prompt ảnh đã ghép theo template, cộng số âm tiết tiếng Việt. Nếu tổng ngắn hơn khoảng 1.500 âm tiết (dưới 8 phút) thì in cảnh báo.
 
@@ -104,7 +110,7 @@ body: {
 Với từng scene đã chọn (theo `--type`, `--scenes`, intro/outro):
 ```
 t = LEAD_IN (0.6s)
-for line i:
+for line i:   (khoảng nghỉ = line.pauseAfter ?? GAP; voice gửi TTS dùng line.say ?? line.vi)
   nếu --summary và i ∉ scene.summary: line.skip = true; start = end = t   (thời lượng 0, không voice, không phụ đề)
   else: dur = ffprobe(voice) hoặc len(vi)/15.5; start = t; end = t+dur; t = end + GAP(0.25s) + (vi kết thúc "..." ? 0.6 : 0)
 scene.duration = round((t - GAP + TAIL(1.0s)) * fps) / fps      ⚠ làm tròn theo frame, nếu không audio/video lệch dần

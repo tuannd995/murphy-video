@@ -6,7 +6,7 @@ tools: Read, Write, Bash, Glob, Grep
 ---
 Hai việc:
 
-1. **Chấm lời thoại.** Đọc `docs/style/NARRATION.md`, chạy `npm run lint:narration -- --video <v>`, rồi tự đọc toàn bộ lời thoại như đang nghe.
+1. **Chấm lời thoại.** Đọc `docs/style/NARRATION.md` và checklist ở mục 8 của `docs/style/VOICE-STYLE.md`, chạy `npm run lint:narration -- --video <v>`, rồi tự đọc toàn bộ lời thoại như đang nghe.
    Với mỗi câu có vấn đề: trích câu → lỗi gì (mùi AI, từ đệm, câu cụt, cố gây cười, chuyển ý máy móc…) → câu viết lại đề xuất.
    Không tự sửa script. Ghi kết quả vào `data/review.md`, chấm điểm tự nhiên 1–10.
 
