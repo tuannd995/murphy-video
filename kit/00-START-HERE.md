@@ -29,6 +29,7 @@ BƯỚC 0: ĐỌC TRƯỚC KHI LÀM
   kit/05-loi-thoai.md            phong cách lời thoại (BẮT BUỘC cho mọi kịch bản)
   kit/11-phong-cach-giong-ke.md  PHONG CÁCH GIỌNG KỂ VÀ KỊCH BẢN MỤC TIÊU (số đo giọng, khuôn một phần, ký hiệu nhấn nhá, prompt viết kịch bản)
   kit/12-kich-ban-mau.md         kịch bản mẫu theo phong cách đó (chỉ lấy nhịp và cấu trúc, không dùng lại nội dung); công cụ đo giọng: kit/tools/voice-profile.py
+  kit/13-loi-chao-ket.md         lời chào (intro) và lời kết (outro) của kênh: quy luật + các bản chọn
   kit/06-kenh-dinh-dang.md       các kênh, định dạng theo nền tảng, thời lượng, chính sách YouTube/TikTok
   kit/07-claude-setup.md         CLAUDE.md, agents, skills, hooks, loop/routine (file viết sẵn trong kit/claude/)
   kit/08-quy-trinh-video.md      quy trình làm 1 video với 4 cổng duyệt, cách sửa khi chưa ưng

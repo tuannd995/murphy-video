@@ -12,15 +12,15 @@
   "character": "hero",
   "voice": { "provider": "elevenlabs", "voiceId": "RxhjHDfpO54FYotYtKpw", "model": "eleven_turbo_v2_5" },
   "music": { "default": "curious", "outro": "warm" },
-  "intro": { "lines": ["Xin chào các bạn, chào mừng các bạn quay trở lại với Não Phẳng."] },
-  "outro": { "lines": [] },
+  "intro": { "ref": "13-loi-chao-ket.md, lời chào B" },   // lời chào và lời kết mẫu nằm ở file 13; khai báo thật ở templates/intro.ts, outro.ts
+  "outro": { "ref": "13-loi-chao-ket.md, lời kết A" },
   "cta": { "tiktok": "Follow để xem thêm", "shorts": "Xem bản đầy đủ trên YouTube Não Phẳng", "reels": "Theo dõi Não Phẳng để xem thêm" },
   "budget": { "videoImagesUsd": 1, "videoVoiceCredits": 6000, "monthlyUsd": 8, "monthlyVoiceCredits": 60000 },
   "targetMinutes": [8, 10],
   "audience": "not_made_for_kids"
 }
 ```
-Kênh còn có `brand/` (logo, banner, watermark, avatar, thumbnail mẫu), `templates/` (`intro.ts`, `outro.ts`, khung kịch bản theo series) và `series/` như mô tả ở `10-cau-truc-du-an.md`. Lời intro và outro cũng phải tuân theo `NARRATION.md`. Ví dụ hướng intro người dùng thích: *"nơi tìm hiểu những điều không phải ai cũng biết, để nghe lúc làm việc, ăn uống, dọn nhà hay trước khi ngủ, và có thêm chuyện để kể với bạn bè."* Viết lại cho tự nhiên, không chèn câu đùa.
+Kênh còn có `brand/` (logo, banner, watermark, avatar, thumbnail mẫu), `templates/` (`intro.ts`, `outro.ts`, khung kịch bản theo series) và `series/` như mô tả ở `10-cau-truc-du-an.md`. Lời intro và outro: xem `13-loi-chao-ket.md` (quy luật, 3 bản lời chào, 3 bản lời kết, ghi chú giọng) và phải tuân theo `NARRATION.md`. Ví dụ hướng intro người dùng thích: *"nơi tìm hiểu những điều không phải ai cũng biết, để nghe lúc làm việc, ăn uống, dọn nhà hay trước khi ngủ, và có thêm chuyện để kể với bạn bè."* Viết lại cho tự nhiên, không chèn câu đùa.
 
 ## 2. Một kênh, nhiều series
 Chỉ có **một kênh**. Các mảng nội dung là **series** (`series/<id>.json`) trong cùng kênh, dùng chung nhân vật, thương hiệu, intro/outro, library và cache. Mỗi series chỉ khác khung kịch bản, thumbnail mẫu, thời lượng và nhạc mặc định.

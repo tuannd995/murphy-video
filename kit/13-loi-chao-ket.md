@@ -1,0 +1,88 @@
+# 13 · Lời chào (intro) và lời kết (outro) của kênh
+
+> Viết cho kênh Não Phẳng, **học cách mở và đóng tập** của một kênh kiến thức tiếng Việt khác (xem `11-phong-cach-giong-ke.md`), không dùng lại câu chữ. Đổi tên kênh thì sửa tên trong từng câu, giữ nguyên quy luật.
+> Intro và outro là scene cố định (`templates/intro.ts`, `outro.ts`), nên chọn **một** bản và giữ mãi: voice chỉ trả tiền một lần nhờ cache (xem 10).
+
+## 1. Quy luật rút ra
+**Lời chào (mở tập):**
+- Một câu tuyên ngôn dài liền mạch nói **kênh mang lại gì cho người nghe**, có một **đối lập** (khô khan ↔ vui, lạ ↔ dễ hiểu), rồi mới đến câu chào tên kênh. Không mở bằng "Xin chào các bạn, hôm nay…" rồi liệt kê.
+- Dài **12–18 giây** (khoảng 50–80 âm tiết). Quá 20 giây là người nghe muốn bỏ qua.
+- Một ví von hoặc một chi tiết đời thường (nhà tắm, rửa chén), không khẩu hiệu sáo ("mang đến kiến thức bổ ích").
+- Nối thẳng vào nội dung: sau lời chào là hook hoặc chủ đề tập, không chen quảng cáo hay CTA.
+
+**Lời kết (đóng tập):**
+- **Ngắn, 8–12 giây.** Thứ tự: báo hết tập → xin like/chia sẻ/đăng ký (một lần, nhẹ nhàng) → chào hẹn gặp lại.
+- Giọng thân mật, không van xin. Nếu có hài thì là tự giễu nhẹ, không phải câu đùa mới.
+- Một CTA chính, không dồn ba bốn yêu cầu liền nhau.
+
+## 2. Ba bản lời chào
+Chọn **một**. Mặc định đề xuất: **B** (đúng ý bạn: nghe lúc làm việc, ăn, dọn nhà, đi ngủ, kể chuyện bàn nhậu).
+
+**Lời chào A · "câu hỏi trong nhà tắm"** (~17 giây, 78 âm tiết)
+> Có những câu hỏi mà cả đời mình chỉ thắc mắc đúng một lần, ở trong nhà tắm hoặc lúc sắp ngủ, rồi quên mất, và hóa ra câu trả lời của chúng lại thú vị hơn cả phim. Ở đây tụi mình lục lại những câu hỏi đó, rồi kể lại cho bạn nghe sao cho dễ hiểu đến mức nghe lúc đang rửa chén cũng không bị lạc. Chào mừng các bạn đến với Não Phẳng.
+
+EN: *There are questions we only wonder about once in a lifetime, in the shower or just before falling asleep, and then forget, and it turns out the answers are more fun than a movie. Here we dig those questions back up and retell the answers so simply that you can follow along while washing dishes. Welcome to Não Phẳng.*
+
+**Lời chào B · "nghe lúc nào cũng được"** (~15 giây, 67 âm tiết) ← mặc định
+> Xin chào các bạn, chào mừng các bạn đến với Não Phẳng, nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu cho ra dáng người hiểu biết.
+
+EN: *Hello everyone, and welcome to Não Phẳng, the place to learn things not everyone knows, to listen to while you work, eat, tidy up, even drift off to sleep, and to have something to impress a date or hold your own at the drinking table when you need it.*
+
+**Lời chào C · "não phẳng"** (~12 giây, 52 âm tiết)
+> Chào mừng các bạn đến với Não Phẳng. Người ta hay nói vui là não càng nhiều nếp nhăn thì càng thông minh, còn ở đây tụi mình làm ngược lại: cho não nghỉ ngơi, phẳng lì như mặt hồ, rồi để những kiến thức lạ tự chảy vào cho nhẹ nhàng.
+
+EN: *Welcome to Não Phẳng. People joke that the more wrinkles a brain has, the smarter it is, but here we do the opposite: we let the brain rest, smooth as a lake, and let strange facts flow in on their own.*
+
+(C chỉ nên dùng nếu bạn thích kiểu đùa tên kênh; câu "nhiều nếp nhăn thì thông minh" là lời đùa dân gian, không phải khẳng định khoa học, nên giữ chữ "người ta hay nói vui".)
+
+## 3. Ba bản lời kết
+Chọn **một bản mặc định**. Bản C có chỗ trống `[câu hỏi video sau]`, đổi mỗi video (chỉ voice của câu đó mới tốn thêm).
+
+**Lời kết A · chuẩn** (~10 giây) ← mặc định
+> Và đó là kết thúc của số Não Phẳng hôm nay. Nếu bạn thấy hay thì bấm like và chia sẻ cho người hay thắc mắc, rồi đăng ký kênh để không lỡ câu hỏi mới. Cảm ơn bạn đã nghe, hẹn gặp lại.
+
+EN: *And that's the end of today's Não Phẳng. If you enjoyed it, like and share it with someone who's always wondering, and subscribe so you don't miss the next question. Thanks for listening, see you next time.*
+
+**Lời kết B · tự giễu nhẹ** (~11 giây)
+> Vậy là xong một câu hỏi, và não của bạn vừa được nghỉ ngơi đúng như tên kênh. Thấy hay thì bấm like và chia sẻ, thấy chưa hay thì cứ đăng ký, biết đâu video sau tụi mình làm khá hơn. Hẹn gặp lại.
+
+EN: *That's one question done, and your brain has just rested, just like the channel name promises. If you liked it, like and share; if you didn't, subscribe anyway, maybe the next one will be better. See you next time.*
+
+**Lời kết C · báo trước video sau** (~11 giây, tốt cho giữ chân người xem)
+> Hôm nay đến đây là hết, nhưng video tới còn một câu kỳ lạ hơn: [câu hỏi video sau]. Muốn biết câu trả lời thì đăng ký kênh để không bỏ lỡ, thấy hay thì bấm like và chia sẻ nhé. Hẹn gặp lại.
+
+EN: *That's it for today, but the next video has an even stranger question: [next question]. To find out the answer, subscribe so you don't miss it, and if you enjoyed this one, like and share. See you next time.*
+
+## 4. Ghi chú giọng cho bản mặc định (ký hiệu ở mục 5 của file 11)
+Lời chào B:
+```text
+Xin chào các bạn / chào mừng các bạn đến với **Não Phẳng** ↘ //
+nơi tìm hiểu những kiến thức (chậm)**không phải ai cũng biết**(/chậm) ↘ /
+(nhanh)để các bạn nghe lúc làm việc / lúc ăn cơm / lúc dọn nhà(/nhanh) / thậm chí là lúc chuẩn bị **đi ngủ** ↘ //
+và để lúc cần thì có thêm chuyện mà tán gái / hoặc chém gió trên bàn nhậu / (nhỏ)cho ra dáng người hiểu biết(/nhỏ)(mỉm) ↘
+```
+Lời kết A:
+```text
+Và đó là kết thúc của số **Não Phẳng** hôm nay ↘ //
+Nếu bạn thấy hay / thì bấm **like** và chia sẻ cho người hay thắc mắc / rồi **đăng ký kênh** để không lỡ câu hỏi mới ↘ /
+Cảm ơn bạn đã nghe / hẹn gặp lại ↘
+```
+Tên kênh "Não Phẳng" luôn nhấn rõ và chậm hơn một nhịp, vì đó là thứ cần đọng lại.
+
+## 5. Dạng khai báo (cho `channel.json` và `templates/intro.ts`, `outro.ts`)
+```jsonc
+"intro": { "lines": [
+  { "vi": "Xin chào các bạn, chào mừng các bạn đến với Não Phẳng,", "en": "Hello everyone, and welcome to Não Phẳng," },
+  { "vi": "nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu cho ra dáng người hiểu biết.", "en": "the place to learn things not everyone knows, ..." }
+] },
+"outro": { "lines": [
+  { "vi": "Và đó là kết thúc của số Não Phẳng hôm nay.", "en": "And that's the end of today's Não Phẳng.", "pauseAfter": 0.7 },
+  { "vi": "Nếu bạn thấy hay thì bấm like và chia sẻ cho người hay thắc mắc, rồi đăng ký kênh để không lỡ câu hỏi mới.", "en": "If you enjoyed it, like and share it with someone who's always wondering, and subscribe so you don't miss the next question." },
+  { "vi": "Cảm ơn bạn đã nghe, hẹn gặp lại.", "en": "Thanks for listening, see you next time." }
+] }
+```
+
+## 6. Bản ngắn cho Shorts, TikTok, Reels
+Không dùng intro dài. Dùng một câu 3–4 giây ở đầu hoặc không dùng, và để CTA ở `channel.json` (`cta.tiktok`, `cta.shorts`, `cta.reels`) hiện dạng chữ ở cuối.
+- Shorts/Reels, nếu muốn có lời: "Não Phẳng đây, hôm nay có một câu hỏi kỳ lạ."
+- Kết bản ngắn: "Bản đầy đủ có trên kênh Não Phẳng." (chữ + giọng, ≤ 3 giây).
