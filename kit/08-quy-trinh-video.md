@@ -11,7 +11,7 @@ Gọi bằng `/video-moi "<chủ đề>" [series]`. Slug = chủ đề viết kh
 | **CỔNG 1** | người dùng | **DUYỆT KỊCH BẢN**: đọc toàn bộ lời thoại, sửa câu nào thì `/sua-cau` | |
 | 4 | hoat-hoa | Code scene; nền lấy từ library hoặc placeholder; storyboard ước lượng; khung hình mẫu | `scenes/*.ts`, tờ xem trước |
 | **CỔNG 2** | người dùng | **DUYỆT STORYBOARD**: góp ý từng scene qua `/duyet` | `data/feedback.json` |
-| 5 | ke-toan | Dry-run ảnh mới và voice → bảng chi phí | |
+| 5 | ke-toan | Dry-run ảnh mới và voice → bảng chi phí (không tính intro/outro cố định) | |
 | **CỔNG 3** | người dùng | **DUYỆT CHI** (đúng cụm này) | |
 | 6 | hoa-si ∥ am-thanh | Tạo ảnh (soát lỗi, đưa vào library) ∥ đọc voice (soát câu bất thường) | ảnh, voice + timestamp |
 | 7 | đạo diễn | `npm run sfx` (nếu chưa có), `npm run make -- --video <v>` | `output/youtube/final.mp4` |

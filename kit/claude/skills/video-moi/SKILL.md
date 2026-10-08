@@ -6,7 +6,7 @@ description: Làm trọn một video mới từ chủ đề tới bản final v�
 Làm theo `kit/08-quy-trinh-video.md` (hoặc `docs/HUONG-DAN.md`):
 
 1. **tham-tu** → `data/sources.md`.
-2. **bien-kich** → `script.ts` (8–10 phút, chia khối, theo NARRATION.md) → `npm run script`.
+2. (Intro và outro là file cố định ở `templates/fixed/`: không viết, không đọc lại, chỉ ghép.) **bien-kich** → `script.ts` (8–10 phút, chia khối, theo NARRATION.md) → `npm run script`.
 3. **kiem-duyet** chấm lời thoại → `data/review.md`. Gửi người dùng: dàn ý, toàn bộ lời thoại tiếng Việt, điểm tự nhiên, câu bị gắn cờ.
    → **[CỔNG 1: DUYỆT KỊCH BẢN]**. Người dùng sửa câu nào thì sửa câu đó, chấm lại.
 4. **hoat-hoa** code các scene (ảnh placeholder hoặc nền library), storyboard với thời lượng ước lượng, khung hình mẫu mọi scene thành tờ xem trước.

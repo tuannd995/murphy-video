@@ -12,7 +12,7 @@
 
 Có một chuyện mà ai cũng từng thử hồi nhỏ và ai cũng thất bại, đó là tự cù chính mình. Bạn có thể cù nách, cù bàn chân, cù cổ, dùng ngón tay hay dùng cả cọng lông gà cũng được, và kết quả vẫn y như nhau là chẳng có gì xảy ra, trong khi chỉ cần một đứa bạn lén chạm nhẹ vào đúng chỗ đó là bạn đã lăn ra cười không thở nổi. Nghe thì giống một chuyện vặt để đùa vui, nhưng đằng sau nó là một sự thật hơi rợn người về bộ não của bạn: nó không hề ngồi yên chờ thế giới đến rồi mới phản ứng, mà luôn đoán trước mọi thứ, và đôi khi đoán nhanh hơn cả thực tại.
 
-**[INTRO KÊNH]**
+**[INTRO KÊNH]** (cố định, đã chốt ở 13, không viết lại, không đọc lại)
 
 Xin chào các bạn, chào mừng các bạn đến với Não Phẳng, nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và đôi khi còn để có thêm chuyện kể cho bạn bè trên bàn nhậu.
 
@@ -54,6 +54,6 @@ Gộp cả ba chuyện lại, bạn sẽ thấy chúng có chung một điểm: 
 
 Cho nên lần sau nếu có ai bảo bạn cứ tin vào mắt mình, hãy nhớ rằng mắt bạn mỗi ngày đang tắt đi vô số lần mà bạn vẫn sống khỏe. Còn nếu có ai lén cù bạn lúc bạn đang tập trung làm việc, bạn có thể giải thích rất bình tĩnh rằng đó là do tiểu não của bạn chưa nhận được bản cc.
 
-**[OUTRO]**
+**[OUTRO]** (cố định, đã chốt ở 13, không viết lại, không đọc lại)
 
-Và đó là kết thúc của số Não Phẳng ngày hôm nay. Nếu bạn thấy thích, hãy bấm like, chia sẻ cho bạn bè, và đăng ký kênh để không bỏ lỡ video mới. Còn bây giờ xin chào và hẹn gặp lại các bạn.
+Và đó là kết thúc của số Não Phẳng hôm nay. Nếu bạn thấy hay thì bấm like và chia sẻ cho người hay thắc mắc, rồi đăng ký kênh để không lỡ câu hỏi mới. Cảm ơn bạn đã nghe, hẹn gặp lại.

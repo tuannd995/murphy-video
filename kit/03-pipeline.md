@@ -20,6 +20,7 @@ Phần đặc tả này rút ra từ một pipeline đã chạy thật (đã là
   "character":  "tsx --env-file-if-exists=.env scripts/gen-character.ts",
   "new:video":  "tsx scripts/new-video.ts",                            // tạo videos/<slug>/ + video.json
   "status":     "tsx scripts/status.ts",                               // bảng trạng thái, chi phí cả xưởng
+  "fixed":      "tsx --env-file-if-exists=.env scripts/fixed.ts",      // tạo intro/outro cố định MỘT LẦN; dry-run; --confirm mới gọi API; --import dùng file có sẵn; --force tạo lại
   "gc":         "tsx scripts/gc.ts",                                   // liệt kê cache mồ côi (chỉ báo)
   "typecheck":  "tsc --noEmit"
 }
@@ -42,7 +43,7 @@ export interface Act {                                      // 1 sân khấu nh�
 export interface SceneDef {
   id: string;               // "scene-01"
   title: string;            // "Hook", "Intro kênh", "Outro kênh"…  (intro/outro nhận diện qua kind)
-  kind?: "intro" | "outro" | "content";
+  kind?: "intro" | "outro" | "content";   // intro/outro luôn là cố định: lấy từ templates/fixed/, không đọc lại, không render lại
   lines: Line[];
   shots: Shot[];            // ảnh nền; shot không có prompt = dùng lại ảnh cùng id / từ library
   acts?: Act[];             // nhân vật làm gì theo câu thoại
@@ -185,8 +186,15 @@ for (let f = 0; f < frames; f++) { paint(f/30); if (!ff.stdin.write(Buffer.from(
 
 ## 11. Chi phí và kiểm soát
 - `src/utils/openrouter.ts` và `src/audio/elevenlabs.ts` là các client mỏng. Mọi lần gọi có tính phí đều thêm một dòng vào **`ledger/cost.jsonl`**: `{ts, channel, video|null, step, model, item, usd|credits}`. Chỉ ghi thêm, không sửa dòng cũ.
-- `scripts/budget-guard.ts "<lệnh>"`: đọc `--video` trong lệnh, cộng sổ theo video, kênh (tháng này), xưởng (tháng này), ước tính phần còn thiếu (đã trừ phần trúng cache). Vượt `budget` ở bất kỳ mức nào thì exit 1 và in lý do. Hook PreToolUse gọi script này cho mọi lệnh có `--confirm`.
+- `scripts/budget-guard.ts "<lệnh>"`: đọc `--video` trong lệnh, cộng sổ theo video, kênh (tháng này), xưởng (tháng này), ước tính phần còn thiếu (đã trừ phần trúng cache). Vượt `budget` ở bất kỳ mức nào thì exit 1 và in lý do. Lệnh `fixed` không có `--video`: guard chỉ kiểm tra ngân sách tháng của kênh, và **chặn** nếu `templates/fixed/LOCK.json` đã tồn tại mà thiếu `--force` (ngăn vô tình đọc lại intro/outro). Hook PreToolUse gọi script này cho mọi lệnh có `--confirm`.
 - `scripts/cost.ts`: chỉ gọi endpoint miễn phí; `--report [--series s] [--month YYYY-MM]` in bảng tổng hợp từ sổ.
+
+## 11b. Intro/outro cố định (`fixed`)
+Xem `13-loi-chao-ket.md` mục 7. Tóm tắt kỹ thuật:
+- `scripts/fixed.ts`: dry-run in số ký tự, credits, quota. `--confirm` gọi ElevenLabs đúng 2 lần (with-timestamps, như mục 4), lưu `templates/fixed/{intro,outro}.{mp3,json}`, render `intro.mp4`/`outro.mp4` từ `templates/intro.ts`/`outro.ts`, mix `intro.wav`/`outro.wav` bằng cùng bộ mix như mục 9, ghi `LOCK.json` `{text, voiceId, model, sha1, createdAt, usd, credits, approvedBy}`. Nếu `LOCK.json` đã có mà thiếu `--force` thì thoát với thông báo "đã chốt".
+- `--import intro=<file> outro=<file>`: copy file có sẵn, đo độ dài bằng ffprobe, tách timestamp bằng cách nội suy (hoặc để trống), **không gọi API**.
+- `gen-voice`, `build-storyboard`, `render`, `mix`, `assemble`: scene `fixed` lấy mọi thứ từ `templates/fixed/` (xem 13 mục 7). Không có fallback gọi TTS. `video.json` ghi `fixedHash` = sha1 của hai `LOCK.json` tại lúc ghép.
+- Chỗ nối: crossfade nhạc nền ~0,5 giây giữa `intro.wav` và nội dung, và giữa nội dung và `outro.wav`. Loudnorm một lần cho toàn bộ file ở `assemble`.
 
 ## 12. Soát lời thoại (`lint-narration`)
 Đếm trên `lines[].vi`, in bảng vi phạm theo `05-loi-thoai.md`:

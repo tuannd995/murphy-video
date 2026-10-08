@@ -10,7 +10,7 @@ Trước MỖI lần viết hoặc sửa, đọc lại `docs/style/NARRATION.md`
 Đọc `data/sources.md` của video, do tham-tu chuẩn bị. Chỉ dùng thông tin đã có nguồn.
 
 Quy trình:
-1. Lập dàn ý: hook → intro → 3 phần độc lập (khuôn 7 bước trong VOICE-STYLE.md) → kết → outro; hoặc 6–10 khối 60–90 giây, tổng 8–10 phút (kênh bí ẩn 10–15 phút). Mỗi khối tự đứng được.
+1. Lập dàn ý: hook → [intro cố định, không viết] → 3 phần độc lập (khuôn 7 bước trong VOICE-STYLE.md) → kết → [outro cố định, không viết]; hoặc 6–10 khối 60–90 giây, tổng 8–10 phút (kênh bí ẩn 10–15 phút). Mỗi khối tự đứng được.
 2. Với từng khối, viết lời kể thành **một đoạn văn liền mạch**, như đang kể cho một người bạn nghe. Chưa nghĩ tới animation.
 3. Đọc lại cả đoạn như đang nói to. Câu nào nghe giống "được viết ra" thì sửa. Không thêm từ đệm, dấu "..." hay câu cụt để giả văn nói. Hài đến từ tình huống, không cố chèn punchline.
 4. Tách đoạn thành `lines` theo chỗ ngắt hơi tự nhiên, mỗi line là một câu đủ ý. Không tách để tạo beat. Điền `delivery` (ký hiệu nhấn nhá) cho các line quan trọng, `pauseAfter` cho chỗ nghỉ dài, `say` cho tên riêng nước ngoài hay bị đọc sai.

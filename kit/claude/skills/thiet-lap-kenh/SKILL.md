@@ -7,7 +7,8 @@ Dự án chỉ có MỘT kênh. Skill này chạy một lần lúc khởi tạo,
 **Lần đầu (chưa có channel.json):**
 1. Hỏi người dùng (gợi ý sẵn đáp án từ kit/06-kenh-dinh-dang.md): tên kênh · tagline · giọng văn · màu chủ đạo · nhân vật (dùng hero hay tạo mới) · giọng đọc · các series ban đầu.
 2. Tạo `channel.json` theo mẫu trong kit/06-kenh-dinh-dang.md, gồm `budget` (video và tháng), `"audience": "not_made_for_kids"`. Tạo `brand/`, `series/`, `templates/`.
-3. Viết intro và outro vào `templates/intro.ts`, `outro.ts`: đưa người dùng chọn 1 trong 3 bản lời chào và 1 trong 3 bản lời kết ở kit/13-loi-chao-ket.md (đổi tên kênh nếu khác), theo docs/style/NARRATION.md (tự nhiên, không chèn câu đùa). Giữ cố định để voice được cache. Chạy `npm run lint:narration` trên đoạn đó.
+3. Viết intro và outro vào `templates/intro.ts`, `outro.ts`: đưa người dùng chọn 1 trong 3 bản lời chào và 1 trong 3 bản lời kết ở kit/13-loi-chao-ket.md (đổi tên kênh nếu khác), theo docs/style/NARRATION.md (tự nhiên, không chèn câu đùa). Hai đoạn này là TÀI SẢN CỐ ĐỊNH (kit/13 mục 7). Mặc định đã chốt: lời chào B, lời kết A. Chạy `npm run lint:narration` trên đoạn đó.
+3b. Chạy `npm run fixed` (dry-run, báo credits). Khi người dùng trả lời đúng "DUYỆT CHI" thì chạy `npm run fixed -- --confirm` (đúng 2 lần gọi TTS), cho người dùng nghe và xem thử intro/outro, chốt `LOCK.json`. Nếu người dùng có sẵn file giọng (giọng clone hoặc tự thu) thì dùng `npm run fixed -- --import intro=… outro=…` (không gọi API).
 4. Nếu cần nhân vật mới: đề xuất /nhan-vat-moi. Nếu cần palette hay nhạc mới: thêm mood nhạc vào `src/audio/synth.ts` (không tốn tiền).
 5. Gợi ý 3 mô tả kênh YouTube và bio TikTok (dưới 80 ký tự) kèm hashtag. Nhắc người dùng kiểm tra tên còn trống không.
 

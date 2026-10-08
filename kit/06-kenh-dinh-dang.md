@@ -12,8 +12,8 @@
   "character": "hero",
   "voice": { "provider": "elevenlabs", "voiceId": "RxhjHDfpO54FYotYtKpw", "model": "eleven_turbo_v2_5" },
   "music": { "default": "curious", "outro": "warm" },
-  "intro": { "ref": "13-loi-chao-ket.md, lời chào B" },   // lời chào và lời kết mẫu nằm ở file 13; khai báo thật ở templates/intro.ts, outro.ts
-  "outro": { "ref": "13-loi-chao-ket.md, lời kết A" },
+  "intro": { "fixed": true, "ref": "13-loi-chao-ket.md, lời chào B" },   // CỐ ĐỊNH: tạo một lần bằng npm run fixed, lưu ở templates/fixed/ (xem 13 mục 7)
+  "outro": { "fixed": true, "ref": "13-loi-chao-ket.md, lời kết A" },
   "cta": { "tiktok": "Follow để xem thêm", "shorts": "Xem bản đầy đủ trên YouTube Não Phẳng", "reels": "Theo dõi Não Phẳng để xem thêm" },
   "budget": { "videoImagesUsd": 1, "videoVoiceCredits": 6000, "monthlyUsd": 8, "monthlyVoiceCredits": 60000 },
   "targetMinutes": [8, 10],
@@ -64,7 +64,7 @@ Gợi ý tên kênh (cần kiểm tra trùng): Não Phẳng · Ủa Vậy Hả? 
 | | Video 8–10 phút |
 |---|---|
 | Ảnh | $0,25–0,40 (giảm dần khi library đầy) |
-| Voice (ElevenLabs) | ~3–3,5k credits (intro/outro/CTA nhờ cache không tính lại) |
+| Voice (ElevenLabs) | ~3–3,5k credits (intro/outro là tài sản cố định, không tính lại) |
 | Nhạc / SFX / render | $0 |
 
 Chi phí cố định mỗi tháng: ElevenLabs (gói Starter hoặc Creator tuỳ nhu cầu), gói Claude, cộng tiền API.

@@ -19,7 +19,8 @@ Cấu trúc này thay thế mọi sơ đồ thư mục khác nếu có chỗ ch�
 ├── fonts/
 ├── audio/sfx/  audio/music/           sinh bằng code (gitignore *.wav, tạo lại bằng `npm run sfx`)
 ├── templates/
-│   ├── intro.ts  outro.ts             scene intro/outro CỐ ĐỊNH của kênh (lời + animation)
+│   ├── intro.ts  outro.ts             khai báo intro/outro CỐ ĐỊNH của kênh (lời + animation)
+│   ├── fixed/                         intro/outro ĐÃ TẠO MỘT LẦN: mp3, json, wav, mp4, LOCK.json (commit, gc không xoá; xem 13 mục 7)
 │   └── <series>.skeleton.ts           khung kịch bản cho từng series (hook → bối cảnh → thân → kết)
 ├── series/<id>.json                   mỗi series: tên, mô tả, khung dùng, thumbnail template, thời lượng, nhạc
 │
@@ -69,7 +70,7 @@ Mọi thứ tốn tiền đều lưu ở `cache/` với tên = hash nội dung t
 | Loại | Khoá hash | Hệ quả |
 |---|---|---|
 | Ảnh | `sha1(model + prompt + hash(ảnh style tham chiếu))` | cùng prompt ở video khác không tốn thêm |
-| Voice | `sha1(voiceId + model + settings + text đã chuẩn hoá)` | **intro, outro, CTA, câu lặp lại giữa các video đọc 1 lần duy nhất** |
+| Voice | `sha1(voiceId + model + settings + text đã chuẩn hoá)` | câu lặp lại giữa các video chỉ đọc 1 lần (intro/outro thì không qua cache mà là tài sản cố định, mục 5) |
 | Clip render | `sha1(code scene + dữ liệu storyboard của scene + hash ảnh/voice dùng trong scene + định dạng)` | sửa 1 scene thì chỉ render lại scene đó |
 
 - Video không sao chép file. `videos/<slug>/data/manifest.json` chỉ ghi **tham chiếu**: `shot.id → hash ảnh`, `line.id → hash voice`, `scene.id → hash clip`. Xoá hay đổi tên video không làm mất cache.
@@ -77,12 +78,11 @@ Mọi thứ tốn tiền đều lưu ở `cache/` với tên = hash nội dung t
 - `npm run gc` liệt kê file cache không video nào tham chiếu (đọc mọi `manifest.json`). **Chỉ báo, không tự xoá.**
 - **Thăng hạng ảnh:** sau khi duyệt, ảnh mới của video được `hoa-si` đưa vào `library/backgrounds/` kèm tag. Video sau gặp bối cảnh tương tự sẽ tìm thấy trong library trước khi nghĩ tới tạo mới (xem `gen-images` trong 03).
 
-## 5. Intro, outro và clip dựng sẵn
-
-- `templates/intro.ts` và `outro.ts` là scene bình thường nhưng **cố định**: cùng lời, cùng animation cho mọi video. Chỉ khác ở tham số tối thiểu (ví dụ tên video hiển thị).
-- Voice của intro/outro nhờ cache nên chỉ trả tiền ở video đầu tiên. Clip render của chúng cũng được cache theo định dạng (youtube, tiktok…). Video sau ghép lại, không render lại.
-- Đổi nội dung intro/outro thì hash đổi, tự đọc và render lại, các video cũ không bị ảnh hưởng.
-- Khung kịch bản `<series>.skeleton.ts` giúp các video cùng series có cùng cấu trúc khối. `bien-kich` bắt đầu từ khung này thay vì từ trang trắng.
+## 5. Intro, outro: tài sản cố định, tạo một lần
+- `templates/intro.ts` và `outro.ts` khai báo lời và animation. Hai đoạn này được **tạo một lần** bằng `npm run fixed` (đọc giọng đúng 2 lần, dựng hình, mix âm thanh) và lưu ở `templates/fixed/` cùng `LOCK.json`. Chi tiết và quy tắc ở `13-loi-chao-ket.md` mục 7.
+- Mọi video sau chỉ **ghép** các file này vào đầu và cuối. Không gọi TTS, không render lại, không tính vào chi phí. Điều này đúng ngay cả khi `cache/` bị dọn hoặc khi `voice` trong `channel.json` đổi.
+- Chỉ tạo lại khi người dùng yêu cầu rõ (`--force`, có DUYỆT CHI). Video cũ không bị ảnh hưởng vì mỗi video ghi `fixedHash` lúc ghép.
+- Khung kịch bản `<series>.skeleton.ts` giúp các video cùng series có cùng cấu trúc khối. `bien-kich` bắt đầu từ khung này thay vì từ trang trắng, và **không viết intro/outro** (đã cố định).
 
 ## 6. `video.json` và trạng thái
 
@@ -116,7 +116,7 @@ videos/<slug>/script.ts ──build-script──► data/script.json
         ▼
  gen-images (hash → cache/images) ┐
  gen-voice  (hash → cache/voice)  ├──► data/manifest.json
- templates/intro,outro            ┘
+ templates/fixed (intro, outro)    ┘  (có sẵn, không gọi API)
         ▼
  storyboard ─► render từng scene (hash → cache/render hoặc build/scenes)
         ▼
@@ -126,7 +126,7 @@ videos/<slug>/script.ts ──build-script──► data/script.json
 
 ## 9. Git, dung lượng, sao lưu
 
-- **Commit:** code, `channel.json`, `brand/`, `characters/**` (cả `raw/`), `library/**`, `templates/`, `series/`, `topics/`, `ledger/`, `cache/{images,voice}`, `videos/**/{video.json,script.ts,scenes,data}`.
+- **Commit:** code, `channel.json`, `brand/`, `characters/**` (cả `raw/`), `library/**`, `templates/` (cả `templates/fixed/`), `series/`, `topics/`, `ledger/`, `cache/{images,voice}`, `videos/**/{video.json,script.ts,scenes,data}`.
 - **Không commit:** `.env`, `videos/**/build/`, `videos/**/output/`, `cache/render/`, `audio/**/*.wav`, `docs/style/private/`, `.current-video`, `exports/`.
 - Ảnh và voice trong `cache/` là thứ **mất tiền mới có**, nên phải sao lưu. Cache lớn dần thì dùng Git LFS: tạo `.gitattributes` với `cache/images/*.png`, `cache/voice/*.mp3`, `library/**/*.png`, `characters/**/*.png` filter=lfs. Hỏi người dùng trước khi bật LFS.
 - Ảnh nền lưu PNG khi tạo, nhưng có thể chuyển WebP chất lượng 92 cho library để nhẹ (vẫn giữ hash cũ trong manifest).

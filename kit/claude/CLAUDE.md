@@ -11,6 +11,7 @@ Agent con **không** hỏi người dùng. Mọi câu hỏi gửi về ĐẠO DI
 - Ngân sách mặc định mỗi video: $1 ảnh, 6.000 credits voice. Mọi khoản chi ghi vào sổ duy nhất `ledger/cost.jsonl`. Ngân sách có 3 mức: video, kênh (tháng), xưởng (tháng).
 - Ảnh, voice, clip render lưu theo hash ở `cache/`. Đã có thì không tạo lại. Tìm tài nguyên theo thứ tự thư mục video → gốc kênh (hàm `resolve`), ưu tiên `library/backgrounds` và bộ tư thế có sẵn.
 - Mỗi video nằm trọn trong `videos/<slug>/`; không ghi file riêng của video ra ngoài thư mục đó. Cấu trúc đầy đủ: `kit/10-cau-truc-du-an.md`.
+- **Intro và outro là tài sản CỐ ĐỊNH** (`templates/fixed/`, tạo một lần bằng `npm run fixed`). Mọi video chỉ ghép vào: KHÔNG đọc lại bằng TTS, KHÔNG gọi ElevenLabs, KHÔNG render lại, KHÔNG viết lại lời, KHÔNG tính vào chi phí video. Chỉ đổi khi người dùng yêu cầu rõ, và phải có DUYỆT CHI (`--force`). Xem `kit/13-loi-chao-ket.md` mục 7.
 - Không in hay commit key. `.env` không bao giờ vào git.
 
 ## Lời thoại (quan trọng nhất)

@@ -59,14 +59,14 @@ CÁC PHA (chi tiết từng pha nằm trong các file md tương ứng)
          SFX/nhạc tổng hợp, storyboard, render (canvas → ffmpeg), mix, assemble, make.
          Kiểm tra: tạo một video thử tạm `videos/_test/demo/` (2 scene ngắn), rồi `npm run make -- --video _test/demo` phải chạy được mà không gọi API
          (ảnh placeholder, thời lượng ước lượng, không có voice).
-         Phải có: resolve.ts (thư mục video → gốc kênh), cache theo hash, ledger/cost.jsonl, video.json + status, new-video, status, gc.
+         Phải có: scripts/fixed.ts (intro/outro cố định), resolve.ts (thư mục video → gốc kênh), cache theo hash, ledger/cost.jsonl, video.json + status, new-video, status, gc.
   PHA 4  Nhân vật: hệ thống bộ tư thế theo 04-hinh-anh-nhan-vat.md (tách nền, loadSprites, drawSprite, lipsync,
          gen-character dry-run, character-sheet, sprite-demo). Dùng bộ tư thế "hero" có sẵn trong kit (nhân vật mẫu, dùng được cho mọi series), KHÔNG tạo lại.
          Kiểm tra: render sprite-demo và gửi tôi xem.
   PHA 5  Định dạng nhiều nền tảng theo 06-kenh-dinh-dang.md (--type youtube|facebook|tiktok|shorts|reels, --summary, --scenes,
          bố cục dọc 9:16). Kiểm tra bằng video demo.
   PHA 6  Thiết lập kênh + video mẫu end-to-end: chạy /thiet-lap-kenh (hỏi tôi tên kênh và các series; gợi ý có trong 06-kenh-dinh-dang.md),
-         rồi /video-moi với 1 chủ đề tôi chọn. Dừng ở từng cổng duyệt theo 08-quy-trinh-video.md.
+         chạy `npm run fixed` để tạo intro và outro CỐ ĐỊNH một lần (lời chào B, lời kết A trong kit/13; dry-run, chờ "DUYỆT CHI"), rồi /video-moi với 1 chủ đề tôi chọn. Dừng ở từng cổng duyệt theo 08-quy-trinh-video.md.
          Xưởng dùng cho MỌI video của kênh: không hard-code chủ đề video hay nhân vật vào code chung (thông tin kênh đọc từ channel.json).
   PHA 7  Viết docs/HUONG-DAN.md (tiếng Việt): cách dùng từng skill, các lệnh npm, ví dụ một lượt làm video, việc tôi cần làm.
 
