@@ -25,10 +25,10 @@ Chọn **một**. Mặc định đề xuất: **B** (đúng ý bạn: nghe lúc 
 
 EN: *There are questions we only wonder about once in a lifetime, in the shower or just before falling asleep, and then forget, and it turns out the answers are more fun than a movie. Here we dig those questions back up and retell the answers so simply that you can follow along while washing dishes. Welcome to Não Phẳng.*
 
-**Lời chào B · "nghe lúc nào cũng được"** (~15 giây, 67 âm tiết) ← mặc định
-> Xin chào các bạn, chào mừng các bạn đến với Não Phẳng, nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu cho ra dáng người hiểu biết.
+**Lời chào B · "nghe lúc nào cũng được"** (~13 giây, 61 âm tiết) ← ĐÃ CHỐT (đã bỏ vế "cho ra dáng người hiểu biết")
+> Xin chào các bạn, chào mừng các bạn đến với Não Phẳng, nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu.
 
-EN: *Hello everyone, and welcome to Não Phẳng, the place to learn things not everyone knows, to listen to while you work, eat, tidy up, even drift off to sleep, and to have something to impress a date or hold your own at the drinking table when you need it.*
+EN: *Hello everyone, and welcome to Não Phẳng, the place to learn things not everyone knows, to listen to while you work, eat, tidy up, even drift off to sleep, and to have something to chat up a date or talk big at the drinking table when you need it.*
 
 **Lời chào C · "não phẳng"** (~12 giây, 52 âm tiết)
 > Chào mừng các bạn đến với Não Phẳng. Người ta hay nói vui là não càng nhiều nếp nhăn thì càng thông minh, còn ở đây tụi mình làm ngược lại: cho não nghỉ ngơi, phẳng lì như mặt hồ, rồi để những kiến thức lạ tự chảy vào cho nhẹ nhàng.
@@ -40,10 +40,10 @@ EN: *Welcome to Não Phẳng. People joke that the more wrinkles a brain has, th
 ## 3. Ba bản lời kết
 Chọn **một bản mặc định**. Bản C có chỗ trống `[câu hỏi video sau]`, đổi mỗi video (chỉ voice của câu đó mới tốn thêm).
 
-**Lời kết A · chuẩn** (~10 giây) ← mặc định
-> Và đó là kết thúc của số Não Phẳng hôm nay. Nếu bạn thấy hay thì bấm like và chia sẻ cho người hay thắc mắc, rồi đăng ký kênh để không lỡ câu hỏi mới. Cảm ơn bạn đã nghe, hẹn gặp lại.
+**Lời kết A · chuẩn** (~8 giây, 39 âm tiết) ← ĐÃ CHỐT (đã sửa theo lời bạn)
+> Và đó là kết thúc của số Não Phẳng hôm nay. Nếu bạn thấy hay thì cho mình 1 like và chia sẻ, đăng ký kênh để không lỡ video mới. Cảm ơn bạn đã nghe, hẹn gặp lại.
 
-EN: *And that's the end of today's Não Phẳng. If you enjoyed it, like and share it with someone who's always wondering, and subscribe so you don't miss the next question. Thanks for listening, see you next time.*
+EN: *And that's the end of today's Não Phẳng. If you enjoyed it, give me a like and a share, and subscribe so you don't miss the next video. Thanks for listening, see you next time.*
 
 **Lời kết B · tự giễu nhẹ** (~11 giây)
 > Vậy là xong một câu hỏi, và não của bạn vừa được nghỉ ngơi đúng như tên kênh. Thấy hay thì bấm like và chia sẻ, thấy chưa hay thì cứ đăng ký, biết đâu video sau tụi mình làm khá hơn. Hẹn gặp lại.
@@ -61,12 +61,12 @@ Lời chào B:
 Xin chào các bạn / chào mừng các bạn đến với **Não Phẳng** ↘ //
 nơi tìm hiểu những kiến thức (chậm)**không phải ai cũng biết**(/chậm) ↘ /
 (nhanh)để các bạn nghe lúc làm việc / lúc ăn cơm / lúc dọn nhà(/nhanh) / thậm chí là lúc chuẩn bị **đi ngủ** ↘ //
-và để lúc cần thì có thêm chuyện mà tán gái / hoặc chém gió trên bàn nhậu / (nhỏ)cho ra dáng người hiểu biết(/nhỏ)(mỉm) ↘
+và để lúc cần thì có thêm chuyện mà tán gái / (mỉm)hoặc chém gió trên bàn nhậu(/mỉm) ↘
 ```
 Lời kết A:
 ```text
 Và đó là kết thúc của số **Não Phẳng** hôm nay ↘ //
-Nếu bạn thấy hay / thì bấm **like** và chia sẻ cho người hay thắc mắc / rồi **đăng ký kênh** để không lỡ câu hỏi mới ↘ /
+Nếu bạn thấy hay / thì cho mình 1 **like** và chia sẻ / **đăng ký kênh** để không lỡ video mới ↘ /
 Cảm ơn bạn đã nghe / hẹn gặp lại ↘
 ```
 Tên kênh "Não Phẳng" luôn nhấn rõ và chậm hơn một nhịp, vì đó là thứ cần đọng lại.
@@ -75,11 +75,11 @@ Tên kênh "Não Phẳng" luôn nhấn rõ và chậm hơn một nhịp, vì đ�
 ```jsonc
 "intro": { "fixed": true, "lines": [
   { "vi": "Xin chào các bạn, chào mừng các bạn đến với Não Phẳng,", "en": "Hello everyone, and welcome to Não Phẳng," },
-  { "vi": "nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu cho ra dáng người hiểu biết.", "en": "the place to learn things not everyone knows, ..." }
+  { "vi": "nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu.", "en": "the place to learn things not everyone knows, ..." }
 ] },
 "outro": { "fixed": true, "lines": [
   { "vi": "Và đó là kết thúc của số Não Phẳng hôm nay.", "en": "And that's the end of today's Não Phẳng.", "pauseAfter": 0.7 },
-  { "vi": "Nếu bạn thấy hay thì bấm like và chia sẻ cho người hay thắc mắc, rồi đăng ký kênh để không lỡ câu hỏi mới.", "en": "If you enjoyed it, like and share it with someone who's always wondering, and subscribe so you don't miss the next question." },
+  { "vi": "Nếu bạn thấy hay thì cho mình 1 like và chia sẻ, đăng ký kênh để không lỡ video mới.", "en": "If you enjoyed it, give me a like and a share, and subscribe so you don't miss the next video." },
   { "vi": "Cảm ơn bạn đã nghe, hẹn gặp lại.", "en": "Thanks for listening, see you next time." }
 ] }
 ```
@@ -102,7 +102,7 @@ templates/fixed/
 └── LOCK.json                 chữ lời đã chốt, voiceId, model, hash, ngày tạo, chi phí, "approvedBy"
 ```
 **Tạo một lần (lúc thiết lập kênh, trong `/thiet-lap-kenh`):**
-1. `npm run fixed` (dry-run): in số ký tự, credits dự kiến (khoảng 200–250 ký tự mỗi đoạn ≈ 100–130 credits với turbo v2.5) và quota còn lại.
+1. `npm run fixed` (dry-run): in số ký tự, credits dự kiến (intro ≈ 210 ký tự, outro ≈ 123 ký tự, tổng ≈ 166 credits với turbo v2.5) và quota còn lại.
 2. Người dùng trả lời đúng **"DUYỆT CHI"** → `npm run fixed -- --confirm`: gọi ElevenLabs **đúng 2 lần** (intro, outro), render hình, mix âm thanh, ghi `LOCK.json`.
 3. Người dùng nghe và xem thử cả hai. Chưa ưng thì sửa đúng chỗ và chạy lại với `--force` (cần DUYỆT CHI lần nữa). Ưng thì chốt.
 4. **Dùng giọng khác (giọng clone, giọng tự thu):** chạy `npm run fixed -- --import intro=duong-dan.mp3 outro=duong-dan.mp3` để đưa file có sẵn vào, **không gọi API**.

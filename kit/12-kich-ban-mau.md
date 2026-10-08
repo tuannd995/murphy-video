@@ -14,7 +14,7 @@ Có một chuyện mà ai cũng từng thử hồi nhỏ và ai cũng thất b�
 
 **[INTRO KÊNH]** (cố định, đã chốt ở 13, không viết lại, không đọc lại)
 
-Xin chào các bạn, chào mừng các bạn đến với Não Phẳng, nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và đôi khi còn để có thêm chuyện kể cho bạn bè trên bàn nhậu.
+Xin chào các bạn, chào mừng các bạn đến với Não Phẳng, nơi tìm hiểu những kiến thức không phải ai cũng biết, để các bạn nghe lúc làm việc, lúc ăn cơm, lúc dọn nhà, thậm chí là lúc chuẩn bị đi ngủ, và để lúc cần thì có thêm chuyện mà tán gái, hoặc chém gió trên bàn nhậu.
 
 **[PHẦN 1 · TẠI SAO KHÔNG TỰ CÙ ĐƯỢC MÌNH]**
 
@@ -56,4 +56,4 @@ Cho nên lần sau nếu có ai bảo bạn cứ tin vào mắt mình, hãy nh�
 
 **[OUTRO]** (cố định, đã chốt ở 13, không viết lại, không đọc lại)
 
-Và đó là kết thúc của số Não Phẳng hôm nay. Nếu bạn thấy hay thì bấm like và chia sẻ cho người hay thắc mắc, rồi đăng ký kênh để không lỡ câu hỏi mới. Cảm ơn bạn đã nghe, hẹn gặp lại.
+Và đó là kết thúc của số Não Phẳng hôm nay. Nếu bạn thấy hay thì cho mình 1 like và chia sẻ, đăng ký kênh để không lỡ video mới. Cảm ơn bạn đã nghe, hẹn gặp lại.
