@@ -10,7 +10,7 @@
   "tone": "kể chuyện tự nhiên, hài nhẹ đến từ tình huống (luôn tuân theo docs/style/NARRATION.md)",
   "palette": { "paper": "#f6eedc", "ink": "#151515", "accent": "#e0362c" },
   "character": "hero",
-  "voice": { "provider": "elevenlabs", "voiceId": "RxhjHDfpO54FYotYtKpw", "model": "eleven_turbo_v2_5" },
+  "voice": { "provider": "elevenlabs", "voiceId": "SMacAogENyIWv6UtGuXB", "model": "eleven_turbo_v2_5", "fallbackVoiceId": "RxhjHDfpO54FYotYtKpw" },   // voiceId = giọng của chính người dùng (mặc định); Phong chỉ là dự phòng
   "music": { "default": "curious", "outro": "warm" },
   "intro": { "fixed": true, "ref": "13-loi-chao-ket.md, lời chào B" },   // CỐ ĐỊNH: tạo một lần bằng npm run fixed, lưu ở templates/fixed/ (xem 13 mục 7)
   "outro": { "fixed": true, "ref": "13-loi-chao-ket.md, lời kết A" },

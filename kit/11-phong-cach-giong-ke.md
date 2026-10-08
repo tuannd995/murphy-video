@@ -146,6 +146,7 @@ Mỗi khi bạn quyết định cử động một ngón tay / não không chỉ
 3. Chỉ so các thông số **không phụ thuộc giọng**: tốc độ, nghỉ, % hạ giọng cuối cụm, nhấn mỗi giây. Cao độ tuyệt đối tuỳ giọng của bạn (nữ hoặc nam trầm sẽ khác 133 Hz, không sao).
 
 ### Cách B · Giọng clone (ElevenLabs) hoặc giọng thư viện
+**Giọng mặc định của kênh là giọng của chính người dùng: `SMacAogENyIWv6UtGuXB`.** Dùng nó cho mọi video và cho intro/outro cố định. Nên nghe thử một đoạn ngắn trước (xem bên dưới) vì chất lượng tiếng Việt của giọng clone phụ thuộc mẫu thu và model.
 - Thiết lập khởi điểm: model `eleven_turbo_v2_5`, `stability` 0,35–0,45 (thấp hơn = nhiều lên xuống hơn), `similarity_boost` 0,8, `style` 0,2–0,3, `speed` 1,05–1,10 nếu giọng chậm hơn 4 âm tiết/s. Đo lại bằng `voice-profile.py` sau khi tạo mẫu.
 - Nhịp nghỉ không điều khiển bằng dấu câu mà bằng **ranh giới line** và `TIMING`: giữ `GAP` ≈ 0,3 s (mục tiêu khoảng nghỉ trung vị 0,33 s). Chỗ nghỉ dài (`//`) đặt `pauseAfter: 0.8` cho line đó (xem 03).
 - Nhấn mạnh và lên xuống bị giới hạn bởi TTS. Cách tăng hiệu quả: viết câu ngắn hơn một chút ở chỗ cần nhấn, thêm dấu phẩy trước chữ cần nhấn, và thử các giọng khác nhau (Phong, Ninh Đôn, Tony Hoang, Đức MC, Hào) để chọn giọng ra nhiều lên xuống nhất cho cùng một đoạn.

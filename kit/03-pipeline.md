@@ -102,6 +102,7 @@ body: {
 → { audio_base64, alignment: { characters[], character_start_times_seconds[], character_end_times_seconds[] } }
 ```
 - Trước khi đọc thật, dry-run in ra: số câu, số ký tự, credits dự kiến (turbo/flash v2.5 = 0,5 credit/ký tự; v3 = 1) và quota còn lại. Thiếu quyền `user_read` thì bỏ qua bước xem quota, không dừng.
+- **Giọng mặc định: `SMacAogENyIWv6UtGuXB`** (giọng của chính người dùng, đã clone trong "My Voices"; đặt ở `channel.json` `voice.voiceId` và `ELEVENLABS_VOICE_ID`). Trước lần dùng đầu tiên, kiểm tra miễn phí bằng `GET /v1/voices/SMacAogENyIWv6UtGuXB` (có trong tài khoản, `category` là `cloned`). Không in key. Giọng Phong `RxhjHDfpO54FYotYtKpw` chỉ là dự phòng khi giọng clone lỗi.
 - Chuẩn hoá text trước khi gửi: bỏ ngoặc kép kiểu `“ ”`.
 - Sau khi đọc: kiểm tra tốc độ đọc từng câu. Ngoài khoảng **9–22 ký tự/giây** thì báo là bất thường (v3 thỉnh thoảng đọc lạc).
 - Nếu lỗi: thử lại 3 lần, **xoá file rỗng** (⚠ từng để lại file 0 byte khiến lần sau bỏ qua câu đó).

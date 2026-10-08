@@ -102,6 +102,7 @@ templates/fixed/
 └── LOCK.json                 chữ lời đã chốt, voiceId, model, hash, ngày tạo, chi phí, "approvedBy"
 ```
 **Tạo một lần (lúc thiết lập kênh, trong `/thiet-lap-kenh`):**
+0. Giọng dùng là **giọng mặc định của kênh `SMacAogENyIWv6UtGuXB`** (giọng của chính người dùng). Trước khi tạo, nghe thử một câu ngắn bằng `scripts/voice-sample.ts SMacAogENyIWv6UtGuXB "Não Phẳng" "<một câu trong lời chào>"` (khoảng 30–60 credits) để chắc giọng đọc tiếng Việt và nhịp ổn; chưa ổn thì chỉnh `stability`, `style`, `speed` (xem 11 mục 6) rồi nghe lại. Chỉ sau đó mới chạy bước 1.
 1. `npm run fixed` (dry-run): in số ký tự, credits dự kiến (intro ≈ 210 ký tự, outro ≈ 123 ký tự, tổng ≈ 166 credits với turbo v2.5) và quota còn lại.
 2. Người dùng trả lời đúng **"DUYỆT CHI"** → `npm run fixed -- --confirm`: gọi ElevenLabs **đúng 2 lần** (intro, outro), render hình, mix âm thanh, ghi `LOCK.json`.
 3. Người dùng nghe và xem thử cả hai. Chưa ưng thì sửa đúng chỗ và chạy lại với `--force` (cần DUYỆT CHI lần nữa). Ưng thì chốt.

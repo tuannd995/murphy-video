@@ -15,7 +15,7 @@ Gói npm: `@napi-rs/canvas` (dependency); `tsx`, `typescript`, `@types/node` (de
 ```
 OPENROUTER_API_KEY=          # https://openrouter.ai/keys
 ELEVENLABS_API_KEY=          # https://elevenlabs.io/app/settings/api-keys  — quyền: Text to Speech, Voices Read, User Read
-ELEVENLABS_VOICE_ID=         # mặc định gợi ý: RxhjHDfpO54FYotYtKpw ("Phong", giọng Bắc, cần gói Starter trở lên)
+ELEVENLABS_VOICE_ID=SMacAogENyIWv6UtGuXB   # MẶC ĐỊNH: giọng của chính người dùng (voice clone trong "My Voices", cần gói Starter trở lên). Dự phòng: RxhjHDfpO54FYotYtKpw ("Phong", giọng thư viện)
 # tuỳ chọn
 ELEVENLABS_MODEL=eleven_turbo_v2_5   # hoặc eleven_v3 (tự nhiên hơn, 1 credit/ký tự, KHÔNG nhận previous_text/next_text)
 IMAGE_MODEL=google/gemini-2.5-flash-image
